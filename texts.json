@@ -1,0 +1,131 @@
+{
+  "default_values": {
+    "badInputPrompt": "%s is not a valid input!",
+    "prompt": null,
+    "validInput": null,
+    "advanceDay": 0,
+    "passInput": false,
+    "transitionDelay": false,
+    "defaultNextScreen": null
+  },
+  "SELECT_DRUG_TO_BUY": {
+    "badInputPrompt": "Please enter a number from 1 to 8!",
+    "prompt": "Which drugs are you interested in?\n\n    1. Cocaine        5. Crystal\n    2. Heroine        6. Grass\n    3. Crack          7. Speed\n    4. Acid           8. Ludes\n",
+    "validInput": "[1-8]",
+    "passInput": true,
+    "defaultNextScreen": "SELECT_QTY_TO_BUY"
+  },
+  "SELECT_QTY_TO_BUY": {
+    "badInputPrompt": "Please enter a valid number!",
+    "prompt": "How much do you want to buy?",
+    "validInput": "[0-9]+",
+    "advanceDay": 1
+  },
+  "CASH_EXCEEDED": {
+    "prompt": "You don't have that much money!"
+  },
+  "HOLD_EXCEEDED": {
+    "prompt": "You can't carry that much!"
+  },
+  "SELECT_DRUG_TO_SELL": {
+    "badInputPrompt": "Please enter a number from 1 to 8!",
+    "prompt": "Which drugs do you want to unload?\n\n    1. Cocaine        5. Crystal\n    2. Heroine        6. Grass\n    3. Crack          7. Speed\n    4. Acid           8. Ludes\n",
+    "validInput": "[1-8]",
+    "passInput": true,
+    "defaultNextScreen": "SELECT_QTY_TO_SELL"
+  },
+  "SELECT_QTY_TO_SELL": {
+    "badInputPrompt": "Please enter a valid number!",
+    "prompt": "How much do you want to unload?",
+    "validInput": "[0-9]+",
+    "advanceDay": 1
+  },
+  "STASH_EXCEEDED": {
+    "prompt": "You don't have that much on you!"
+  },
+  "BANK_OPERATION_SELECTION": {
+    "badInputPrompt": "Please answer just 'D' or 'W'!",
+    "prompt": "What brings you to our humble bank?\n\n    (D)eposit some cash\n    (W)ithdraw some cash",
+    "validInput": "[DW]"
+  },
+  "DEPOSIT_MONEY": {
+    "badInputPrompt": "Please enter a valid number!",
+    "prompt": "How much do you want to deposit?",
+    "validInput": "\\d+"
+  },
+  "DEPOSIT_EXCEEDED": {
+    "prompt": "You don't have that much cash!"
+  },
+  "WITHDRAW_MONEY": {
+    "badInputPrompt": "Please enter a valid number!",
+    "prompt": "How much do you want to withdraw?",
+    "validInput": "\\d+"
+  },
+  "WITHDRAW_LIMIT_EXCEEDED": {
+    "prompt": "You don't have that much cash!"
+  },
+  "GO_TO_HOSPITAL": {
+    "badInputPrompt": "Just say Y or N, man!",
+    "prompt": "You drag your sorry ass to the local hospital. The docs check you up and come to the conclusion that it will cost %d $ to check you out.%n%nDo you sign the consent forms? (Y/N)",
+    "validInput": "[YN]",
+    "passInput": true
+  },
+  "HEALED": {
+    "prompt": "You are good to go. Just lay in bed for %s days.",
+    "transitionDelay": true
+  },
+  "NOT_HEALED": {
+    "prompt": "God help you man!",
+    "transitionDelay": true
+  },
+  "NO_CASH_FOR_HEALING": {
+    "prompt": "You don't have enough money! The docs also want to eat!",
+    "transitionDelay": true
+  },
+  "LOAN_SHARK": {
+    "badInputPrompt": "I don't speak your language! Just say B or P, man",
+    "prompt": "What do you want from me? (B)orrow some money or (P)ay some money back?",
+    "validInput": "[BP]"
+  },
+  "BORROW_MONEY": {
+    "badInputPrompt": "Just name a figure, don't be shy!",
+    "prompt": "How much do you want to borrow?",
+    "validInput": "\\d+",
+    "passInput": true
+  },
+  "BORROW_MONEY_TOO_MUCH": {
+    "prompt": "No, man, that's too risky.",
+    "transitionDelay": true
+  },
+  "BORROW_MONEY_TOO_LITTLE": {
+    "prompt": "That's too little. You won't get my lazy ass off the sofa for less than 1000 $.",
+    "transitionDelay": true
+  },
+  "BORROW_MONEY_OK": {
+    "prompt": "Here you are, sir. Now, you know the drill: you have %s days to pay me back, or you'll get a visit from my boys.",
+    "transitionDelay": true,
+    "advanceDay": 1
+  },
+  "BORROW_MONEY_NOT_OK": {
+    "prompt": "No way, man! You still owe me %s $. You better pay me back soon, the clock is ticking...",
+    "transitionDelay": true
+  },
+  "PAY_BACK_MONEY": {
+    "badInputPrompt": "Come on, say a figure!",
+    "prompt": "How much have you brought me?",
+    "validInput": "\\d+"
+  },
+  "PAY_BACK_MONEY": {
+    "prompt": "You pay in full? It's a pleasure to make business with you, sir."
+  },
+  "PAY_BACK_PARTIALLY": {
+    "prompt": "Each note is beautiful, but you still owe me %s."
+  },
+  "PAY_BACK_ZERO": {
+    "prompt": "Do you think that's funny? I won't take that little. Get the hell out of my office and make me some money."
+  },
+  "PAY_BACK_TOO_MUCH": {
+    "prompt": "Where are those moneys? You don't have that much on you!"
+  }
+}
+
