@@ -33,7 +33,7 @@ public class SelectDrugQtyToSellScreen extends ScreenAbstract {
                 break;
             case -1: {
                 setAdvanceDay(0);
-                setNextScreen(screenFactory.ofName(ScreenName.CASH_EXCEEDED));
+                setNextScreen(screenFactory.ofName(ScreenName.STASH_EXCEEDED));
                 break;
             }
             case -2: {

@@ -17,15 +17,10 @@ public class ScreenFactory {
                 case MAIN_SELECTION -> new MainSelectionScreen(name);
                 case SELECT_DRUG_TO_BUY, SELECT_DRUG_TO_SELL -> new InputGrabberScreen(name);
                 case SELECT_QTY_TO_BUY -> new SelectDrugQtyToBuyScreen(name);
-                //case HOLD_EXCEEDED -> new DrugBuyHoldExceededScreen(name);
-                // case CASH_EXCEEDED -> new DrugBuyCashExceededScreen(name);
                 case SELECT_QTY_TO_SELL -> new SelectDrugQtyToSellScreen(name);
-                //case STASH_EXCEEDED -> new DrugSellStashExceeded(name);
                 case BANK_OPERATION_SELECTION -> new BankOperationSelectionScreen(name);
                 case DEPOSIT_MONEY -> new BankDepositScreen(name);
-                //case DEPOSIT_EXCEEDED -> new DepositExceededScreen(name);
                 case WITHDRAW_MONEY -> new BankWithdrawScreen(name);
-                //case WITHDRAW_LIMIT_EXCEEDED -> new WithdrawLimitExceededScreen(name);
                 case GO_TO_HOSPITAL -> new GoToHospitalScreen(name);
                 case LOAN_SHARK -> new LoanSharkScreen(name);
                 case BORROW_MONEY -> new BorrowMoneyScreen(name);
