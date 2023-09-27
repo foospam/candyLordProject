@@ -6,9 +6,9 @@ import com.sorianotapia.headings.HeadingNames;
 
 import java.util.ArrayList;
 
-public abstract class ScreenAbstract {
+public abstract class AbstractScreen {
 
-    ScreenAbstract nextScreen;
+    AbstractScreen nextScreen;
     ScreenName name;
     String validInput;
     HeadingNames heading;
@@ -19,7 +19,7 @@ public abstract class ScreenAbstract {
     int advanceDay;
     boolean passInput;
 
-    public ScreenAbstract() {
+    public AbstractScreen() {
 
     }
 
@@ -27,7 +27,7 @@ public abstract class ScreenAbstract {
         return prompt;
     }
 
-    public ScreenAbstract(ScreenName name) {
+    public AbstractScreen(ScreenName name) {
 
         this.name = name;
         this.badInputPrompt = "%s is not a valid input!";
@@ -41,11 +41,11 @@ public abstract class ScreenAbstract {
 
     public abstract void handleUserInput(ArrayList<String> stringArrayList, Player player, ScreenFactory screenFactory);
 
-    public void setNextScreen(ScreenAbstract screen) {
+    public void setNextScreen(AbstractScreen screen) {
         this.nextScreen = screen;
     }
 
-    public ScreenAbstract getNextScreen() {
+    public AbstractScreen getNextScreen() {
         return nextScreen;
     }
 

@@ -1,11 +1,10 @@
 package com.sorianotapia.screens;
 
-import com.sorianotapia.fromVersion1.Drugs;
 import com.sorianotapia.fromVersion1.Player;
 
 import java.util.ArrayList;
 
-public class InputGrabberScreen extends ScreenAbstract{
+public class InputGrabberScreen extends AbstractScreen {
 
     public InputGrabberScreen(ScreenName name) {
         super(name);

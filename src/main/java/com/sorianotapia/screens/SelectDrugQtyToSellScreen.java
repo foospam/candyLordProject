@@ -5,7 +5,7 @@ import com.sorianotapia.fromVersion1.Player;
 
 import java.util.ArrayList;
 
-public class SelectDrugQtyToSellScreen extends ScreenAbstract {
+public class SelectDrugQtyToSellScreen extends AbstractScreen {
     public SelectDrugQtyToSellScreen(ScreenName name) {
         super(name);
     }

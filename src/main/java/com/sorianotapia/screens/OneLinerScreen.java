@@ -4,7 +4,7 @@ import com.sorianotapia.fromVersion1.Player;
 
 import java.util.ArrayList;
 
-public class OneLinerScreen extends ScreenAbstract{
+public class OneLinerScreen extends AbstractScreen {
 
     public OneLinerScreen(ScreenName name){
         super(name);

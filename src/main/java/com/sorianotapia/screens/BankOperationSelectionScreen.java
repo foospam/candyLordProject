@@ -4,7 +4,7 @@ import com.sorianotapia.fromVersion1.Player;
 
 import java.util.ArrayList;
 
-public class BankOperationSelectionScreen extends ScreenAbstract {
+public class BankOperationSelectionScreen extends AbstractScreen {
     public BankOperationSelectionScreen(ScreenName name) {
         super(name);
     }

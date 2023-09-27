@@ -4,7 +4,7 @@ import com.sorianotapia.fromVersion1.Player;
 
 import java.util.ArrayList;
 
-public class BorrowMoneyScreen extends ScreenAbstract {
+public class BorrowMoneyScreen extends AbstractScreen {
     public BorrowMoneyScreen(ScreenName name) {
         super(name);
     }

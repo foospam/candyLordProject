@@ -4,16 +4,16 @@ import java.util.EnumMap;
 
 public class ScreenFactory {
 
-    private EnumMap<ScreenName, ScreenAbstract> container;
+    private EnumMap<ScreenName, AbstractScreen> container;
 
     public ScreenFactory() {
-        container = new EnumMap<ScreenName, ScreenAbstract>(ScreenName.class);
+        container = new EnumMap<ScreenName, AbstractScreen>(ScreenName.class);
     }
 
-    public ScreenAbstract ofName(ScreenName name) {
+    public AbstractScreen ofName(ScreenName name) {
         if (container.containsKey(name)) return container.get(name);
         else {
-            ScreenAbstract screen = switch (name) {
+            AbstractScreen screen = switch (name) {
                 case MAIN_SELECTION -> new MainSelectionScreen(name);
                 case SELECT_DRUG_TO_BUY, SELECT_DRUG_TO_SELL -> new InputGrabberScreen(name);
                 case SELECT_QTY_TO_BUY -> new SelectDrugQtyToBuyScreen(name);

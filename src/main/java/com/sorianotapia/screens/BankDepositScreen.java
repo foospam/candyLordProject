@@ -4,7 +4,7 @@ import com.sorianotapia.fromVersion1.Player;
 
 import java.util.ArrayList;
 
-public class BankDepositScreen extends ScreenAbstract {
+public class BankDepositScreen extends AbstractScreen {
     public BankDepositScreen(ScreenName name) {
         super(name);
     }

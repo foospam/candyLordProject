@@ -2,11 +2,9 @@ package com.sorianotapia.screens;
 
 import com.sorianotapia.fromVersion1.Player;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.Formatter;
 
-public class GoToHospitalScreen extends ScreenAbstract {
+public class GoToHospitalScreen extends AbstractScreen {
     public GoToHospitalScreen(ScreenName name) {
 
         super(name);

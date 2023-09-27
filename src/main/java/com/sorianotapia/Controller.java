@@ -3,7 +3,7 @@ package com.sorianotapia;
 import com.sorianotapia.fromVersion1.Drugs;
 import com.sorianotapia.fromVersion1.LoanSharkDebt;
 import com.sorianotapia.fromVersion1.Player;
-import com.sorianotapia.screens.ScreenAbstract;
+import com.sorianotapia.screens.AbstractScreen;
 import com.sorianotapia.screens.ScreenFactory;
 import com.sorianotapia.screens.ScreenName;
 
@@ -27,7 +27,7 @@ public class Controller {
         controller.run();
     }
 
-    private ScreenAbstract screen;
+    private AbstractScreen screen;
     private ArrayList<String> inputBuffer;
     private Scanner scanner;
     private Player player;
@@ -84,7 +84,7 @@ public class Controller {
         System.out.println(prompt);
     }
 
-    private void setScreen(ScreenAbstract screen){
+    private void setScreen(AbstractScreen screen){
         this.screen = screen;
     }
 

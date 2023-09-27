@@ -5,7 +5,7 @@ import com.sorianotapia.headings.HeadingNames;
 
 import java.util.ArrayList;
 
-public class MainSelectionScreen extends ScreenAbstract {
+public class MainSelectionScreen extends AbstractScreen {
 
     public MainSelectionScreen(ScreenName name) {
         super(name);
