@@ -10,19 +10,14 @@ import java.util.ArrayList;
 
 public class NameContainer {
 
-    public static void main(String[] args) throws IOException {
-        NameContainer.setFile("placeNames.json");
-        NameContainer.readAllPlaceNames();
-    }
-
 
     private static ArrayList<String> placeNames = new ArrayList<>();
     private static ArrayList<String> stuffNames = new ArrayList<>();
-    private static ObjectMapper mapper = mapper = new ObjectMapper();
+    private static ObjectMapper mapper = new ObjectMapper();
     private static ObjectNode root;
 
 
-    public static void readAllPlaceNames() {
+    private static void readAllPlaceNames() {
         try {
             ArrayNode nameSource = (ArrayNode) root.get("placeNames");
             nameSource.forEach(s -> placeNames.add(s.toString().replace("\"", "")));
@@ -31,10 +26,10 @@ public class NameContainer {
         }
     }
 
-    public static void readAllStuffNames() {
+    private static void readAllStuffNames() {
         try {
             ArrayNode nameSource = (ArrayNode) root.get("stuffNames");
-            nameSource.forEach(s -> placeNames.add(s.toString().replace("\"", "")));
+            nameSource.forEach(s -> stuffNames.add(s.toString().replace("\"", "")));
         } catch (NullPointerException E) {
             throw new NullPointerException("The name file does not contain any 'stuffNames' element.");
         }
@@ -42,6 +37,8 @@ public class NameContainer {
 
     public static void setFile(String fileName) throws IOException {
         root = (ObjectNode) mapper.readTree(new File(fileName));
+        readAllPlaceNames();
+        readAllStuffNames();
     }
 
     public static String getRandomPlaceName() {
@@ -49,9 +46,17 @@ public class NameContainer {
             int index = (int) (Math.random() * placeNames.size());
             String name = placeNames.get(index);
             placeNames.remove(index);
+            return name;
         }
         return null;
     }
 
+    public static ArrayList<String> getPlaceNames(){
+        return placeNames;
+    }
+
+    public static ArrayList<String> getStuffNames(){
+        return stuffNames;
+    }
 
 }

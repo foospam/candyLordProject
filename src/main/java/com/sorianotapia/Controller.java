@@ -1,19 +1,23 @@
 package com.sorianotapia;
-
-import com.sorianotapia.fromVersion1.Drugs;
 import com.sorianotapia.fromVersion1.LoanSharkDebt;
 import com.sorianotapia.fromVersion1.Player;
+import com.sorianotapia.places.NameContainer;
 import com.sorianotapia.screens.AbstractScreen;
 import com.sorianotapia.screens.ScreenFactory;
 import com.sorianotapia.screens.ScreenName;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import com.sorianotapia.places.PlaceContainer;
+
 
 public class Controller {
 
     public static void main(String[] args) throws IOException {
+        TextContainer.setFile("texts.json");
+        NameContainer.setFile("placeNames.json");
+
+        //PlaceContainer.getRandomPlace();
         GameDate gameDate = new GameDate();
         Player player = new Player();
         LoanSharkDebt debt = new LoanSharkDebt();
@@ -21,7 +25,7 @@ public class Controller {
         gameDate.subscribe(debt);
 
 
-        TextContainer.setFile("texts.json");
+
         Controller controller = new Controller(player, gameDate);
         //controller.player.setHealth(50);
         controller.run();
@@ -90,24 +94,24 @@ public class Controller {
 
     public Object[] getFullStats(){
         Object[] objects = new Object[28];
-        objects[0] = player.getDrugsOnHand(Drugs.COCAINE);
-        objects[1] = player.getDrugsOnHand(Drugs.CRACK);
-        objects[2] = player.getDrugsOnHand(Drugs.HEROIN);
-        objects[3] = player.getDrugsOnHand(Drugs.ACID);
-        objects[4] = player.getDrugsOnHand(Drugs.CRYSTAL);
-        objects[5] = player.getDrugsOnHand(Drugs.GRASS);
-        objects[6] = player.getDrugsOnHand(Drugs.SPEED);
-        objects[7] = player.getDrugsOnHand(Drugs.LUDES);
-        objects[8] = Drugs.COCAINE.getPrice();
-        objects[9] = Drugs.CRACK.getPrice();
-        objects[10] = Drugs.HEROIN.getPrice();
-        objects[11] = Drugs.ACID.getPrice();
-        objects[12] = Drugs.CRYSTAL.getPrice();
-        objects[13] = Drugs.GRASS.getPrice();
-        objects[14] = Drugs.SPEED.getPrice();
-        objects[15] = Drugs.LUDES.getPrice();
+        objects[0] = player.getStuffOnHand(0);
+        objects[1] = player.getStuffOnHand(1);
+        objects[2] = player.getStuffOnHand(2);
+        objects[3] = player.getStuffOnHand(3);
+        objects[4] = player.getStuffOnHand(4);
+        objects[5] = player.getStuffOnHand(5);
+        objects[6] = player.getStuffOnHand(6);
+        objects[7] = player.getStuffOnHand(7);
+        objects[8] = player.getLocation().getStuffPrice(player.translateStuffIndexToName(0));
+        objects[9] = player.getLocation().getStuffPrice(player.translateStuffIndexToName(1));
+        objects[10] = player.getLocation().getStuffPrice(player.translateStuffIndexToName(2));
+        objects[11] = player.getLocation().getStuffPrice(player.translateStuffIndexToName(3));
+        objects[12] = player.getLocation().getStuffPrice(player.translateStuffIndexToName(4));
+        objects[13] = player.getLocation().getStuffPrice(player.translateStuffIndexToName(5));
+        objects[14] = player.getLocation().getStuffPrice(player.translateStuffIndexToName(6));
+        objects[15] = player.getLocation().getStuffPrice(player.translateStuffIndexToName(7));
         objects[16] = date.getStringDate();
-        objects[17] = player.getLocation().printableName();
+        objects[17] = player.getLocation().getName();
         objects[18] = player.getHold();
         objects[19] = player.getMaxHold();
         objects[20] = player.getCash();

@@ -10,6 +10,7 @@ public class Stuff {
         this.name = name;
         this.maxPrice = maxPrice;
         this.minPrice = minPrice;
+        updatePrice(minPrice, maxPrice);
     }
 
     public void updatePrice(int minPrice, int maxPrice) {
@@ -30,5 +31,9 @@ public class Stuff {
 
     public int getPrice() {
         return price;
+    }
+
+    public String getName() {
+        return name;
     }
 }

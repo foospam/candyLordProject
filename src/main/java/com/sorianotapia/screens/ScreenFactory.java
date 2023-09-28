@@ -24,11 +24,12 @@ public class ScreenFactory {
                 case GO_TO_HOSPITAL -> new GoToHospitalScreen(name);
                 case LOAN_SHARK -> new LoanSharkScreen(name);
                 case BORROW_MONEY -> new BorrowMoneyScreen(name);
+                case TRAVEL -> new TravelScreen(name);
                 case STASH_EXCEEDED, HOLD_EXCEEDED, CASH_EXCEEDED, DEPOSIT_EXCEEDED, WITHDRAW_LIMIT_EXCEEDED, HEALED,
                         NOT_HEALED, NO_CASH_FOR_HEALING, BORROW_MONEY_TOO_MUCH,
                         BORROW_MONEY_TOO_LITTLE, BORROW_MONEY_OK,
                         BORROW_MONEY_NOT_OK, PAY_BACK_IN_FULL, PAY_BACK_PARTIALLY,
-                        PAY_BACK_ZERO, PAY_BACK_TOO_MUCH -> new OneLinerScreen(name);
+                        PAY_BACK_ZERO, PAY_BACK_TOO_MUCH, TRAVEL_OK, TRAVEL_TOO_EXPENSIVE, TRAVEL_NOT_OK -> new OneLinerScreen(name);
                 case PAY_BACK_MONEY -> new PayBackMoneyScreen(name);
 
 

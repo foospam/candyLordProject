@@ -126,6 +126,21 @@
   },
   "PAY_BACK_TOO_MUCH": {
     "prompt": "Where are those moneys? You don't have that much on you!"
+  },
+  "TRAVEL": {
+    "badInputPrompt": "Just type the number of your destination",
+    "prompt": "You are at the airport.%n%s Where do you want to go?%n%s%n",
+    "validInput": "\\d+"
+  },
+  "TRAVEL_OK": {
+    "prompt": "All right! Hop in! We're headed to %s!",
+    "advanceDay": 1
+  },
+  "TRAVEL_NOT_OK": {
+    "prompt": "Man, you are already in %s! So here you remain."
+  },
+  "TRAVEL_TOO_EXPENSIVE": {
+    "prompt": "You don't have enough money to get to %s! Come back when you got the money!"
   }
 }
 

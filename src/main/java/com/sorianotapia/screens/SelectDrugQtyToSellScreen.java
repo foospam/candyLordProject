@@ -12,22 +12,11 @@ public class SelectDrugQtyToSellScreen extends AbstractScreen {
 
     @Override
     public void handleUserInput(ArrayList<String> stringArrayList, Player player, ScreenFactory screenFactory) {
-        int drugIndex = Integer.parseInt(stringArrayList.get(0)) - 1;
-        Drugs drug = Drugs.values()[drugIndex];
-        int drugQty = Integer.parseInt(stringArrayList.get(1));
+        int stuffIndex = Integer.parseInt(stringArrayList.get(0)) - 1;
+        String stuff = player.translateStuffIndexToName(stuffIndex);
+        int stuffQty = Integer.parseInt(stringArrayList.get(1));
 
-//        if (drugQty > player.getDrugsOnHand(Drugs.values()[drugIndex])) {
-//            setAdvanceDay(0);
-//            setNextScreen(screenFactory.ofName(ScreenName.STASH_EXCEEDED));
-//        } else if (drugQty == 0) {
-//            setAdvanceDay(0);
-//            setNextScreen(screenFactory.ofName(ScreenName.MAIN_SELECTION));
-//        } else {
-//            player.sellDrugs(Drugs.values()[drugIndex], drugQty);
-//            setNextScreen(screenFactory.ofName(ScreenName.MAIN_SELECTION));
-//        }
-
-        switch (player.sellDrugs(Drugs.values()[drugIndex], drugQty)) {
+        switch (player.sellStuff(stuff, stuffQty)) {
             case 0:
                 setNextScreen(screenFactory.ofName(ScreenName.MAIN_SELECTION));
                 break;

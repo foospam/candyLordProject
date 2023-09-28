@@ -1,6 +1,11 @@
 package com.sorianotapia.fromVersion1;
 
+import com.sorianotapia.places.NameContainer;
+import com.sorianotapia.places.Place;
+import com.sorianotapia.places.PlaceContainer;
+
 import java.util.EnumMap;
+import java.util.HashMap;
 
 public class Player {
     private int maxHold;
@@ -11,8 +16,8 @@ public class Player {
     private int cash;
     private LoanSharkDebt debt;
     private BankAccount bankAccount;
-    private City location;
-    private EnumMap<Drugs, Integer> drugsOnHand;
+    private Place location;
+    private HashMap<String, Integer> stuffOnHand;
 
     private int numberOfGuns;
 
@@ -51,9 +56,10 @@ public class Player {
         hold = 10;
 
         bankAccount = new BankAccount(this);
-        drugsOnHand = new EnumMap<>(Drugs.class);
-        for (Drugs drug : Drugs.values()) drugsOnHand.put(drug, 0);
-        location = City.values()[(int) (Math.random() * 8)];
+        location = PlaceContainer.getRandomPlace();
+        stuffOnHand = new HashMap<>();
+        for (String name: NameContainer.getStuffNames()) stuffOnHand.put(name, 0);
+
     }
 
 
@@ -83,8 +89,8 @@ public class Player {
         else return 0;
     }
 
-    public int buyDrugs(Drugs drug, int quantity) {
-        int totalCost = location.getDrugPrice(drug) * quantity;
+    public int buyStuff(String stuff, int quantity) {
+        int totalCost = location.getStuffPrice(stuff) * quantity;
 
         if (totalCost > cash) {
             return -1;
@@ -92,48 +98,32 @@ public class Player {
             return -2;
         } else {
             cash -= totalCost;
-            int oldQuantityOnHand = drugsOnHand.get(drug);
-            drugsOnHand.put(drug, oldQuantityOnHand + quantity);
+            int oldQuantityOnHand = stuffOnHand.get(stuff);
+            stuffOnHand.put(stuff, oldQuantityOnHand + quantity);
             hold -= quantity;
             return 0;
         }
     }
 
-    public int sellDrugs(Drugs drug, int quantity) {
-        int totalIncome = location.getDrugPrice(drug) * quantity;
+    public int sellStuff(String stuff, int quantity) {
+        int totalIncome = location.getStuffPrice(stuff) * quantity;
 
-        if (drugsOnHand.get(drug) < quantity) {
+        if (stuffOnHand.get(stuff) < quantity) {
             return -1;
         } else if (quantity == 0) {
             return -2;
         } else {
             cash += totalIncome;
-            int oldQuantityOnHand = drugsOnHand.get(drug);
-            drugsOnHand.put(drug, oldQuantityOnHand - quantity);
+            int oldQuantityOnHand = stuffOnHand.get(stuff);
+            stuffOnHand.put(stuff, oldQuantityOnHand - quantity);
             hold += quantity;
             return 0;
         }
     }
 
 
-//    public void travel(City city){
-//        int fromIndex = location.ordinal();
-//        int toIndex = city.ordinal();
-//        int ticketPrice = JetTickets.getPrice(fromIndex, toIndex);
-//        setCash(getCash()-ticketPrice);
-//        this.location = city;
-//        this.location.updateDrugPrices();
-//    }
 
-    public EnumMap<Drugs, Integer> getDrugsOnHand() {
-        return drugsOnHand;
-    }
-
-    public int getDrugsOnHand(Drugs drug) {
-        return drugsOnHand.get(drug);
-    }
-
-    public City getLocation() {
+    public Place getLocation() {
         return location;
     }
 
@@ -175,4 +165,28 @@ public class Player {
     public int payBackDebt(int amount){
         return debt.payBack(this, amount);
     }
+
+    public String translateStuffIndexToName(int index){
+        return location.getStuffName(index);
+    }
+
+    public int getStuffOnHand(int index) {
+        String stuff = translateStuffIndexToName(index);
+        return stuffOnHand.get(stuff);
+    }
+
+    private void setLocation(Place location){
+        this.location = location;
+    }
+
+    public int travel(Place destination, int ticketPrice){
+        if (ticketPrice > cash) return -1;
+        else if(destination == location) return -2;
+        else {
+            cash -= ticketPrice;
+            location = destination;
+            return 0;
+        }
+    }
+
 }

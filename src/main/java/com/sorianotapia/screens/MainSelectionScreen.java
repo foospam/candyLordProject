@@ -26,7 +26,7 @@ public class MainSelectionScreen extends AbstractScreen {
         setNextScreen(switch(input.get(0)) {
             case "B" -> screenFactory.ofName(ScreenName.SELECT_DRUG_TO_BUY);
             case "S" -> screenFactory.ofName(ScreenName.SELECT_DRUG_TO_SELL);
-            case "J" -> screenFactory.ofName(ScreenName.JET_TO_CITY);
+            case "J" -> screenFactory.ofName(ScreenName.TRAVEL);
             case "V" -> screenFactory.ofName(ScreenName.BANK_OPERATION_SELECTION);
             case "H" -> screenFactory.ofName(ScreenName.GO_TO_HOSPITAL);
             case "L" -> screenFactory.ofName(ScreenName.LOAN_SHARK);

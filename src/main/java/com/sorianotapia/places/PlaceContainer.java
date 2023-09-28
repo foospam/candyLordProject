@@ -4,23 +4,16 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class PlaceContainer {
-    private ArrayList<Place> places;
+    private static ArrayList<Place> places;
 
-    private final int NUMBER_OF_PLACES;
-    private final int PRICE_PER_KM;
-    private final int WORLD_SIZE;
-    private final int MIN_DISTANCE;
+    private static int NUMBER_OF_PLACES;
+    private static int PRICE_PER_KM;
+    private static int WORLD_SIZE;
+    private static int MIN_DISTANCE;
 
-    public static void main(String[] args) {
-        PlaceContainer container = new PlaceContainer();
-        ArrayList<Point> points = container.getPoints();
-        System.out.println(points);
-        container.getMap(points);
-    }
-
-    public PlaceContainer() {
-        PRICE_PER_KM = 5;
+    static {
         WORLD_SIZE = 20;
+        PRICE_PER_KM = 500/WORLD_SIZE;
         MIN_DISTANCE = 5;
         NUMBER_OF_PLACES = 8;
         places = new ArrayList<>();
@@ -33,19 +26,29 @@ public class PlaceContainer {
         }
     }
 
-    public double[] returnTicketPrices(PlaceName name) {
-        double[] ticketPrices = new double[values.size()];
-        Place origin = getPlaceByName(name);
-        for (int i = 0; i < values.size(); i++) {
-            ticketPrices[i] = origin.distanceTo(values.get(i));
+
+    public static int[] returnTicketPrices(Place origin) {
+        int[] ticketPrices = new int[places.size()];
+        for (int i = 0; i < places.size(); i++) {
+            ticketPrices[i] = (int) (origin.distanceTo(places.get(i)) * PRICE_PER_KM);
         }
         return ticketPrices;
     }
 
-    public Place getPlaceByName(PlaceName name) {
-        for (Place place : values
+    public static int[] returnTicketPrices(int placeIndex) {
+        Place origin = places.get(placeIndex);
+        return returnTicketPrices(origin);
+    }
+
+    public static int[] returnTicketPrices(String placeName) {
+        Place origin = getPlaceByName(placeName);
+        return returnTicketPrices(origin);
+    }
+
+    public static Place getPlaceByName(String name) {
+        for (Place place : places
         ) {
-            if (place.getInternalName() == name) {
+            if (place.getName().equals(name)) {
                 return place;
             }
         }
@@ -56,7 +59,7 @@ public class PlaceContainer {
 //
 //    }
 
-    private ArrayList<Point> getPoints() {
+    private static ArrayList<Point> getPoints() {
         ArrayList<Point> points = new ArrayList<>();
         points.add(getRandomPoint());
 
@@ -73,11 +76,17 @@ public class PlaceContainer {
         return points;
     }
 
-    private Point getRandomPoint() {
+    private static Point getRandomPoint() {
         return new Point((int) (Math.random() * WORLD_SIZE), (int) (Math.random() * WORLD_SIZE));
     }
 
-    public String getMap(ArrayList<Point> points) {
+    public static String getMap(){
+        ArrayList<Point> points = new ArrayList<>();
+        places.forEach(p -> points.add(p.getCoordinates()));
+        return getMap(points);
+    }
+
+    public static String getMap(ArrayList<Point> points) {
         StringBuilder map = new StringBuilder("x".repeat(WORLD_SIZE * WORLD_SIZE));
 
         for (Point point :
@@ -88,10 +97,25 @@ public class PlaceContainer {
 
         }
         for (int i = 1; i < WORLD_SIZE; i++)
-            map.insert(i * WORLD_SIZE + i - 1, "\n");
-        System.out.println(map);
-        System.out.println(map.toString().replaceAll("x", "   ").replaceAll("(\\d)", " $1 "));
-        return map.toString();
+            //╔═╗║
+            map.insert(i * WORLD_SIZE + (3*(i-1)), "║\n║");
+        System.out.println(map.toString());
+        map.insert(0, "╔"+"═".repeat(WORLD_SIZE*3)+"╗\n║");
+        map.insert(map.length()-2, "║\n╚"+"═".repeat(WORLD_SIZE*3)+"╝\n");
+
+        String worldMap = map.toString().replaceAll("x", "   ").replaceAll("(\\d)", " $1 ");
+        return worldMap;
     }
 
+    public static Place getRandomPlace(){
+        return places.get((int) (Math.random() * places.size()));
+    }
+
+    public static String getPlaceName(int index){
+        return places.get(index).getName();
+    }
+
+    public static Place getPlaceByIndex(int index){
+        return places.get(index);
+    }
 }
