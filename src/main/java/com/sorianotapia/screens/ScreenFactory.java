@@ -29,8 +29,10 @@ public class ScreenFactory {
                         NOT_HEALED, NO_CASH_FOR_HEALING, BORROW_MONEY_TOO_MUCH,
                         BORROW_MONEY_TOO_LITTLE, BORROW_MONEY_OK,
                         BORROW_MONEY_NOT_OK, PAY_BACK_IN_FULL, PAY_BACK_PARTIALLY,
-                        PAY_BACK_ZERO, PAY_BACK_TOO_MUCH, TRAVEL_OK, TRAVEL_TOO_EXPENSIVE, TRAVEL_NOT_OK -> new OneLinerScreen(name);
+                        PAY_BACK_ZERO, PAY_BACK_TOO_MUCH, TRAVEL_OK, TRAVEL_TOO_EXPENSIVE, TRAVEL_NOT_OK,
+                        EVENT_PRICE_INCREASE, EVENT_PRICE_DECREASE, RELAX -> new OneLinerScreen(name);
                 case PAY_BACK_MONEY -> new PayBackMoneyScreen(name);
+
 
 
                 default -> null;

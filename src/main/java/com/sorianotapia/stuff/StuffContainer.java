@@ -42,4 +42,13 @@ public class StuffContainer {
     }
 
 
+    public Stuff getStuff(int index){
+        return stuffList.get(index);
+    }
+
+    public int getSize(){
+        return stuffList.size();
+    }
+
+
 }

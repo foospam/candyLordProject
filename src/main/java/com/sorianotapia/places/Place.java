@@ -1,13 +1,9 @@
 package com.sorianotapia.places;
 
-import com.sorianotapia.fromVersion1.Drugs;
 import com.sorianotapia.stuff.Stuff;
 import com.sorianotapia.stuff.StuffContainer;
 
 import java.awt.Point;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Place {
     private String name;
@@ -41,6 +37,15 @@ public class Place {
 
     public String getStuffName(int index){
         return stuffContainer.getStuffName(index);
+    }
+
+    public Stuff getStuff(int index){
+        return stuffContainer.getStuff(index);
+    }
+
+    public Stuff getRandomStuff(){
+        int randomIndex = (int) (Math.random() * stuffContainer.getSize());
+        return getStuff(randomIndex);
     }
 
 }

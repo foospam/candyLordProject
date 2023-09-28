@@ -141,6 +141,19 @@
   },
   "TRAVEL_TOO_EXPENSIVE": {
     "prompt": "You don't have enough money to get to %s! Come back when you got the money!"
+  },
+  "RELAX": {
+    "prompt": "Yeah, just relax and wait to see what the future has in store for you.",
+    "transitionDelay" : true,
+    "advanceDay" : 1
+  },
+  "EVENT_PRICE_INCREASE": {
+    "prompt": "The cops have seized an important cargo of %s. Its prices are exploding!",
+    "transitionDelay" : true
+  },
+  "EVENT_PRICE_DECREASE": {
+    "prompt": "Some cops have started traficking themselves. The market is flooded with %s!",
+    "transitionDelay" : true
   }
 }
 

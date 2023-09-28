@@ -1,4 +1,6 @@
 package com.sorianotapia;
+import com.sorianotapia.events.Event;
+import com.sorianotapia.events.EventFactory;
 import com.sorianotapia.fromVersion1.LoanSharkDebt;
 import com.sorianotapia.fromVersion1.Player;
 import com.sorianotapia.places.NameContainer;
@@ -8,7 +10,7 @@ import com.sorianotapia.screens.ScreenName;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import com.sorianotapia.places.PlaceContainer;
+import java.util.Stack;
 
 
 public class Controller {
@@ -37,6 +39,8 @@ public class Controller {
     private Player player;
     private ScreenFactory screenFactory;
     private GameDate date;
+    private static Stack<Event> eventStack;
+    private EventFactory eventFactory;
 
     public Controller(Player player, GameDate gameDate){
         inputBuffer = new ArrayList<>();
@@ -46,12 +50,14 @@ public class Controller {
         screenFactory = new ScreenFactory();
         screen = screenFactory.ofName(ScreenName.MAIN_SELECTION);
         date = gameDate;
+        eventFactory = new EventFactory();
+        eventStack = new Stack<>();
     }
 
     public void run(){
         while (true) {
             render();
-            getEvent();
+            handleEvents();
             getUserInput();
             handleUserInput();
             update();
@@ -78,8 +84,22 @@ public class Controller {
         screen.handleUserInput(inputBuffer, player, screenFactory);
     }
 
-    private void getEvent() {
+    private void handleEvents() {
+        eventFactory.pushRandomEvents(player);
+
+        boolean localEvent = false;
+
+        while (!eventStack.isEmpty()) {
+
+            Event event = eventStack.pop();
+            event.run(this, screenFactory, inputBuffer);
+            localEvent = event.isLocalEvent();
+
+            if (localEvent) break;
+        }
+        if (localEvent) render();
     }
+
 
     private void render() {
         if (null != screen.getHeading())
@@ -88,7 +108,7 @@ public class Controller {
         System.out.println(prompt);
     }
 
-    private void setScreen(AbstractScreen screen){
+    public void setScreen(AbstractScreen screen){
         this.screen = screen;
     }
 
@@ -140,4 +160,11 @@ public class Controller {
         }
         setScreen(screen.getNextScreen());
     }
+
+    public static void pushEvent(Event event){
+        eventStack.push(event);
+    }
+
+
+
 }

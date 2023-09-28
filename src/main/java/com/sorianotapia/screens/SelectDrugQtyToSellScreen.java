@@ -1,6 +1,5 @@
 package com.sorianotapia.screens;
 
-import com.sorianotapia.fromVersion1.Drugs;
 import com.sorianotapia.fromVersion1.Player;
 
 import java.util.ArrayList;

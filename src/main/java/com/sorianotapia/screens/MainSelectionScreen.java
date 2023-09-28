@@ -10,12 +10,13 @@ public class MainSelectionScreen extends AbstractScreen {
     public MainSelectionScreen(ScreenName name) {
         super(name);
         this.heading = HeadingNames.STAT_PAGE_DRUGS;
-        this.validInput = "[BSJVHL]";
+        this.validInput = "[BSJVHLR]";
         this.prompt = """
                 Here's a list of your possible plans dude:
                 (B)uy Drugs                 (V)isit the bank
                 (S)ell Drugs                Go to the (H)ospital
                 (J)et to another city       See the (L)oan shark
+                (R)elax and do nothing
                 
                 Make up your mind!
                 """;
@@ -30,6 +31,7 @@ public class MainSelectionScreen extends AbstractScreen {
             case "V" -> screenFactory.ofName(ScreenName.BANK_OPERATION_SELECTION);
             case "H" -> screenFactory.ofName(ScreenName.GO_TO_HOSPITAL);
             case "L" -> screenFactory.ofName(ScreenName.LOAN_SHARK);
+            case "R" -> screenFactory.ofName(ScreenName.RELAX);
             default -> screenFactory.ofName(ScreenName.MAIN_SELECTION);
         });
     }

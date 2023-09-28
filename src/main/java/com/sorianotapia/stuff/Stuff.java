@@ -21,9 +21,7 @@ public class Stuff {
         updatePrice(minPrice, maxPrice);
     }
 
-    public void priceUp() {
-        updatePrice(price, maxPrice);
-    }
+    public void priceUp() {updatePrice(price, maxPrice);}
 
     public void priceDown() {
         updatePrice(minPrice, price);
@@ -35,5 +33,15 @@ public class Stuff {
 
     public String getName() {
         return name;
+    }
+
+    public void priceUp(int percent){
+        price += (int) (price * (percent)/100);
+        price = Math.min(price, maxPrice);
+    }
+
+    public void priceDown(int percent){
+        price -= (int) (price * (percent)/100);
+        price = Math.max(price, minPrice);
     }
 }

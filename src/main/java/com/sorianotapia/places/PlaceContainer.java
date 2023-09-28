@@ -118,4 +118,8 @@ public class PlaceContainer {
     public static Place getPlaceByIndex(int index){
         return places.get(index);
     }
+
+    public static int size(){
+        return places.size();
+    }
 }
