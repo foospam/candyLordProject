@@ -9,7 +9,7 @@ import com.sorianotapia.screens.ScreenName;
 import java.util.ArrayList;
 
 public abstract class Event {
-    public final Place place;
+    public Place place;
     public final Player player;
 
     public Event(Place place, Player player) {
@@ -21,6 +21,10 @@ public abstract class Event {
 
     public boolean isLocalEvent(){
         return place == player.getLocation();
+    }
+
+    public void setPlace(Place place){
+        this.place = place;
     }
 
 

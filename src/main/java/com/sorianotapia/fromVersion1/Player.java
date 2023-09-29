@@ -1,10 +1,13 @@
 package com.sorianotapia.fromVersion1;
 
+import com.sorianotapia.MethodAnswers;
+import com.sorianotapia.accessories.Arm;
+import com.sorianotapia.accessories.StuffCarrier;
 import com.sorianotapia.places.NameContainer;
 import com.sorianotapia.places.Place;
 import com.sorianotapia.places.PlaceContainer;
 
-import java.util.EnumMap;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Player {
@@ -18,6 +21,7 @@ public class Player {
     private BankAccount bankAccount;
     private Place location;
     private HashMap<String, Integer> stuffOnHand;
+    private HashMap<Arm, Integer> armMap;
 
     private int numberOfGuns;
 
@@ -87,6 +91,60 @@ public class Player {
     public int getDebtDays() {
         if (debt != null) return debt.getPaymentPeriod();
         else return 0;
+    }
+
+//
+//    public int buyGun(String gun, int quantity) {
+//        int totalCost = location.getStuffPrice(stuff) * quantity;
+//
+//        if (totalCost > cash) {
+//            return -1;
+//        } else if (quantity > hold) {
+//            return -2;
+//        } else {
+//            cash -= totalCost;
+//            int oldQuantityOnHand = stuffOnHand.get(stuff);
+//            stuffOnHand.put(stuff, oldQuantityOnHand + quantity);
+//            hold -= quantity;
+//            return 0;
+//        }
+//    }
+//
+//    public int buyStash(String stash, int quantity){
+//
+//    }
+
+    public MethodAnswers buyStuffCarrier(StuffCarrier carrier) {
+        int hold = carrier.getHold();
+        int price = carrier.getPrice();
+
+        if (price > cash) {
+            return MethodAnswers.INSUFFICIENT_MONEY;
+        } else {
+            cash -= price;
+            this.maxHold = hold;
+            return MethodAnswers.SUCCESS;
+        }
+    }
+
+
+    public MethodAnswers buyArm(Arm arm, int quantity) {
+        int totalPrice = arm.getPrice() * quantity;
+
+        if (totalPrice > cash) {
+            return MethodAnswers.INSUFFICIENT_MONEY;
+        } else {
+            cash -= totalPrice;
+            int armNumber;
+            if (armMap.containsKey(arm)) {
+                armNumber = armMap.get(arm) + quantity;
+            } else {
+                armNumber = quantity;
+            }
+            armMap.put(arm, armNumber);
+            return MethodAnswers.SUCCESS;
+            // TO DO: Aquí hay que hacer una armería para poderlas llevar mejor, las armas. Por ejemplo, para el string, o para cuando haya que elegirlas en la pelea.
+        }
     }
 
     public int buyStuff(String stuff, int quantity) {
@@ -189,4 +247,14 @@ public class Player {
         }
     }
 
+    public void emptyPockets(){
+        this.cash = 0;
+    }
+
+    public void emptyHold(){
+        for (String key: stuffOnHand.keySet()){
+            stuffOnHand.put(key, 0);
+        }
+        hold = maxHold;
+    }
 }

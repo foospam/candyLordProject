@@ -13,6 +13,7 @@ public class NameContainer {
 
     private static ArrayList<String> placeNames = new ArrayList<>();
     private static ArrayList<String> stuffNames = new ArrayList<>();
+
     private static ObjectMapper mapper = new ObjectMapper();
     private static ObjectNode root;
 

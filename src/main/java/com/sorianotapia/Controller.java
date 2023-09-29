@@ -1,5 +1,6 @@
 package com.sorianotapia;
 import com.sorianotapia.events.Event;
+import com.sorianotapia.events.EventMessage;
 import com.sorianotapia.events.EventFactory;
 import com.sorianotapia.fromVersion1.LoanSharkDebt;
 import com.sorianotapia.fromVersion1.Player;
@@ -8,9 +9,7 @@ import com.sorianotapia.screens.AbstractScreen;
 import com.sorianotapia.screens.ScreenFactory;
 import com.sorianotapia.screens.ScreenName;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 
 public class Controller {
@@ -39,7 +38,7 @@ public class Controller {
     private Player player;
     private ScreenFactory screenFactory;
     private GameDate date;
-    private static Stack<Event> eventStack;
+    private static LinkedList<EventMessage> eventMessageQueue;
     private EventFactory eventFactory;
 
     public Controller(Player player, GameDate gameDate){
@@ -50,8 +49,8 @@ public class Controller {
         screenFactory = new ScreenFactory();
         screen = screenFactory.ofName(ScreenName.MAIN_SELECTION);
         date = gameDate;
-        eventFactory = new EventFactory();
-        eventStack = new Stack<>();
+        eventFactory = new EventFactory(player.getLocation(), player);
+        eventMessageQueue = new LinkedList<>();
     }
 
     public void run(){
@@ -89,9 +88,9 @@ public class Controller {
 
         boolean localEvent = false;
 
-        while (!eventStack.isEmpty()) {
+        while (!eventMessageQueue.isEmpty()) {
 
-            Event event = eventStack.pop();
+            Event event = eventMessageQueue.poll().getEvent();
             event.run(this, screenFactory, inputBuffer);
             localEvent = event.isLocalEvent();
 
@@ -161,10 +160,7 @@ public class Controller {
         setScreen(screen.getNextScreen());
     }
 
-    public static void pushEvent(Event event){
-        eventStack.push(event);
+    public static void pushEventMessage(EventMessage eventMessage){
+        eventMessageQueue.add(eventMessage);
     }
-
-
-
 }

@@ -154,6 +154,52 @@
   "EVENT_PRICE_DECREASE": {
     "prompt": "Some cops have started traficking themselves. The market is flooded with %s!",
     "transitionDelay" : true
+  },
+  "ROB_ALL_MONEY": {
+    "prompt": "A gangster steps out of a dark alley and puts a gun to your temple.\n\"Empty your pockets, man!\"\nYou give him all you have and get away broke but healthy.",
+    "transitionDelay" : true
+  },
+  "ROB_ALL_MONEY_NO_OK": {
+    "prompt": "A gangster steps out of a dark alley and puts a gun to your temple.\n\"Empty your pockets, man!\"\nUnfortunately, you don't have enough. He hits you with the back of his gun.\n\"You broke bastard!\"\nYou get away injured.",
+    "transitionDelay" : true
+  },
+  "ROB_ALL_STUFF": {
+    "prompt": "A gangster steps out of a dark alley and puts a gun to your temple.\n\"Give me all that sweet stuff of yours!\"\nYou give him all you have on you.",
+    "transitionDelay" : true
+  },
+  "ROB_ALL_MONEY_NO_OK": {
+    "prompt": "A gangster steps out of a dark alley and puts a gun to your temple.\n\"Give me all that sweet stuff of yours!\"\nUnfortunately, you don't carry anything. He hits you with the back of his gun.\n\"Now I'll have to go cold turkey!\"\nYou get away injured.",
+    "transitionDelay" : true
+  },
+  "BUY_STUFF_CARRIER": {
+    "badInputPrompt": "Just say yes or no, man. I don't have all day.",
+    "prompt": "A shady guy approaches in a dark alley. Do you want to buy a %s? It can hold up to %s units of stuff, and it costs just %s.",
+    "validInput": "[YN]"
+  },
+  "BUY_STUFF_CARRIER_OK": {
+    "prompt": "Here you are! It's a pleasure to make business with you!",
+    "transitionDelay": true
+  },
+  "BUY_STUFF_CARRIER_NO_OK": {
+    "prompt": "Your miss. That was some sweet merch!",
+    "transitionDelay": true
+  },
+  "BUY_ARM": {
+    "badInputPrompt": "Just say yes or no, man. I don't have all day.",
+    "prompt": "A shady guy with a military look approaches in a dark alley. Do you want to buy a %s?%nIt's a powerful weapon! You hit somebody, they get %s points south.%nWith an accuracy of %s %, you cannot miss.%nThe unit costs %s. I can give you %s for %s, you take it or leave it.",
+    "validInput": "[YN]"
+  },
+  "BUY_ARM_OK": {
+    "prompt": "Here you are! It's a pleasure to make business with you, sir!",
+    "transitionDelay": true
+  },
+  "BUY_ARM_NO_OK": {
+    "prompt": "I'm sorry. This could really have protected you.",
+    "transitionDelay": true
+  },
+  "NO_MONEY": {
+    "prompt": "Come back when you got the money!",
+    "transitionDelay": true
   }
 }
 

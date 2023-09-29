@@ -9,16 +9,26 @@ import java.util.ArrayList;
 
 public class EventFactory {
 
-
     ArrayList<Event> events;
 
     public static void main(String[] args) {
     }
 
+    public EventFactory(Place place, Player player){
+        events = new ArrayList<>();
+        events.add(new BuyStuffCarrierEvent(place, player)); // TO DO, quitar del constructor el place, se puede manejar con setter ssolo
+        events.add(new BuyArmEvent(place, player));
+        events.add(new MoneyRobberyEvent(place, player));
+        events.add(new StuffRobberyEvent(place, player));
+        events.add(new PriceDecreaseEvent(place, player));
+        events.add(new PriceIncreaseEvent(place, player));
+    }
+
     public void pushRandomEvent(Place place, Player player) {
-        if (Math.random() < 0.3) {
-            //int eventIndex = (int) (Math.random() * events.size());
-            Controller.pushEvent(new PriceIncreaseEvent(place, player));
+
+        if (Math.random() < 0.8) { // Esto se podía meter en un parámetro
+            Event event = events.get((int) (Math.random() * events.size()));
+            Controller.pushEventMessage(new EventMessage(event, place));
         }
     }
 
