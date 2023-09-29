@@ -147,35 +147,35 @@ public class Player {
         }
     }
 
-    public int buyStuff(String stuff, int quantity) {
+    public MethodAnswers buyStuff(String stuff, int quantity) {
         int totalCost = location.getStuffPrice(stuff) * quantity;
 
         if (totalCost > cash) {
-            return -1;
+            return MethodAnswers.INSUFFICIENT_MONEY;
         } else if (quantity > hold) {
-            return -2;
+            return MethodAnswers.INSUFFICIENT_HOLD;
         } else {
             cash -= totalCost;
             int oldQuantityOnHand = stuffOnHand.get(stuff);
             stuffOnHand.put(stuff, oldQuantityOnHand + quantity);
             hold -= quantity;
-            return 0;
+            return MethodAnswers.SUCCESS;
         }
     }
 
-    public int sellStuff(String stuff, int quantity) {
+    public MethodAnswers sellStuff(String stuff, int quantity) {
         int totalIncome = location.getStuffPrice(stuff) * quantity;
 
         if (stuffOnHand.get(stuff) < quantity) {
-            return -1;
+            return MethodAnswers.INSUFFICIENT_STASH;
         } else if (quantity == 0) {
-            return -2;
+            return MethodAnswers.QUANTITY_ZERO;
         } else {
             cash += totalIncome;
             int oldQuantityOnHand = stuffOnHand.get(stuff);
             stuffOnHand.put(stuff, oldQuantityOnHand - quantity);
             hold += quantity;
-            return 0;
+            return MethodAnswers.SUCCESS;
         }
     }
 
@@ -237,13 +237,13 @@ public class Player {
         this.location = location;
     }
 
-    public int travel(Place destination, int ticketPrice){
-        if (ticketPrice > cash) return -1;
-        else if(destination == location) return -2;
+    public MethodAnswers travel(Place destination, int ticketPrice){
+        if (ticketPrice > cash) return MethodAnswers.INSUFFICIENT_MONEY;
+        else if(destination == location) return MethodAnswers.SAME_ORIGIN_AND_DESTINATION;
         else {
             cash -= ticketPrice;
             location = destination;
-            return 0;
+            return MethodAnswers.SUCCESS;
         }
     }
 

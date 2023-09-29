@@ -23,7 +23,7 @@ public abstract class AbstractScreen {
 
     }
 
-    public String render(ArrayList<String> inputBuffer, Player player) {
+    public String render(Player player) {
         return prompt;
     }
 
@@ -39,7 +39,7 @@ public abstract class AbstractScreen {
         return this.validInput;
     }
 
-    public abstract void handleUserInput(ArrayList<String> stringArrayList, Player player, ScreenFactory screenFactory);
+    public abstract void handleUserInput(Player player);
 
     public void setNextScreen(AbstractScreen screen) {
         this.nextScreen = screen;
@@ -91,5 +91,9 @@ public abstract class AbstractScreen {
 
     public boolean getTransitionDelay(){
         return transitionDelay;
+    }
+
+    public ScreenName getName(){
+        return name;
     }
 }

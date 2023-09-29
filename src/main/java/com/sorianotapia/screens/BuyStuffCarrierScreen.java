@@ -1,5 +1,6 @@
 package com.sorianotapia.screens;
 
+import com.sorianotapia.Controller;
 import com.sorianotapia.accessories.StuffCarrier;
 import com.sorianotapia.accessories.StuffCarrierContainer;
 import com.sorianotapia.fromVersion1.Player;
@@ -11,22 +12,22 @@ public class BuyStuffCarrierScreen extends AbstractScreen {
         super(name);
     }
 
-    public String render(ArrayList<String> inputBuffer, Player player) {
-        String merchName = inputBuffer.get(0);
-        String merchHold = inputBuffer.get(1);
-        String merchPrice = inputBuffer.get(2);
+    public String render(Player player) {
+        String merchName = Controller.inputBuffer.get(0);
+        String merchHold = Controller.inputBuffer.get(1);
+        String merchPrice = Controller.inputBuffer.get(2);
         return String.format(prompt, merchName, merchHold, merchPrice);
     }
 
     @Override
-    public void handleUserInput(ArrayList<String> inputBuffer, Player player, ScreenFactory screenFactory) {
-        StuffCarrier carrier = StuffCarrierContainer.getCarrierByName(inputBuffer.get(0));
-        if (inputBuffer.get(3) == "N") {
-            setNextScreen(screenFactory.ofName(ScreenName.BUY_STUFF_CARRIER_NO));
+    public void handleUserInput(Player player) {
+        StuffCarrier carrier = StuffCarrierContainer.getCarrierByName(Controller.inputBuffer.get(0));
+        if (Controller.inputBuffer.get(3) == "N") {
+            setNextScreen(ScreenFactory.ofName(ScreenName.BUY_STUFF_CARRIER_NO));
         } else {
             switch (player.buyStuffCarrier(carrier)) {
-                case INSUFFICIENT_MONEY -> setNextScreen(screenFactory.ofName(ScreenName.NO_MONEY));
-                case SUCCESS -> setNextScreen(screenFactory.ofName(ScreenName.BUY_STUFF_CARRIER_OK));
+                case INSUFFICIENT_MONEY -> setNextScreen(ScreenFactory.ofName(ScreenName.NO_MONEY));
+                case SUCCESS -> setNextScreen(ScreenFactory.ofName(ScreenName.BUY_STUFF_CARRIER_OK));
             }
         }
 

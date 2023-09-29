@@ -1,5 +1,6 @@
 package com.sorianotapia.screens;
 
+import com.sorianotapia.Controller;
 import com.sorianotapia.fromVersion1.Player;
 import com.sorianotapia.headings.HeadingNames;
 
@@ -23,16 +24,16 @@ public class MainSelectionScreen extends AbstractScreen {
     }
 
     @Override
-    public void handleUserInput(ArrayList<String> input, Player player, ScreenFactory screenFactory) {
-        setNextScreen(switch(input.get(0)) {
-            case "B" -> screenFactory.ofName(ScreenName.SELECT_DRUG_TO_BUY);
-            case "S" -> screenFactory.ofName(ScreenName.SELECT_DRUG_TO_SELL);
-            case "J" -> screenFactory.ofName(ScreenName.TRAVEL);
-            case "V" -> screenFactory.ofName(ScreenName.BANK_OPERATION_SELECTION);
-            case "H" -> screenFactory.ofName(ScreenName.GO_TO_HOSPITAL);
-            case "L" -> screenFactory.ofName(ScreenName.LOAN_SHARK);
-            case "R" -> screenFactory.ofName(ScreenName.RELAX);
-            default -> screenFactory.ofName(ScreenName.MAIN_SELECTION);
+    public void handleUserInput(Player player) {
+        setNextScreen(switch(Controller.inputBuffer.get(0)) {
+            case "B" -> ScreenFactory.ofName(ScreenName.SELECT_DRUG_TO_BUY);
+            case "S" -> ScreenFactory.ofName(ScreenName.SELECT_DRUG_TO_SELL);
+            case "J" -> ScreenFactory.ofName(ScreenName.TRAVEL);
+            case "V" -> ScreenFactory.ofName(ScreenName.BANK_OPERATION_SELECTION);
+            case "H" -> ScreenFactory.ofName(ScreenName.GO_TO_HOSPITAL);
+            case "L" -> ScreenFactory.ofName(ScreenName.LOAN_SHARK);
+            case "R" -> ScreenFactory.ofName(ScreenName.RELAX);
+            default -> ScreenFactory.ofName(ScreenName.MAIN_SELECTION);
         });
     }
 

@@ -1,5 +1,6 @@
 package com.sorianotapia.screens;
 
+import com.sorianotapia.Controller;
 import com.sorianotapia.fromVersion1.Player;
 
 import java.util.ArrayList;
@@ -10,34 +11,23 @@ public class SelectDrugQtyToBuyScreen extends AbstractScreen {
     }
 
     @Override
-    public void handleUserInput(ArrayList<String> stringArrayList, Player player, ScreenFactory screenFactory) {
-        int stuffIndex = Integer.parseInt(stringArrayList.get(0)) - 1;
+    public void handleUserInput(Player player) {
+        int stuffIndex = Integer.parseInt(Controller.inputBuffer.get(0)) - 1;
         String stuff = player.translateStuffIndexToName(stuffIndex);
-        int stuffQty = Integer.parseInt(stringArrayList.get(1));
-
-//        if (stuffQty > player.getHold()) {
-//            setNextScreen(screenFactory.ofName(ScreenName.HOLD_EXCEEDED));
-//        }
-//        else if (stuffQty * drug.getPrice() > player.getCash()) {
-//            setNextScreen(screenFactory.ofName(ScreenName.CASH_EXCEEDED));
-//        }
-//        else{
-//            player.buyDrugs(Drugs.values()[drugIndex], stuffQty);
-//            setNextScreen(screenFactory.ofName(ScreenName.MAIN_SELECTION));
-//        }
+        int stuffQty = Integer.parseInt(Controller.inputBuffer.get(1));
 
         switch (player.buyStuff(stuff, stuffQty)) {
-            case 0:
-                setNextScreen(screenFactory.ofName(ScreenName.MAIN_SELECTION));
+            case SUCCESS:
+                setNextScreen(ScreenFactory.ofName(ScreenName.MAIN_SELECTION));
                 break;
-            case -1: {
+            case INSUFFICIENT_MONEY: {
                 setAdvanceDay(0);
-                setNextScreen(screenFactory.ofName(ScreenName.CASH_EXCEEDED));
+                setNextScreen(ScreenFactory.ofName(ScreenName.CASH_EXCEEDED));
                 break;
             }
-            case -2: {
+            case INSUFFICIENT_HOLD: {
                 setAdvanceDay(0);
-                setNextScreen(screenFactory.ofName(ScreenName.HOLD_EXCEEDED));
+                setNextScreen(ScreenFactory.ofName(ScreenName.HOLD_EXCEEDED));
                 break;
             }
         }

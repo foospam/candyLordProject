@@ -1,5 +1,6 @@
 package com.sorianotapia.screens;
 
+import com.sorianotapia.Controller;
 import com.sorianotapia.fromVersion1.Player;
 
 import java.util.ArrayList;
@@ -10,23 +11,23 @@ public class SelectDrugQtyToSellScreen extends AbstractScreen {
     }
 
     @Override
-    public void handleUserInput(ArrayList<String> stringArrayList, Player player, ScreenFactory screenFactory) {
-        int stuffIndex = Integer.parseInt(stringArrayList.get(0)) - 1;
+    public void handleUserInput(Player player) {
+        int stuffIndex = Integer.parseInt(Controller.inputBuffer.get(0)) - 1;
         String stuff = player.translateStuffIndexToName(stuffIndex);
-        int stuffQty = Integer.parseInt(stringArrayList.get(1));
+        int stuffQty = Integer.parseInt(Controller.inputBuffer.get(1));
 
         switch (player.sellStuff(stuff, stuffQty)) {
-            case 0:
-                setNextScreen(screenFactory.ofName(ScreenName.MAIN_SELECTION));
+            case SUCCESS:
+                setNextScreen(ScreenFactory.ofName(ScreenName.MAIN_SELECTION));
                 break;
-            case -1: {
+            case INSUFFICIENT_STASH: {
                 setAdvanceDay(0);
-                setNextScreen(screenFactory.ofName(ScreenName.STASH_EXCEEDED));
+                setNextScreen(ScreenFactory.ofName(ScreenName.STASH_EXCEEDED));
                 break;
             }
-            case -2: {
+            case QUANTITY_ZERO: {
                 setAdvanceDay(0);
-                setNextScreen(screenFactory.ofName(ScreenName.MAIN_SELECTION));
+                setNextScreen(ScreenFactory.ofName(ScreenName.MAIN_SELECTION));
                 break;
             }
         }

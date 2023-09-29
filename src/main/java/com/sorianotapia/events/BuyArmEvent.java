@@ -28,7 +28,7 @@ public class BuyArmEvent extends Event {
             int total_price = quantity * arm.getPrice();
             buffer.add(String.valueOf(quantity));
             buffer.add(String.valueOf(total_price));
-            controller.setScreen(screenFactory.ofName(ScreenName.BUY_STUFF_CARRIER));
+            controller.setScreen(screenFactory.ofName(ScreenName.BUY_ARM));
         }
     }
 }

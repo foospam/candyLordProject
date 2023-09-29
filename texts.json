@@ -186,7 +186,7 @@
   },
   "BUY_ARM": {
     "badInputPrompt": "Just say yes or no, man. I don't have all day.",
-    "prompt": "A shady guy with a military look approaches in a dark alley. Do you want to buy a %s?%nIt's a powerful weapon! You hit somebody, they get %s points south.%nWith an accuracy of %s %, you cannot miss.%nThe unit costs %s. I can give you %s for %s, you take it or leave it.",
+    "prompt": "A shady guy with a military look approaches in a dark alley. Do you want to buy a %s?%nIt's a powerful weapon! You hit somebody, they get %s points south.%nWith an accuracy of %s, you cannot miss.%nThe unit costs %s. I can give you %s for %s, you take it or leave it.",
     "validInput": "[YN]"
   },
   "BUY_ARM_OK": {

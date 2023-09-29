@@ -11,7 +11,7 @@ public class InputGrabberScreen extends AbstractScreen {
     }
 
     @Override
-    public void handleUserInput(ArrayList<String> stringArrayList, Player player, ScreenFactory screenFactory) {
-        setNextScreen(screenFactory.ofName(ScreenName.valueOf(defaultNextScreen)));
+    public void handleUserInput(Player player) {
+        setNextScreen(ScreenFactory.ofName(ScreenName.valueOf(defaultNextScreen)));
     }
 }

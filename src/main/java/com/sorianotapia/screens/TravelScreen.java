@@ -1,5 +1,7 @@
 package com.sorianotapia.screens;
 
+import com.sorianotapia.Controller;
+import com.sorianotapia.MethodAnswers;
 import com.sorianotapia.fromVersion1.Player;
 import com.sorianotapia.places.Place;
 import com.sorianotapia.places.PlaceContainer;
@@ -13,7 +15,7 @@ public class TravelScreen extends AbstractScreen {
     }
 
     @Override
-    public String render(ArrayList<String> inputBuffer, Player player) {
+    public String render(Player player) {
         String worldMap = PlaceContainer.getMap();
         int[] ticketPrices = PlaceContainer.returnTicketPrices(player.getLocation());
         StringBuilder fareTable = new StringBuilder();
@@ -26,24 +28,24 @@ public class TravelScreen extends AbstractScreen {
     }
 
     @Override
-    public void handleUserInput(ArrayList<String> stringArrayList, Player player, ScreenFactory screenFactory) {
+    public void handleUserInput(Player player) {
 
-        int destinationIndex = Integer.parseInt(stringArrayList.get(0))-1;
+        int destinationIndex = Integer.parseInt(Controller.inputBuffer.get(0))-1;
         Place destination = PlaceContainer.getPlaceByIndex(destinationIndex);
         int price = PlaceContainer.returnTicketPrices(player.getLocation())[destinationIndex];
         switch (player.travel(destination, price)) {
-            case 0 -> {
-                stringArrayList.clear();
-                stringArrayList.add(destination.getName());
-                setNextScreen(screenFactory.ofName(ScreenName.TRAVEL_OK));
+            case SUCCESS -> {
+                Controller.inputBuffer.clear();
+                Controller.inputBuffer.add(destination.getName());
+                setNextScreen(ScreenFactory.ofName(ScreenName.TRAVEL_OK));
             }
-            case -1 -> {
-                stringArrayList.clear();
-                stringArrayList.add(destination.getName());
-                setNextScreen(screenFactory.ofName(ScreenName.TRAVEL_TOO_EXPENSIVE));
+            case INSUFFICIENT_MONEY -> {
+                Controller.inputBuffer.clear();
+                Controller.inputBuffer.add(destination.getName());
+                setNextScreen(ScreenFactory.ofName(ScreenName.TRAVEL_TOO_EXPENSIVE));
             }
-            case 2 -> {
-                setNextScreen(screenFactory.ofName(ScreenName.TRAVEL_NOT_OK));
+            case SAME_ORIGIN_AND_DESTINATION -> {
+                setNextScreen(ScreenFactory.ofName(ScreenName.TRAVEL_NOT_OK));
             }
 
         }

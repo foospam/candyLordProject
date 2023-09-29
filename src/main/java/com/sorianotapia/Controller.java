@@ -17,8 +17,6 @@ public class Controller {
     public static void main(String[] args) throws IOException {
         TextContainer.setFile("texts.json");
         NameContainer.setFile("placeNames.json");
-
-        //PlaceContainer.getRandomPlace();
         GameDate gameDate = new GameDate();
         Player player = new Player();
         LoanSharkDebt debt = new LoanSharkDebt();
@@ -33,7 +31,7 @@ public class Controller {
     }
 
     private AbstractScreen screen;
-    private ArrayList<String> inputBuffer;
+    public static ArrayList<String> inputBuffer;
     private Scanner scanner;
     private Player player;
     private ScreenFactory screenFactory;
@@ -80,30 +78,32 @@ public class Controller {
     }
 
     private void handleUserInput() {
-        screen.handleUserInput(inputBuffer, player, screenFactory);
+        screen.handleUserInput(player);
     }
 
     private void handleEvents() {
-        eventFactory.pushRandomEvents(player);
+        if (screen.getName() == ScreenName.MAIN_SELECTION) {
+            eventFactory.pushRandomEvents(player);
 
-        boolean localEvent = false;
+            boolean localEvent = false;
 
-        while (!eventMessageQueue.isEmpty()) {
+            while (!eventMessageQueue.isEmpty()) {
 
-            Event event = eventMessageQueue.poll().getEvent();
-            event.run(this, screenFactory, inputBuffer);
-            localEvent = event.isLocalEvent();
+                Event event = eventMessageQueue.poll().getEvent();
+                event.run(this, screenFactory, inputBuffer);
+                localEvent = event.isLocalEvent();
 
-            if (localEvent) break;
+                if (localEvent) break;
+            }
+            if (localEvent) render();
         }
-        if (localEvent) render();
     }
 
 
     private void render() {
         if (null != screen.getHeading())
             System.out.printf(screen.getHeading().getTemplate()+"%n", getFullStats());
-        String prompt = screen.render(inputBuffer, player);
+        String prompt = screen.render(player);
         System.out.println(prompt);
     }
 

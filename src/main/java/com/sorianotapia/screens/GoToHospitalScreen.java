@@ -1,5 +1,6 @@
 package com.sorianotapia.screens;
 
+import com.sorianotapia.Controller;
 import com.sorianotapia.fromVersion1.Player;
 
 import java.util.ArrayList;
@@ -11,25 +12,25 @@ public class GoToHospitalScreen extends AbstractScreen {
     }
 
     @Override
-    public String render(ArrayList<String> arrayList, Player player){
+    public String render(Player player){
         return String.format(prompt, player.getHealingCost());
     }
 
     @Override
-    public void handleUserInput(ArrayList<String> stringArrayList, Player player, ScreenFactory screenFactory) {
-        switch(stringArrayList.get(0)){
+    public void handleUserInput(Player player) {
+        switch(Controller.inputBuffer.get(0)){
             case "Y": {
 
                 int healingDays = player.getHealingDays();
                 switch(player.heal()){
                     case 0: {
-                        stringArrayList.set(0, String.valueOf(healingDays));
+                        Controller.inputBuffer.set(0, String.valueOf(healingDays));
                         setAdvanceDay(healingDays);
-                        setNextScreen(screenFactory.ofName(ScreenName.HEALED));
+                        setNextScreen(ScreenFactory.ofName(ScreenName.HEALED));
                         break;
                     }
                     case -1: {
-                        setNextScreen(screenFactory.ofName(ScreenName.NO_CASH_FOR_HEALING));
+                        setNextScreen(ScreenFactory.ofName(ScreenName.NO_CASH_FOR_HEALING));
                         break;
                     }
                 }
@@ -38,7 +39,7 @@ public class GoToHospitalScreen extends AbstractScreen {
 
             }
             case "N": {
-                setNextScreen(screenFactory.ofName(ScreenName.NOT_HEALED));
+                setNextScreen(ScreenFactory.ofName(ScreenName.NOT_HEALED));
                 break;
             }
         }

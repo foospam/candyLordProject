@@ -4,13 +4,14 @@ import java.util.EnumMap;
 
 public class ScreenFactory {
 
-    private EnumMap<ScreenName, AbstractScreen> container;
+    static private EnumMap<ScreenName, AbstractScreen> container =
+            new EnumMap<ScreenName, AbstractScreen>(ScreenName.class);
 
-    public ScreenFactory() {
-        container = new EnumMap<ScreenName, AbstractScreen>(ScreenName.class);
-    }
+//    public ScreenFactory() {
+//        container = new EnumMap<ScreenName, AbstractScreen>(ScreenName.class);
+//    }
 
-    public AbstractScreen ofName(ScreenName name) {
+    public static AbstractScreen ofName(ScreenName name) {
         if (container.containsKey(name)) return container.get(name);
         else {
             AbstractScreen screen = switch (name) {
@@ -33,7 +34,10 @@ public class ScreenFactory {
                         BORROW_MONEY_NOT_OK, PAY_BACK_IN_FULL, PAY_BACK_PARTIALLY,
                         PAY_BACK_ZERO, PAY_BACK_TOO_MUCH, TRAVEL_OK, TRAVEL_TOO_EXPENSIVE, TRAVEL_NOT_OK,
                         EVENT_PRICE_INCREASE, EVENT_PRICE_DECREASE, RELAX,
-                        BUY_STUFF_CARRIER_OK, BUY_STUFF_CARRIER_NO, NO_MONEY -> new OneLinerScreen(name);
+                        BUY_STUFF_CARRIER_OK, BUY_STUFF_CARRIER_NO, NO_MONEY,
+                        ROB_ALL_MONEY, ROB_ALL_MONEY_NO_OK,
+                        ROB_ALL_STUFF, ROB_ALL_STUFF_NO_OK,
+                        BUY_ARM_NO_OK, BUY_ARM_OK -> new OneLinerScreen(name);
                 case PAY_BACK_MONEY -> new PayBackMoneyScreen(name);
 
                 default -> null;
