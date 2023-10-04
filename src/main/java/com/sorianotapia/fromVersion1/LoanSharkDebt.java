@@ -25,7 +25,6 @@ public class LoanSharkDebt implements TimeListener {
 
     public void raiseDebt() {
         value = (int) (value * (1 + INTEREST / 100.));
-        System.out.println("Value: " + value);
     }
 
     public void payOffDebt(int amount) {
@@ -73,6 +72,7 @@ public class LoanSharkDebt implements TimeListener {
             value += quantity;
             player.setCash(player.getCash() + quantity);
             paymentPeriod = getInitialPaymentPeriod(player, quantity);
+            activeCredit = true;
             return MethodAnswers.SUCCESS;
         }
     }
@@ -82,11 +82,12 @@ public class LoanSharkDebt implements TimeListener {
     }
 
     private int getInitialPaymentPeriod(Player player, int quantity) {
-        int maxCredit = getMaxCredit(player) - MIN_LOAN;
+        int maxCredit = getMaxCredit(player);
         int variablePaymentPeriod = MAX_PAYMENT_PERIOD - MIN_PAYMENT_PERIOD;
         double normalizedQuantity = (maxCredit - quantity) / (double) maxCredit;
         double factor = 1 / Math.pow(variablePaymentPeriod, normalizedQuantity); // Esto y la línea de abajo se puede simplificar a variablePaymentPeriod^normalized quantity
         int initialPaymentPeriod = (int) (variablePaymentPeriod * (1 - factor)) + MIN_PAYMENT_PERIOD;
+
         if (paymentPeriod <= 0) return initialPaymentPeriod;
         else return Math.min(paymentPeriod, initialPaymentPeriod);
 
@@ -105,8 +106,9 @@ public class LoanSharkDebt implements TimeListener {
     }
 
     public void updatePaymentPeriod(int days) {
+
         paymentPeriod -= days;
-        if (paymentPeriod <= -1) {
+        if (paymentPeriod == -1) {
             overdue += 1;
             EventFactory.pushDebtEvent();
         }

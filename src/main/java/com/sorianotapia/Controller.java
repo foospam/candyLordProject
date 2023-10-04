@@ -1,4 +1,5 @@
 package com.sorianotapia;
+
 import com.sorianotapia.events.Event;
 import com.sorianotapia.events.EventMessage;
 import com.sorianotapia.events.EventFactory;
@@ -8,6 +9,7 @@ import com.sorianotapia.places.NameContainer;
 import com.sorianotapia.screens.AbstractScreen;
 import com.sorianotapia.screens.ScreenFactory;
 import com.sorianotapia.screens.ScreenName;
+
 import java.io.IOException;
 import java.util.*;
 
@@ -25,7 +27,6 @@ public class Controller {
         EventFactory.initializeEvents(player);
 
 
-
         Controller controller = new Controller(player, gameDate);
         //controller.player.setHealth(50);
         controller.run();
@@ -39,7 +40,7 @@ public class Controller {
     private GameDate date;
     private static LinkedList<EventMessage> eventMessageQueue;
 
-    public Controller(Player player, GameDate gameDate){
+    public Controller(Player player, GameDate gameDate) {
         inputBuffer = new ArrayList<>();
         scanner = new Scanner(System.in);
         this.player = player;
@@ -51,7 +52,7 @@ public class Controller {
         eventMessageQueue = new LinkedList<>();
     }
 
-    public void run(){
+    public void run() {
         while (true) {
             render();
             if (screen.getName() == ScreenName.EVENT_LOOP) {
@@ -59,6 +60,9 @@ public class Controller {
             }
             getUserInput();
             handleUserInput();
+            if (screen.getName() == ScreenName.GOOD_BYE) {
+                break;
+            }
             update();
         }
     }
@@ -67,13 +71,13 @@ public class Controller {
     private void getUserInput() {
         String validInput = screen.getValidInput();
         if (null != validInput) {
-            String inputString = "";
+            String inputString = "FALSE_INPUT";
             boolean first = true;
-            while (!inputString.matches(validInput)){
+            while (!inputString.matches(validInput)) {
                 if (first) first = false;
                 else System.out.printf(screen.getBadInputPrompt(), inputString);
 
-                inputString = scanner.next();
+                inputString = scanner.nextLine();
             }
             inputBuffer.add(inputString);
         }
@@ -84,36 +88,46 @@ public class Controller {
     }
 
     private void handleEvents() {
-        if (screen.getName() == ScreenName.MAIN_SELECTION) {
-            EventFactory.pushRandomEvents(player);
+        if (screen.getName() == ScreenName.EVENT_LOOP) {
 
             boolean localEvent = false;
+
+            if (eventMessageQueue.isEmpty()) {
+                screen = ScreenFactory.ofName(ScreenName.MAIN_SELECTION);
+                render();
+            }
+
+//            ArrayList<Class> classList = new ArrayList<>();
+//            eventMessageQueue.forEach(s -> classList.add(s.getEvent().getClass()));
+//            System.out.println(classList);
+
 
             while (!eventMessageQueue.isEmpty()) {
 
                 Event event = eventMessageQueue.poll().getEvent();
                 event.run(this);
                 localEvent = event.isLocalEvent();
-
+                if (localEvent) render();
                 if (localEvent) break;
+
             }
-            if (localEvent) render();
         }
     }
 
 
     private void render() {
+//        System.out.println(screen.getName());
         if (null != screen.getHeading())
-            System.out.printf(screen.getHeading().getTemplate()+"%n", getFullStats());
+            System.out.printf(screen.getHeading().getTemplate() + "%n", getFullStats());
         String prompt = screen.render(player);
-        System.out.println(prompt);
+        if (prompt != null && prompt != "null") System.out.println(prompt);
     }
 
-    public void setScreen(AbstractScreen screen){
+    public void setScreen(AbstractScreen screen) {
         this.screen = screen;
     }
 
-    public Object[] getFullStats(){
+    public Object[] getFullStats() {
         Object[] objects = new Object[28];
         objects[0] = player.getStuffOnHand(0);
         objects[1] = player.getStuffOnHand(1);
@@ -138,7 +152,7 @@ public class Controller {
         objects[20] = player.getCash();
         objects[21] = player.getDeposits();
         objects[22] = player.getDebtValue();
-        objects[23] = player.getDebtValue() > 0 ?  String.format("(%2d)", player.getDebtDays()) : "";
+        objects[23] = player.getDebtValue() > 0 ? String.format("(%2d)", player.getDebtDays()) : "";
         objects[24] = player.getNumberOfGuns();
         objects[25] = player.getGunType();
         objects[26] = player.getReputation();
@@ -150,7 +164,11 @@ public class Controller {
     private void update() {
         if (!screen.passInput()) inputBuffer.clear();
 
-        date.updateDate(screen.getAdvanceDay());
+        int advanceDays = screen.getAdvanceDay();
+        if (advanceDays > 0) {
+            date.updateDate(advanceDays);
+            EventFactory.pushRandomEvents(player);
+        }
 
         if (screen.getTransitionDelay()) {
             try {
@@ -162,7 +180,7 @@ public class Controller {
         setScreen(screen.getNextScreen());
     }
 
-    public static void pushEventMessage(EventMessage eventMessage){
+    public static void pushEventMessage(EventMessage eventMessage) {
         eventMessageQueue.add(eventMessage);
     }
 }

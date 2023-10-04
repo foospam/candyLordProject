@@ -10,17 +10,17 @@ public class HitDebitorScreen extends AbstractScreen{
 
     @Override
     public void handleUserInput(Player player) {
-        player.setHarm(25); // TO DO: Parametrizar esto
-        int overdue = Integer.parseInt(Controller.inputBuffer.get(0));
+        player.setHarm(100); // TO DO: Parametrizar esto
+        int overdue = Integer.parseInt(Controller.inputBuffer.get(0))-1;
+
         if (overdue > 0) {
             Controller.inputBuffer.clear();
-            Controller.inputBuffer.add(String.valueOf(--overdue));
+            Controller.inputBuffer.add(String.valueOf(overdue));
             setNextScreen(ScreenFactory.ofName(ScreenName.HIT_DEBITOR));
         }
         else {
-
+            player.extendPaymentPeriod();
             setNextScreen(ScreenFactory.ofName(ScreenName.WARN_DEBITOR));
-            setNextScreen(ScreenFactory.ofName(ScreenName.MAIN_SELECTION));
         }
 
     }

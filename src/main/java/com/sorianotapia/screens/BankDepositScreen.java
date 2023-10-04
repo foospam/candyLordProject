@@ -16,7 +16,7 @@ public class BankDepositScreen extends AbstractScreen {
 
         switch(player.setDeposits(quantity)){
             case(0) : {
-                setNextScreen(ScreenFactory.ofName(ScreenName.MAIN_SELECTION));
+                setNextScreen(ScreenFactory.ofName(ScreenName.EVENT_LOOP));
                 break;
             }
             case(-1) : {

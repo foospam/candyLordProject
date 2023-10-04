@@ -52,6 +52,7 @@ public class EventFactory {
     }
 
     public static void pushGameOverEvent(){
-        Controller.pushEventMessage(new EventMessage(reclaimDebtEvent, null));
+        System.out.println("Game over triggered");
+        Controller.pushEventMessage(new EventMessage(gameOverEvent, null));
     }
 }
