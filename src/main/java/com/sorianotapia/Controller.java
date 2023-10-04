@@ -22,6 +22,7 @@ public class Controller {
         LoanSharkDebt debt = new LoanSharkDebt();
         player.setDebt(debt);
         gameDate.subscribe(debt);
+        EventFactory.initializeEvents(player);
 
 
 
@@ -37,7 +38,6 @@ public class Controller {
     private ScreenFactory screenFactory;
     private GameDate date;
     private static LinkedList<EventMessage> eventMessageQueue;
-    private EventFactory eventFactory;
 
     public Controller(Player player, GameDate gameDate){
         inputBuffer = new ArrayList<>();
@@ -47,14 +47,16 @@ public class Controller {
         screenFactory = new ScreenFactory();
         screen = screenFactory.ofName(ScreenName.MAIN_SELECTION);
         date = gameDate;
-        eventFactory = new EventFactory(player.getLocation(), player);
+
         eventMessageQueue = new LinkedList<>();
     }
 
     public void run(){
         while (true) {
             render();
-            handleEvents();
+            if (screen.getName() == ScreenName.EVENT_LOOP) {
+                handleEvents();
+            }
             getUserInput();
             handleUserInput();
             update();
@@ -83,14 +85,14 @@ public class Controller {
 
     private void handleEvents() {
         if (screen.getName() == ScreenName.MAIN_SELECTION) {
-            eventFactory.pushRandomEvents(player);
+            EventFactory.pushRandomEvents(player);
 
             boolean localEvent = false;
 
             while (!eventMessageQueue.isEmpty()) {
 
                 Event event = eventMessageQueue.poll().getEvent();
-                event.run(this, screenFactory, inputBuffer);
+                event.run(this);
                 localEvent = event.isLocalEvent();
 
                 if (localEvent) break;

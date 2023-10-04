@@ -1,8 +1,11 @@
 package com.sorianotapia.fromVersion1;
 
+import com.sorianotapia.Controller;
 import com.sorianotapia.MethodAnswers;
 import com.sorianotapia.accessories.Arm;
 import com.sorianotapia.accessories.StuffCarrier;
+import com.sorianotapia.events.EventFactory;
+import com.sorianotapia.events.EventMessage;
 import com.sorianotapia.places.NameContainer;
 import com.sorianotapia.places.Place;
 import com.sorianotapia.places.PlaceContainer;
@@ -32,7 +35,14 @@ public class Player {
     }
 
     public void setHealth(int health) {
-        this.health = health;
+
+        if (health > 0) {
+            this.health = health;
+        }
+        else {
+            this.health = 0;
+            EventFactory.pushGameOverEvent();
+        }
     }
 
     public int getReputation() {
@@ -216,11 +226,11 @@ public class Player {
         return hospital.heal(this);
     }
 
-    public int borrowMoney(int amount){
+    public MethodAnswers borrowMoney(int amount){
         return debt.borrow(this, amount);
     }
 
-    public int payBackDebt(int amount){
+    public MethodAnswers payBackDebt(int amount){
         return debt.payBack(this, amount);
     }
 
@@ -256,5 +266,17 @@ public class Player {
             stuffOnHand.put(key, 0);
         }
         hold = maxHold;
+    }
+
+    public void setHarm(int harm){
+        setHealth(health-harm);
+    }
+
+    public int getOverdue() {
+        return debt.getOverdue();
+    }
+
+    public void extendPaymentPeriod(){
+        debt.extendPaymentPeriod();
     }
 }

@@ -28,18 +28,23 @@ public class ScreenFactory {
                 case TRAVEL -> new TravelScreen(name);
                 case BUY_STUFF_CARRIER -> new BuyStuffCarrierScreen(name);
                 case BUY_ARM -> new BuyArmScreen(name);
+                case RECLAIM_DEBT -> new ReclaimLoanScreen(name);
+                case ROB_MONEY -> new RobMoneyScreen(name);
+                case ROB_STUFF -> new RobStuffScreen(name);
+                case EVENT_LOOP -> new EventLoopScreen(name);
                 case STASH_EXCEEDED, HOLD_EXCEEDED, CASH_EXCEEDED, DEPOSIT_EXCEEDED, WITHDRAW_LIMIT_EXCEEDED, HEALED,
                         NOT_HEALED, NO_CASH_FOR_HEALING, BORROW_MONEY_TOO_MUCH,
                         BORROW_MONEY_TOO_LITTLE, BORROW_MONEY_OK,
                         BORROW_MONEY_NOT_OK, PAY_BACK_IN_FULL, PAY_BACK_PARTIALLY,
                         PAY_BACK_ZERO, PAY_BACK_TOO_MUCH, TRAVEL_OK, TRAVEL_TOO_EXPENSIVE, TRAVEL_NOT_OK,
-                        EVENT_PRICE_INCREASE, EVENT_PRICE_DECREASE, RELAX,
+                        RELAX -> new OneLinerScreen(name);
+                case PAY_BACK_MONEY -> new PayBackMoneyScreen(name);
+                case EVENT_PRICE_INCREASE, EVENT_PRICE_DECREASE,
                         BUY_STUFF_CARRIER_OK, BUY_STUFF_CARRIER_NO, NO_MONEY,
                         ROB_ALL_MONEY, ROB_ALL_MONEY_NO_OK,
                         ROB_ALL_STUFF, ROB_ALL_STUFF_NO_OK,
-                        BUY_ARM_NO_OK, BUY_ARM_OK -> new OneLinerScreen(name);
-                case PAY_BACK_MONEY -> new PayBackMoneyScreen(name);
-
+                        BUY_ARM_NO_OK, BUY_ARM_OK,
+                        WARN_DEBITOR -> new EventLoopOneLinerScreen(name);
                 default -> null;
             };
 

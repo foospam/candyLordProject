@@ -8,22 +8,13 @@ import com.sorianotapia.screens.ScreenName;
 
 import java.util.ArrayList;
 
-public class StuffRobberyEvent extends Event{
-    public StuffRobberyEvent(Place place, Player player) {
-        super(place, player);
+public class StuffRobberyEvent extends UserEvent {
+    public StuffRobberyEvent(Player player) {
+        super(player);
     }
 
     @Override
-    public void run(Controller controller, ScreenFactory screenFactory, ArrayList<String> buffer) {
-        if (isLocalEvent()){
-            if (player.getCash() > 0 ) {
-                player.emptyHold();
-                controller.setScreen(screenFactory.ofName(ScreenName.ROB_ALL_STUFF));
-            } else {
-                int health = player.getHealth();
-                player.setHealth(health-5);
-                controller.setScreen(screenFactory.ofName(ScreenName.ROB_ALL_STUFF_NO_OK));
-            }
-        }
+    public void run(Controller controller) {
+        controller.setScreen(ScreenFactory.ofName(ScreenName.ROB_STUFF));
     }
 }

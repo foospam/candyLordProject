@@ -1,6 +1,11 @@
 package com.sorianotapia.fromVersion1;
 
+import com.sorianotapia.Controller;
+import com.sorianotapia.MethodAnswers;
 import com.sorianotapia.TimeListener;
+import com.sorianotapia.events.EventFactory;
+import com.sorianotapia.events.EventMessage;
+import com.sorianotapia.events.ReclaimDebtEvent;
 
 public class LoanSharkDebt implements TimeListener {
     public static void main(String[] args) {
@@ -14,6 +19,7 @@ public class LoanSharkDebt implements TimeListener {
     private final int MIN_LOAN;
     private final int MAX_PAYMENT_PERIOD;
     private final int MIN_PAYMENT_PERIOD;
+    private int overdue;
 
     int paymentPeriod;
 
@@ -45,29 +51,29 @@ public class LoanSharkDebt implements TimeListener {
         return paymentPeriod;
     }
 
-    public int payBack(Player player, int quantity) {
-        if (quantity > player.getCash()) return -1;
-        else if (quantity < value / 10) return -2;
+    public MethodAnswers payBack(Player player, int quantity) {
+        if (quantity > player.getCash()) return MethodAnswers.INSUFFICIENT_MONEY;
+        else if (quantity < value / 10) return MethodAnswers.QUANTITY_NOT_WORTH_THE_FUSS;
         else {
             value -= quantity;
             player.setCash(player.getCash() - quantity);
             if (value == 0) {
                 cancelDebt();
-                return 1;
-            } else return 0;
+                return MethodAnswers.DEBT_CANCELLED;
+            } else return MethodAnswers.PARTIAL_PAYBACK_OK;
         }
     }
 
-    public int borrow(Player player, int quantity) {
+    public MethodAnswers borrow(Player player, int quantity) {
 
-        if (quantity < MIN_LOAN) return -1;
-        else if (quantity > getMaxCredit(player)) return -2;
-        else if (quantity > (getMaxCredit(player) - value)) return -3;
+        if (quantity < MIN_LOAN) return MethodAnswers.MINIMUM_LOAN_NOT_REACHED;
+        else if (quantity > getMaxCredit(player)) return MethodAnswers.MAXIMUM_CREDIT_EXCEEDED;
+        else if (quantity > (getMaxCredit(player) - value)) return MethodAnswers.CURRENT_CREDIT_EXCEEDED;
         else {
             value += quantity;
             player.setCash(player.getCash() + quantity);
             paymentPeriod = getInitialPaymentPeriod(player, quantity);
-            return 0;
+            return MethodAnswers.SUCCESS;
         }
     }
 
@@ -98,10 +104,11 @@ public class LoanSharkDebt implements TimeListener {
          */
     }
 
-    public void updatePaymentPeriod() {
-        paymentPeriod--;
-        if (paymentPeriod == -1) {
-
+    public void updatePaymentPeriod(int days) {
+        paymentPeriod -= days;
+        if (paymentPeriod <= -1) {
+            overdue += 1;
+            EventFactory.pushDebtEvent();
         }
     }
 
@@ -116,6 +123,7 @@ public class LoanSharkDebt implements TimeListener {
         if (activeCredit) {
             for (int i = 0; i < days; i++) {
                 raiseDebt();
+                updatePaymentPeriod(days);
             }
         }
     }
@@ -123,5 +131,13 @@ public class LoanSharkDebt implements TimeListener {
     @Override
     public void updateEvents(Object... args) {
 
+    }
+
+    public int getOverdue() {
+        return overdue;
+    }
+
+    public void extendPaymentPeriod(){
+        paymentPeriod = 10;
     }
 }

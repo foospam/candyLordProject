@@ -10,20 +10,21 @@ import com.sorianotapia.screens.ScreenName;
 
 import java.util.ArrayList;
 
-public class BuyStuffCarrierEvent extends Event {
-    public BuyStuffCarrierEvent(Place place, Player player) {
-        super(place, player);
+public class BuyStuffCarrierEvent extends UserEvent {
+    public BuyStuffCarrierEvent(Player player) {
+        super(player);
     }
 
     @Override
-    public void run(Controller controller, ScreenFactory screenFactory, ArrayList<String> buffer) {
+
+    public void run(Controller controller) {
         if (isLocalEvent()) {
             StuffCarrier stuffContainer = StuffCarrierContainer.getRandomCarrier();
-            buffer.clear();
-            buffer.add(stuffContainer.getName());
-            buffer.add(String.valueOf(stuffContainer.getHold()));
-            buffer.add(String.valueOf(stuffContainer.getPrice()));
-            controller.setScreen(screenFactory.ofName(ScreenName.BUY_STUFF_CARRIER));
+            Controller.inputBuffer.clear();
+            Controller.inputBuffer.add(stuffContainer.getName());
+            Controller.inputBuffer.add(String.valueOf(stuffContainer.getHold()));
+            Controller.inputBuffer.add(String.valueOf(stuffContainer.getPrice()));
+            controller.setScreen(ScreenFactory.ofName(ScreenName.BUY_STUFF_CARRIER));
         }
     }
 }

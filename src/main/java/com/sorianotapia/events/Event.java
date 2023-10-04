@@ -8,24 +8,13 @@ import com.sorianotapia.screens.ScreenName;
 
 import java.util.ArrayList;
 
-public abstract class Event {
-    public Place place;
-    public final Player player;
-
-    public Event(Place place, Player player) {
-        this.place = place;
-        this.player = player;
-    }
-
-    public abstract void run(Controller controller, ScreenFactory screenFactory, ArrayList<String> buffer);
-
-    public boolean isLocalEvent(){
-        return place == player.getLocation();
-    }
-
-    public void setPlace(Place place){
-        this.place = place;
-    }
+public interface Event {
 
 
+    public abstract void run(Controller controller);
+
+    public boolean isLocalEvent();
+
+    public void setPlace(Place place);
+    public void setPlayer(Player player);
 }

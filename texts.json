@@ -200,6 +200,28 @@
   "NO_MONEY": {
     "prompt": "Come back when you got the money!",
     "transitionDelay": true
+  },
+  "RECLAIM_DEBT": {
+    "prompt": "A group of sketchy guys round you up in dark alley. You don't have time to react. One of them has a baseball bat.",
+    "passInput": true,
+    "transitionDelay": true
+  },
+  "HIT_DEBITOR": {
+    "prompt": "CRACK!",
+    "passInput": true,
+    "transitionDelay": true
+  },
+  "WARN_DEBITOR": {
+    "prompt": "The loan shark needs his money, comprende? You got 10 more days. Next time you won't come off so lightly!",
+    "transitionDelay": true
+  },
+  "GAME_OVER": {
+    "badInputPrompt": "Just type Y or N!",
+    "prompt": "You kinda fall asleep. Next thing you see, you are surrounded by fire and some weird people in red pajamas are running around carrying forks. You're dead, amigo.\n\nDo you want to start a new game?",
+    "validInput": "[YN]"
+  },
+  "EVENT_LOOP": {
+    "prompt": null
   }
 }
 

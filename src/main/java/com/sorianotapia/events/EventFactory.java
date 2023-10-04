@@ -9,32 +9,49 @@ import java.util.ArrayList;
 
 public class EventFactory {
 
-    ArrayList<Event> events;
+    static private ArrayList<Event> randomPlaceEvents = new ArrayList<>();
+    static private ArrayList<Event> randomUserEvents = new ArrayList<>();
+    static private Event reclaimDebtEvent;
 
-    public static void main(String[] args) {
+    static private GameOverEvent gameOverEvent;
+
+    private EventFactory(){};
+
+    public static void initializeEvents(Player player){
+        randomPlaceEvents.add(new PriceDecreaseEvent(player));
+        randomPlaceEvents.add(new PriceIncreaseEvent(player));
+
+        randomUserEvents.add(new BuyStuffCarrierEvent(player)); // TO DO, quitar del constructor el place, se puede manejar con setter ssolo
+        randomUserEvents.add(new BuyArmEvent(player));
+        randomUserEvents.add(new MoneyRobberyEvent(player));
+        randomUserEvents.add(new StuffRobberyEvent(player));
+
+        reclaimDebtEvent = new ReclaimDebtEvent(player);
+
+        gameOverEvent = new GameOverEvent(player);
     }
 
-    public EventFactory(Place place, Player player){
-        events = new ArrayList<>();
-        events.add(new BuyStuffCarrierEvent(place, player)); // TO DO, quitar del constructor el place, se puede manejar con setter ssolo
-        events.add(new BuyArmEvent(place, player));
-        events.add(new MoneyRobberyEvent(place, player));
-        events.add(new StuffRobberyEvent(place, player));
-        events.add(new PriceDecreaseEvent(place, player));
-        events.add(new PriceIncreaseEvent(place, player));
-    }
 
-    public void pushRandomEvent(Place place, Player player) {
+
+    public static void pushRandomEvent(Place place, Player player) {
 
         if (Math.random() < 0.8) { // Esto se podía meter en un parámetro
-            Event event = events.get((int) (Math.random() * events.size()));
+            Event event = randomPlaceEvents.get((int) (Math.random() * randomPlaceEvents.size()));
             Controller.pushEventMessage(new EventMessage(event, place));
         }
     }
 
-    public void pushRandomEvents(Player player) {
+    public static void pushRandomEvents(Player player) {
         for (int i = 0; i < PlaceContainer.size(); i++) {
             pushRandomEvent(PlaceContainer.getPlaceByIndex(i), player);
         }
+    }
+
+    public static void pushDebtEvent(){
+        Controller.pushEventMessage(new EventMessage(reclaimDebtEvent, null));
+    }
+
+    public static void pushGameOverEvent(){
+        Controller.pushEventMessage(new EventMessage(reclaimDebtEvent, null));
     }
 }
