@@ -3,26 +3,30 @@ package com.sorianotapia.combat;
 import com.sorianotapia.accessories.Arm;
 import com.sorianotapia.combat.Fighter;
 
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class NPC implements Fighter {
 
     protected int health;
+    protected String name;
     protected Arm armInHand;
+    protected boolean inBattle;
 
     public NPC(Arm arm) {
         this.health = 100;
         this.armInHand = arm;
+        this.inBattle = true;
     }
 
     @Override
-    public void shootRandomEnemy(Fighter... enemies) {
-        Fighter enemy = enemies[ThreadLocalRandom.current().nextInt(enemies.length)];
-        armInHand.shoot(enemy);
+    public String shootRandomEnemy(ArrayList<Fighter> enemies) {
+        Fighter enemy = enemies.get(ThreadLocalRandom.current().nextInt(enemies.size()));
+        return armInHand.shoot(enemy);
     }
 
     @Override
-    public abstract boolean escapeEnemies(Fighter... enemies);
+    public abstract String escapeEnemies(ArrayList<Fighter> enemies);
 
     @Override
     public void setHarm(int harm) {
@@ -39,6 +43,17 @@ public abstract class NPC implements Fighter {
         return ThreadLocalRandom.current().nextInt(armInHand.getHarm());
     }
 
-    public abstract void act(Fighter... enemies);
+    public abstract String act (ArrayList<Fighter> enemies);
 
+    public String getName(){
+        return this.name;
+    }
+
+    public boolean isDead(){
+        return (health == 0);
+    }
+
+    public boolean isInBattle() {
+        return inBattle;
+    }
 }

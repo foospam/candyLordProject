@@ -24,6 +24,18 @@ public class Holster {
         }
     }
 
+    public Arm getTopGun(){
+        if (armList.isEmpty()) {
+            return ArmContainer.getDefaultArm();
+        }
+        else {
+            Arm arm = armList.get(0);
+            armList.remove(0);
+            armMap.put(arm, armMap.get(arm)-1);
+            return arm;
+        }
+    }
+
     public void add(Arm arm){
         armList.add(arm);
         if (!armMap.containsKey(arm)){

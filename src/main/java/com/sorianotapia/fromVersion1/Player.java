@@ -2,6 +2,7 @@ package com.sorianotapia.fromVersion1;
 
 import com.sorianotapia.MethodAnswers;
 import com.sorianotapia.accessories.Arm;
+import com.sorianotapia.accessories.Holster;
 import com.sorianotapia.accessories.StuffCarrier;
 import com.sorianotapia.combat.Fighter;
 import com.sorianotapia.events.EventFactory;
@@ -9,6 +10,7 @@ import com.sorianotapia.places.NameContainer;
 import com.sorianotapia.places.Place;
 import com.sorianotapia.places.PlaceContainer;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -25,6 +27,7 @@ public class Player implements Fighter {
     private HashMap<String, Integer> stuffOnHand;
     private HashMap<Arm, Integer> armMap;
     private Arm armInHand;
+    private Holster holster;
 
 
     public int getHealth() {
@@ -66,6 +69,7 @@ public class Player implements Fighter {
         maxHold = 10;
         hold = 10;
 
+        holster = new Holster();
         bankAccount = new BankAccount(this);
         location = PlaceContainer.getRandomPlace();
         stuffOnHand = new HashMap<>();
@@ -99,27 +103,6 @@ public class Player implements Fighter {
         if (debt != null) return debt.getPaymentPeriod();
         else return 0;
     }
-
-//
-//    public int buyGun(String gun, int quantity) {
-//        int totalCost = location.getStuffPrice(stuff) * quantity;
-//
-//        if (totalCost > cash) {
-//            return -1;
-//        } else if (quantity > hold) {
-//            return -2;
-//        } else {
-//            cash -= totalCost;
-//            int oldQuantityOnHand = stuffOnHand.get(stuff);
-//            stuffOnHand.put(stuff, oldQuantityOnHand + quantity);
-//            hold -= quantity;
-//            return 0;
-//        }
-//    }
-//
-//    public int buyStash(String stash, int quantity){
-//
-//    }
 
     public MethodAnswers buyStuffCarrier(StuffCarrier carrier) {
         int hold = carrier.getHold();
@@ -186,21 +169,8 @@ public class Player implements Fighter {
         }
     }
 
-
-
     public Place getLocation() {
         return location;
-    }
-
-    public int getNumberOfGuns() {
-        return numberOfGuns;
-    }
-
-    public String getGunType() {
-        if (gunType != null) {
-            return gunType;
-        }
-        return "None";
     }
 
     public int getHold() {
@@ -278,21 +248,21 @@ public class Player implements Fighter {
     }
 
     @Override
-    public void shootRandomEnemy(Fighter... enemies) {
-        Fighter enemy = enemies[ThreadLocalRandom.current().nextInt(enemies.length)];
-        armInHand.shoot(enemy);
+    public String shootRandomEnemy(ArrayList<Fighter> enemies) {
+        Fighter enemy = enemies.get(ThreadLocalRandom.current().nextInt(enemies.size()));
+        return armInHand.shoot(enemy);
     }
 
     @Override
-    public boolean escapeEnemies(Fighter... enemies) {
+    public String escapeEnemies(ArrayList<Fighter> enemies) {
         for (Fighter enemy : enemies) {
             int fighterRoll = gunRoll();
             int enemyRoll = enemy.gunRoll();
             if (enemyRoll > fighterRoll) {
-                return false;
+                return "You tried to chicken out, but the cops were quicker. Good luck next time!";
             }
         }
-        return true;
+        return "You chickened out like the chicken you are!";
     }
 
     public int gunRoll(){
@@ -302,5 +272,26 @@ public class Player implements Fighter {
 
     public int harmRoll(){
         return ThreadLocalRandom.current().nextInt(armInHand.getHarm());
+    }
+
+    public void setArmInHand(Arm armInHand) {
+        this.armInHand = armInHand;
+    }
+
+    @Override
+    public String getName() {
+        return "You";
+    }
+
+    public Arm getTopGun(){
+        return holster.getTopGun();
+    }
+
+    public boolean isDead(){
+        return (health == 0);
+    }
+
+    public boolean isInBattle(){
+        return true;
     }
 }

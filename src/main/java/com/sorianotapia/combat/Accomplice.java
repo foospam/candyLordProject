@@ -2,6 +2,8 @@ package com.sorianotapia.combat;
 
 import com.sorianotapia.accessories.Arm;
 
+import java.util.ArrayList;
+
 public class Accomplice extends NPC {
 
     final int bossReputation;
@@ -12,26 +14,31 @@ public class Accomplice extends NPC {
     }
 
     @Override
-    public boolean escapeEnemies(Fighter... enemies) {
+    public String escapeEnemies(ArrayList<Fighter> enemies) {
         for (Fighter enemy : enemies) {
             int fighterRoll = gunRoll();
             int enemyRoll = enemy.gunRoll();
             if (enemyRoll > fighterRoll) {
-                return false;
+                return name + " tried to escape, but the enemy was quicker!";
             }
         }
-        return true;
+        return name + " chickened out of the fight scene.";
     }
 
     @Override
-    public void act(Fighter... enemies) {
+    public void setArmInHand(Arm arm) {
+
+    }
+
+    @Override
+    public String act(ArrayList<Fighter> enemies) {
         double willignessToFight =
                         ((double) health / 100) *
                         ((double) bossReputation / (double) (bossReputation+1));
 
         if (willignessToFight < 0.25){
-            escapeEnemies(enemies);
+            return escapeEnemies(enemies);
         }
-        else shootRandomEnemy(enemies);
+        else return shootRandomEnemy(enemies);
     }
 }

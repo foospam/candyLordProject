@@ -42,10 +42,11 @@ public class Arm implements Comparable {
         else return 0;
     }
 
-    public void shoot(Fighter fighter){
+    public String shoot(Fighter fighter){
         int die = ThreadLocalRandom.current().nextInt(100);
         if (die <= accuracy){
             fighter.setHarm(harm);
+            return " attacked "+fighter.getName()+". "+fighter.getName() +" took " + harm + " points of harm,";
         }
     }
 
