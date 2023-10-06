@@ -6,13 +6,17 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class ArmContainer {
     private static ArrayList<Arm> valueList = new ArrayList<>();
     private static HashMap<String, Arm> valueMap = new HashMap<>();
     private static ObjectMapper mapper = new ObjectMapper();
+    private static Arm defaultArm;
     private static ObjectNode root;
+
+    private static int armsInUse = 0;
 
     static {
         try {
@@ -31,8 +35,14 @@ public class ArmContainer {
                 int accuracy = s.get("accuracy").asInt();
                 int price = s.get("price").asInt();
                 Arm arm = new Arm(name, harm, accuracy, price);
-                valueMap.put(name, arm);
-                valueList.add(arm);
+
+                if (s.asText().equals("default")) {
+                    defaultArm = arm;
+                }
+                else {
+                    valueMap.put(name, arm);
+                    valueList.add(arm);
+                }
             });
         } catch (NullPointerException E) {
             throw new NullPointerException("The name file does not contain any arm elements.");
@@ -56,5 +66,11 @@ public class ArmContainer {
         root = (ObjectNode) mapper.readTree(new File(fileName));
         readAllStuffCarriers();
     }
+
+    public static Arm getDefaultArm(){
+        return defaultArm;
+    }
+
+
 
 }

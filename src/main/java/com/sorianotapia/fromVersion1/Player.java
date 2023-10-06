@@ -1,19 +1,18 @@
 package com.sorianotapia.fromVersion1;
 
-import com.sorianotapia.Controller;
 import com.sorianotapia.MethodAnswers;
 import com.sorianotapia.accessories.Arm;
 import com.sorianotapia.accessories.StuffCarrier;
+import com.sorianotapia.combat.Fighter;
 import com.sorianotapia.events.EventFactory;
-import com.sorianotapia.events.EventMessage;
 import com.sorianotapia.places.NameContainer;
 import com.sorianotapia.places.Place;
 import com.sorianotapia.places.PlaceContainer;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ThreadLocalRandom;
 
-public class Player {
+public class Player implements Fighter {
     private int maxHold;
     private int hold;
     private int health;
@@ -25,10 +24,8 @@ public class Player {
     private Place location;
     private HashMap<String, Integer> stuffOnHand;
     private HashMap<Arm, Integer> armMap;
+    private Arm armInHand;
 
-    private int numberOfGuns;
-
-    private String gunType;
 
     public int getHealth() {
         return health;
@@ -278,5 +275,32 @@ public class Player {
 
     public void extendPaymentPeriod(){
         debt.extendPaymentPeriod();
+    }
+
+    @Override
+    public void shootRandomEnemy(Fighter... enemies) {
+        Fighter enemy = enemies[ThreadLocalRandom.current().nextInt(enemies.length)];
+        armInHand.shoot(enemy);
+    }
+
+    @Override
+    public boolean escapeEnemies(Fighter... enemies) {
+        for (Fighter enemy : enemies) {
+            int fighterRoll = gunRoll();
+            int enemyRoll = enemy.gunRoll();
+            if (enemyRoll > fighterRoll) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int gunRoll(){
+        return ThreadLocalRandom.current().nextInt(armInHand.getAccuracy())
+                + ThreadLocalRandom.current().nextInt(armInHand.getHarm());
+    }
+
+    public int harmRoll(){
+        return ThreadLocalRandom.current().nextInt(armInHand.getHarm());
     }
 }

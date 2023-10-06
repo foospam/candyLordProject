@@ -1,4 +1,10 @@
-{
+  {
+  "default" : {
+    "name" : "Fists",
+    "harm" : 5,
+    "accuracy": 75,
+    "price": 0
+  },
   "1" : {
     "name": "Beretta",
     "harm": 40,

@@ -1,6 +1,10 @@
 package com.sorianotapia.accessories;
 
-public class Arm {
+import com.sorianotapia.combat.Fighter;
+
+import java.util.concurrent.ThreadLocalRandom;
+
+public class Arm implements Comparable {
     private String name;
     private int harm;
     private int accuracy;
@@ -29,5 +33,20 @@ public class Arm {
         return name;
     }
 
+
+    @Override
+    public int compareTo(Object o) {
+        Arm otherArm = (Arm) o;
+        if (this.harm > otherArm.harm) return 1;
+        else if (this.harm < otherArm.harm) return -1;
+        else return 0;
+    }
+
+    public void shoot(Fighter fighter){
+        int die = ThreadLocalRandom.current().nextInt(100);
+        if (die <= accuracy){
+            fighter.setHarm(harm);
+        }
+    }
 
 }
