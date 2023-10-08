@@ -22,7 +22,7 @@ public abstract class NPC implements Fighter {
     @Override
     public String shootRandomEnemy(ArrayList<Fighter> enemies) {
         Fighter enemy = enemies.get(ThreadLocalRandom.current().nextInt(enemies.size()));
-        return armInHand.shoot(enemy);
+        return name + armInHand.shoot(enemy);
     }
 
     @Override
@@ -55,5 +55,9 @@ public abstract class NPC implements Fighter {
 
     public boolean isInBattle() {
         return inBattle;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 }

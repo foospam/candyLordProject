@@ -250,7 +250,7 @@ public class Player implements Fighter {
     @Override
     public String shootRandomEnemy(ArrayList<Fighter> enemies) {
         Fighter enemy = enemies.get(ThreadLocalRandom.current().nextInt(enemies.size()));
-        return armInHand.shoot(enemy);
+        return "You "+armInHand.shoot(enemy);
     }
 
     @Override
@@ -293,5 +293,9 @@ public class Player implements Fighter {
 
     public boolean isInBattle(){
         return true;
+    }
+
+    public Arm getArmInHand(){
+        return armInHand;
     }
 }

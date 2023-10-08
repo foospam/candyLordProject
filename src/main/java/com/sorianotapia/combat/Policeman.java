@@ -11,6 +11,7 @@ public class Policeman extends NPC {
 
     @Override
     public String escapeEnemies(ArrayList<Fighter> enemies) {
+        inBattle = false;
         return name + " escaped the fight scene!";
     }
 
@@ -19,6 +20,11 @@ public class Policeman extends NPC {
     }
     @Override
     public String act(ArrayList<Fighter> enemies) {
-        return null;
+        if (Math.random() < 0.8){
+            return shootRandomEnemy(enemies);
+        }
+        else {
+            return escapeEnemies(enemies);
+        }
     }
 }

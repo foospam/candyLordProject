@@ -29,6 +29,8 @@ public class ArmContainer {
     private static void readAllStuffCarriers() {
 
         try {
+            String defaultArmName = root.at("/default/name").asText();
+
             root.forEach(s -> {
                 String name = s.get("name").asText();
                 int harm = s.get("harm").asInt();
@@ -36,7 +38,7 @@ public class ArmContainer {
                 int price = s.get("price").asInt();
                 Arm arm = new Arm(name, harm, accuracy, price);
 
-                if (s.asText().equals("default")) {
+                if (arm.getName().equals(defaultArmName)) {
                     defaultArm = arm;
                 }
                 else {

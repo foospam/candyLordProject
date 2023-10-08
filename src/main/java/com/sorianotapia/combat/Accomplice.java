@@ -22,6 +22,7 @@ public class Accomplice extends NPC {
                 return name + " tried to escape, but the enemy was quicker!";
             }
         }
+        inBattle = false;
         return name + " chickened out of the fight scene.";
     }
 

@@ -34,16 +34,22 @@ public class SetCombatScreen extends AbstractScreen {
         ArrayList<Fighter> cops = new ArrayList<>();
 
         for (int i = 0; i < numberOfCops; i++) {
-            cops.add(new Policeman(ArmContainer.getRandomArm()));
+            Policeman policeman = new Policeman(ArmContainer.getRandomArm());
+            policeman.setName("Cop "+i);
+            cops.add(policeman);
         }
 
         ArrayList<Fighter> allies = new ArrayList<>();
         player.setArmInHand(player.getTopGun());
         for (int i = 0; i < numberOfAllies; i++) {
-            allies.add(new Accomplice(player.getTopGun(), player.getReputation()));
+            Accomplice accomplice = new Accomplice(player.getTopGun(), player.getReputation());
+            accomplice.setName("Accomplice "+i);
+            allies.add(accomplice);
         }
 
-        nextScreen = ScreenFactory.ofName(ScreenName.COMBAT_ACTION_SELECTION);
-        nextScreen
+        CombatActionSelection screen = (CombatActionSelection) ScreenFactory.ofName(ScreenName.COMBAT_ACTION_SELECTION);
+        screen.setCops(cops);
+        screen.setAllies(allies);
+        setNextScreen(screen);
     }
 }

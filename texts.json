@@ -240,6 +240,11 @@
     "badInputPrompt": "Just type a number, we'll see how many come to your call!",
     "prompt": "Someone must have ratted on you, because Five-Oh is on you. %s cop%s %s trying to bring you in! How much reinforcement do you want to bring?%n",
     "validInput": "\\d+"
+  },
+  "COMBAT_ACTION_SELECTION": {
+    "badInputPrompt": "Just type G for 'go' or F for 'fight', man!",
+    "prompt": "What do you do now?",
+    "validInput": "[GF]"
   }
 }
 

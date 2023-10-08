@@ -8,8 +8,11 @@ import com.sorianotapia.screens.ScreenName;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class PoliceCombatEvent implements Event {
+public class PoliceCombatEvent extends UserEvent {
 
+    public PoliceCombatEvent(Player player) {
+        super(player);
+    }
 
     @Override
     public void run(Controller controller) {
@@ -19,18 +22,4 @@ public class PoliceCombatEvent implements Event {
         controller.setScreen(ScreenFactory.ofName(ScreenName.SET_COMBAT));
     }
 
-    @Override
-    public boolean isLocalEvent() {
-        return false;
-    }
-
-    @Override
-    public void setPlace(Place place) {
-
-    }
-
-    @Override
-    public void setPlayer(Player player) {
-
-    }
 }

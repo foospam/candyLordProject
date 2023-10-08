@@ -9,6 +9,7 @@ public class CombatResultScreen extends AbstractScreen {
     LinkedList<String> resultStrings;
     boolean battleOver;
 
+
     public CombatResultScreen(ScreenName name) {
         super(name);
     }
@@ -20,7 +21,7 @@ public class CombatResultScreen extends AbstractScreen {
 
     @Override
     public void handleUserInput(Player player) {
-        if (!resultStrings.isEmpty()){
+        if (!resultStrings.isEmpty()) {
 
             setNextScreen(this);
 
@@ -29,12 +30,14 @@ public class CombatResultScreen extends AbstractScreen {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-        }
-
-        else if (battleOver) {
-            setNextScreen(ScreenFactory.ofName(ScreenName.EVENT_LOOP));
-        }
-        else {
+        } else if (battleOver) {
+            setBattleOver(false);
+            if (player.isDead()) {
+                setNextScreen(ScreenFactory.ofName(ScreenName.EVENT_LOOP));
+            } else {
+                setNextScreen(ScreenFactory.ofName(ScreenName.MAIN_SELECTION));
+            }
+        } else {
             setNextScreen(ScreenFactory.ofName(ScreenName.COMBAT_ACTION_SELECTION));
         }
     }

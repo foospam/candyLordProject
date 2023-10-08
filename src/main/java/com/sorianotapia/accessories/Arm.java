@@ -46,8 +46,9 @@ public class Arm implements Comparable {
         int die = ThreadLocalRandom.current().nextInt(100);
         if (die <= accuracy){
             fighter.setHarm(harm);
-            return " attacked "+fighter.getName()+". "+fighter.getName() +" took " + harm + " points of harm,";
+            return " attacked "+fighter.getName()+". "+fighter.getName() +" took " + harm + " points of harm.";
         }
+        return " attacked "+fighter.getName()+" and missed.";
     }
 
 }

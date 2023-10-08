@@ -1,6 +1,7 @@
 package com.sorianotapia.screens;
 
 import com.sorianotapia.Controller;
+import com.sorianotapia.accessories.Arm;
 import com.sorianotapia.combat.Accomplice;
 import com.sorianotapia.combat.Fighter;
 import com.sorianotapia.combat.Policeman;
@@ -22,14 +23,13 @@ public class CombatActionSelection extends AbstractScreen {
         this.allies = allies;
     }
 
-    public void setCops(ArrayList<Fighter> cops){
+    public void setCops(ArrayList<Fighter> cops) {
         this.cops = cops;
     }
 
     public CombatActionSelection(ScreenName name) {
         super(name);
     }
-
 
 
     @Override
@@ -48,6 +48,11 @@ public class CombatActionSelection extends AbstractScreen {
                 }
             }
             case "F" -> {
+                if (player.getArmInHand() == null) {
+                    Arm topGun = player.getTopGun();
+                    System.out.println("Topgun is null: " + (topGun == null));
+                    player.setArmInHand(player.getTopGun());
+                }
                 resultStrings.add(player.shootRandomEnemy(cops));
             }
         }
@@ -67,7 +72,7 @@ public class CombatActionSelection extends AbstractScreen {
             resultStrings.add((accomplice.act(cops)));
 
             // Remove dead characters from cop list:
-            for (int i = cops.size()-1; i <= 0; i--) {
+            for (int i = cops.size() - 1; i >= 0; i--) {
                 if (cops.get(i).isDead()) {
                     resultStrings.add(cops.get(i).getName() + " has bitten the dust!");
                     cops.remove(i);
@@ -77,7 +82,7 @@ public class CombatActionSelection extends AbstractScreen {
 
         // Remove characters who have fled battle from the allies list
 
-        for (int i = allies.size()-1; i <= 0; i--) {
+        for (int i = allies.size() - 1; i >= 0; i--) {
             if (!allies.get(i).isInBattle()) {
                 allies.remove(i);
             }
@@ -85,13 +90,19 @@ public class CombatActionSelection extends AbstractScreen {
 
         // The cops attack
 
+        allies.add(player); // The player can be hit by the police
+
+        COP_ATTACK:
         for (Fighter cop : cops) {
             Policeman policeman = (Policeman) cop;
-            allies.add(player);
             resultStrings.add((policeman.act(allies)));
 
             // Remove dead characters from allies list:
-            for (int i = allies.size()-1; i <= 0; i--) {
+            for (int i = allies.size() - 1; i >= 0; i--) {
+                if (player.isDead()){
+                    resultStrings.add("You have bitten the dust!");
+                    break COP_ATTACK;
+                }
                 if (allies.get(i).isDead()) {
                     resultStrings.add(allies.get(i).getName() + " has bitten the dust!");
                     allies.remove(i);
@@ -105,13 +116,16 @@ public class CombatActionSelection extends AbstractScreen {
 
         // Remove characters who have fled battle from the cop list
 
-        for (int i = cops.size()-1; i <= 0; i--) {
+        for (int i = cops.size() - 1; i >= 0; i--) {
             if (!cops.get(i).isInBattle()) {
                 cops.remove(i);
             }
         }
 
         next.setResultStrings(resultStrings);
+        if (cops.isEmpty() || player.isDead()) {
+            next.setBattleOver(true);
+        }
         setNextScreen(next);
     }
 

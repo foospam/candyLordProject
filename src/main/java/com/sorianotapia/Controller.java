@@ -3,6 +3,7 @@ package com.sorianotapia;
 import com.sorianotapia.events.Event;
 import com.sorianotapia.events.EventMessage;
 import com.sorianotapia.events.EventFactory;
+import com.sorianotapia.events.EventQueue;
 import com.sorianotapia.fromVersion1.LoanSharkDebt;
 import com.sorianotapia.fromVersion1.Player;
 import com.sorianotapia.places.NameContainer;
@@ -38,7 +39,7 @@ public class Controller {
     private Player player;
     private ScreenFactory screenFactory;
     private GameDate date;
-    private static LinkedList<EventMessage> eventMessageQueue;
+    private static EventQueue eventMessageQueue;
 
     public Controller(Player player, GameDate gameDate) {
         inputBuffer = new ArrayList<>();
@@ -49,7 +50,7 @@ public class Controller {
         screen = screenFactory.ofName(ScreenName.MAIN_SELECTION);
         date = gameDate;
 
-        eventMessageQueue = new LinkedList<>();
+        eventMessageQueue = new EventQueue();
     }
 
     public void run() {
@@ -97,14 +98,11 @@ public class Controller {
                 render();
             }
 
-//            ArrayList<Class> classList = new ArrayList<>();
-//            eventMessageQueue.forEach(s -> classList.add(s.getEvent().getClass()));
-//            System.out.println(classList);
-
 
             while (!eventMessageQueue.isEmpty()) {
+                System.out.println(eventMessageQueue.toString());
 
-                Event event = eventMessageQueue.poll().getEvent();
+                Event event = eventMessageQueue.poll();
                 event.run(this);
                 localEvent = event.isLocalEvent();
                 if (localEvent) render();
@@ -153,8 +151,8 @@ public class Controller {
         objects[21] = player.getDeposits();
         objects[22] = player.getDebtValue();
         objects[23] = player.getDebtValue() > 0 ? String.format("(%2d)", player.getDebtDays()) : "";
-        objects[24] = player.getNumberOfGuns();
-        objects[25] = player.getGunType();
+        objects[24] = 0; //player.getNumberOfGuns();
+        objects[25] = "None"; // player.getGunType();
         objects[26] = player.getReputation();
         objects[27] = player.getHealth();
 
@@ -167,7 +165,8 @@ public class Controller {
         int advanceDays = screen.getAdvanceDay();
         if (advanceDays > 0) {
             date.updateDate(advanceDays);
-            EventFactory.pushRandomEvents(player);
+            EventFactory.pushRandomPlaceEvents(player);
+            EventFactory.pushRandomUserEvents(player);
         }
 
         if (screen.getTransitionDelay()) {
@@ -181,6 +180,7 @@ public class Controller {
     }
 
     public static void pushEventMessage(EventMessage eventMessage) {
+        System.out.println("Game over triggered");
         eventMessageQueue.add(eventMessage);
     }
 }

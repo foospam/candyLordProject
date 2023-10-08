@@ -22,7 +22,7 @@ public class BuyStuffCarrierScreen extends AbstractScreen {
     @Override
     public void handleUserInput(Player player) {
         StuffCarrier carrier = StuffCarrierContainer.getCarrierByName(Controller.inputBuffer.get(0));
-        if (Controller.inputBuffer.get(3) == "N") {
+        if (Controller.inputBuffer.get(3).equals("N")) {
             setNextScreen(ScreenFactory.ofName(ScreenName.BUY_STUFF_CARRIER_NO));
         } else {
             switch (player.buyStuffCarrier(carrier)) {

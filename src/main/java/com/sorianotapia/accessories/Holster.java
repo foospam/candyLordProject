@@ -5,10 +5,11 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public class Holster {
-    private HashMap<Arm, Integer> armMap;
-    private ArrayList<Arm> armList;
+    private HashMap<Arm, Integer> armMap = new HashMap<>();
+    private ArrayList<Arm> armList = new ArrayList<>();
     private int armsInUse;
     private String stringRep;
+
 
 
     public ArrayList<Arm> getTopGuns(int quantity){
