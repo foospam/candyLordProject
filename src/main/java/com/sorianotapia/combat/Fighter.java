@@ -16,4 +16,8 @@ public interface Fighter {
     String getName();
     public boolean isDead();
     public boolean isInBattle();
+
+    public Arm giveArmInHand();
+
+    public String combatInfoString();
 }

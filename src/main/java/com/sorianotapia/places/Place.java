@@ -1,5 +1,6 @@
 package com.sorianotapia.places;
 
+import com.sorianotapia.GameSettings;
 import com.sorianotapia.stuff.Stuff;
 import com.sorianotapia.stuff.StuffContainer;
 
@@ -31,6 +32,10 @@ public class Place {
         return stuffContainer.getPrice(stuffName);
     }
 
+    public int getStuffPrice(int index){
+        return stuffContainer.getPrice(index);
+    }
+
     public String getName() {
         return name;
     }
@@ -46,6 +51,10 @@ public class Place {
     public Stuff getRandomStuff(){
         int randomIndex = (int) (Math.random() * stuffContainer.getSize());
         return getStuff(randomIndex);
+    }
+
+    public void updateStuffPrices(){
+        stuffContainer.updateStuffPrices(GameSettings.RAMDOM_PRICE_VARIATION_PERCENTAGE);
     }
 
 }

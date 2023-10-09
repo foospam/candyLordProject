@@ -19,6 +19,21 @@ public class CombatActionSelection extends AbstractScreen {
     private LinkedList<String> fightEvents;
 
 
+    @Override
+    public String render(Player player) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(prompt+"\n\nTHIS IS THE SITUATION\n");
+        stringBuilder.append(player.combatInfoString()+"\n");
+        for (Fighter fighter: allies) {
+            stringBuilder.append(fighter.combatInfoString()+"\n");
+        }
+        for (Fighter fighter: cops) {
+            stringBuilder.append(fighter.combatInfoString()+"\n");
+        }
+        return stringBuilder.toString();
+    }
+
     public void setAllies(ArrayList<Fighter> allies) {
         this.allies = allies;
     }
@@ -39,6 +54,8 @@ public class CombatActionSelection extends AbstractScreen {
 
         String fightDecision = Controller.inputBuffer.get(0);
 
+        System.out.println("Cops: " + cops.size());
+
         switch (fightDecision) {
             case "G" -> {
                 String escaped = player.escapeEnemies(cops);
@@ -54,12 +71,23 @@ public class CombatActionSelection extends AbstractScreen {
                     player.setArmInHand(player.getTopGun());
                 }
                 resultStrings.add(player.shootRandomEnemy(cops));
+
+                // Remove cops killed by player and increase reputation for them
+
+                for (int i = cops.size() - 1; i >= 0; i--) {
+                    if (cops.get(i).isDead()) {
+                        resultStrings.add(cops.get(i).getName() + " has bitten the dust!");
+                        player.increaseReputation();
+                        cops.remove(i);
+                    }
+                }
             }
         }
 
         // Stop battle if the main character has fled
 
         if (next.battleOver) {
+            player.decreaseReputation();
             next.setResultStrings(resultStrings);
             setNextScreen(next);
             return;
@@ -67,15 +95,21 @@ public class CombatActionSelection extends AbstractScreen {
 
         // Allies attack
 
-        for (Fighter ally : allies) {
-            Accomplice accomplice = (Accomplice) ally;
-            resultStrings.add((accomplice.act(cops)));
+        if (!cops.isEmpty()) {
+            for (Fighter ally : allies) {
+                Accomplice accomplice = (Accomplice) ally;
+                resultStrings.add((accomplice.act(cops)));
 
-            // Remove dead characters from cop list:
-            for (int i = cops.size() - 1; i >= 0; i--) {
-                if (cops.get(i).isDead()) {
-                    resultStrings.add(cops.get(i).getName() + " has bitten the dust!");
-                    cops.remove(i);
+                // Remove dead characters from cop list:
+                for (int i = cops.size() - 1; i >= 0; i--) {
+                    if (cops.get(i).isDead()) {
+                        resultStrings.add(cops.get(i).getName() + " has bitten the dust!");
+                        cops.remove(i);
+                    }
+                }
+
+                if (cops.isEmpty()) {
+                    break;
                 }
             }
         }
@@ -99,7 +133,7 @@ public class CombatActionSelection extends AbstractScreen {
 
             // Remove dead characters from allies list:
             for (int i = allies.size() - 1; i >= 0; i--) {
-                if (player.isDead()){
+                if (player.isDead()) {
                     resultStrings.add("You have bitten the dust!");
                     break COP_ATTACK;
                 }
@@ -122,10 +156,22 @@ public class CombatActionSelection extends AbstractScreen {
             }
         }
 
-        next.setResultStrings(resultStrings);
-        if (cops.isEmpty() || player.isDead()) {
+        if (cops.isEmpty()) {
+            player.getReputation();
+            resultStrings.add("You have won!");
+            for (Fighter fighter : allies) {
+                Arm arm = fighter.giveArmInHand();
+                if (!arm.isDefault()) {
+                    player.pickArm(arm);
+                    resultStrings.add("You retrieved a " + arm.getName() + " from the battle field.");
+                }
+            }
+            next.setBattleOver(true);
+        } else if (player.isDead()) {
             next.setBattleOver(true);
         }
+
+        next.setResultStrings(resultStrings);
         setNextScreen(next);
     }
 

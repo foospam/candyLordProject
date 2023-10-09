@@ -28,7 +28,7 @@ public class BuyArmScreen extends AbstractScreen {
     public void handleUserInput(Player player) {
         Arm arm = ArmContainer.getArmByName(Controller.inputBuffer.get(0));
         int quantity = Integer.valueOf(Controller.inputBuffer.get(4));
-        if (Controller.inputBuffer.get(6) == "N") {
+        if (Controller.inputBuffer.get(6).equals("N")) {
             setNextScreen(ScreenFactory.ofName(ScreenName.BUY_ARM_NO_OK));
         } else {
             switch (player.buyArm(arm, quantity)) {

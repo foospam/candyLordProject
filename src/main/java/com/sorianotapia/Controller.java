@@ -25,6 +25,7 @@ public class Controller {
         LoanSharkDebt debt = new LoanSharkDebt();
         player.setDebt(debt);
         gameDate.subscribe(debt);
+
         EventFactory.initializeEvents(player);
 
 
@@ -39,7 +40,10 @@ public class Controller {
     private Player player;
     private ScreenFactory screenFactory;
     private GameDate date;
+    private GameInfo gameInfo;
     private static EventQueue eventMessageQueue;
+
+    private static Object[] displayInformationBuffer;
 
     public Controller(Player player, GameDate gameDate) {
         inputBuffer = new ArrayList<>();
@@ -49,7 +53,7 @@ public class Controller {
         screenFactory = new ScreenFactory();
         screen = screenFactory.ofName(ScreenName.MAIN_SELECTION);
         date = gameDate;
-
+        gameInfo = new GameInfo(player, gameDate);
         eventMessageQueue = new EventQueue();
     }
 
@@ -98,7 +102,6 @@ public class Controller {
                 render();
             }
 
-
             while (!eventMessageQueue.isEmpty()) {
                 System.out.println(eventMessageQueue.toString());
 
@@ -114,6 +117,10 @@ public class Controller {
 
 
     private void render() {
+        gameInfo.updateGameInfo(player, date);
+        System.out.println(gameInfo.printStuff());
+        System.out.println(gameInfo.printUserStats());
+
 //        System.out.println(screen.getName());
         if (null != screen.getHeading())
             System.out.printf(screen.getHeading().getTemplate() + "%n", getFullStats());
@@ -165,6 +172,7 @@ public class Controller {
         int advanceDays = screen.getAdvanceDay();
         if (advanceDays > 0) {
             date.updateDate(advanceDays);
+            EventFactory.pushDailyPriceUpdateEvent(player);
             EventFactory.pushRandomPlaceEvents(player);
             EventFactory.pushRandomUserEvents(player);
         }
@@ -180,7 +188,18 @@ public class Controller {
     }
 
     public static void pushEventMessage(EventMessage eventMessage) {
-        System.out.println("Game over triggered");
         eventMessageQueue.add(eventMessage);
+    }
+
+    public static Object[] getDisplayInformationBuffer(){
+        return displayInformationBuffer;
+    }
+
+    public static void setDisplayInformationBuffer(Object[] displayInformation){
+        displayInformationBuffer = displayInformation;
+    }
+
+    public static void resetDisplayInformationBuffer(){
+        displayInformationBuffer = null;
     }
 }

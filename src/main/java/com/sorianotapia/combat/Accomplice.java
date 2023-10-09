@@ -1,6 +1,7 @@
 package com.sorianotapia.combat;
 
 import com.sorianotapia.accessories.Arm;
+import com.sorianotapia.accessories.DisplaySymbols;
 
 import java.util.ArrayList;
 
@@ -11,6 +12,7 @@ public class Accomplice extends NPC {
     public Accomplice(Arm arm, int bossReputation) {
         super(arm);
         this.bossReputation = bossReputation;
+        icon = DisplaySymbols.GANGSTER.toString();
     }
 
     @Override

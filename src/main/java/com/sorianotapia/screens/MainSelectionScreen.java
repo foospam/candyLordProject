@@ -1,6 +1,7 @@
 package com.sorianotapia.screens;
 
 import com.sorianotapia.Controller;
+import com.sorianotapia.GameInfo;
 import com.sorianotapia.fromVersion1.Player;
 import com.sorianotapia.headings.HeadingNames;
 
@@ -26,7 +27,19 @@ public class MainSelectionScreen extends AbstractScreen {
     @Override
     public void handleUserInput(Player player) {
         setNextScreen(switch(Controller.inputBuffer.get(0)) {
-            case "B" -> ScreenFactory.ofName(ScreenName.SELECT_DRUG_TO_BUY);
+            case "B" -> {
+                Controller.setDisplayInformationBuffer(
+                        new Object[]{
+                                GameInfo.gameInfo.getStuffNames().get(0),
+                                GameInfo.gameInfo.getStuffNames().get(1),
+                                GameInfo.gameInfo.getStuffNames().get(2),
+                                GameInfo.gameInfo.getStuffNames().get(3),
+                                GameInfo.gameInfo.getStuffNames().get(4),
+                                GameInfo.gameInfo.getStuffNames().get(5),
+                                GameInfo.gameInfo.getStuffNames().get(6),
+                                GameInfo.gameInfo.getStuffNames().get(7),
+                        });
+                yield ScreenFactory.ofName(ScreenName.SELECT_DRUG_TO_BUY);}
             case "S" -> ScreenFactory.ofName(ScreenName.SELECT_DRUG_TO_SELL);
             case "J" -> ScreenFactory.ofName(ScreenName.TRAVEL);
             case "V" -> ScreenFactory.ofName(ScreenName.BANK_OPERATION_SELECTION);

@@ -16,7 +16,8 @@ public class PoliceCombatEvent extends UserEvent {
 
     @Override
     public void run(Controller controller) {
-        int policeAgents = ThreadLocalRandom.current().nextInt(1,5);
+        int policeAgents = player.getReputation() + ThreadLocalRandom.current().nextInt(0,3);
+        Controller.setDisplayInformationBuffer(new Object[]{policeAgents, player.getReputation()});
         Controller.inputBuffer.clear();
         Controller.inputBuffer.add(String.valueOf(policeAgents));
         controller.setScreen(ScreenFactory.ofName(ScreenName.SET_COMBAT));

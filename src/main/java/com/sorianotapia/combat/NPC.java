@@ -1,6 +1,7 @@
 package com.sorianotapia.combat;
 
 import com.sorianotapia.accessories.Arm;
+import com.sorianotapia.accessories.DisplaySymbols;
 import com.sorianotapia.combat.Fighter;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class NPC implements Fighter {
 
+    protected String icon;
     protected int health;
     protected String name;
     protected Arm armInHand;
@@ -60,4 +62,14 @@ public abstract class NPC implements Fighter {
     public void setName(String name){
         this.name = name;
     }
+
+    public Arm giveArmInHand(){
+        Arm arm = armInHand;
+        armInHand = null;
+        return arm;
+    }
+
+    public String combatInfoString(){
+        return icon +" "+name+": "+armInHand.toString()+", "+health+" health points";
+    };
 }

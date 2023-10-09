@@ -10,11 +10,14 @@ public class Arm implements Comparable {
     private int accuracy;
     private int price;
 
-    public Arm(String name, int harm, int accuracy, int price) {
+    private boolean isDefault;
+
+    public Arm(String name, int harm, int accuracy, int price, boolean isDefault) {
         this.name = name;
         this.harm = harm;
         this.accuracy = accuracy;
         this.price = price;
+        this.isDefault = isDefault;
     }
 
     public int getHarm() {
@@ -51,4 +54,12 @@ public class Arm implements Comparable {
         return " attacked "+fighter.getName()+" and missed.";
     }
 
+    public boolean isDefault() {
+        return isDefault;
+    }
+
+    @Override
+    public String toString() {
+        return name + " (harm: "+harm+", acc.: "+accuracy+")";
+    }
 }

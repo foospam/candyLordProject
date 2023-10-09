@@ -37,6 +37,10 @@ public class StuffContainer {
         return stuffList.get(stuffMap.get(name)).getPrice();
     }
 
+    public int getPrice(int index){
+        return stuffList.get(index).getPrice();
+    }
+
     public String getStuffName(int index){
         return stuffList.get(index).getName();
     }
@@ -48,6 +52,12 @@ public class StuffContainer {
 
     public int getSize(){
         return stuffList.size();
+    }
+
+    public void updateStuffPrices(int percentage) {
+        for (Stuff stuff : stuffList){
+            stuff.randomPriceUpdate(percentage);
+        }
     }
 
 

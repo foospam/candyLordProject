@@ -3,7 +3,8 @@
     "name" : "Fists",
     "harm" : 5,
     "accuracy": 75,
-    "price": 0
+    "price": 0,
+    "default": true
   },
   "1" : {
     "name": "Beretta",

@@ -1,12 +1,15 @@
 package com.sorianotapia.events;
 
 import com.sorianotapia.Controller;
+import com.sorianotapia.GameSettings;
 import com.sorianotapia.fromVersion1.Player;
 import com.sorianotapia.places.Place;
 import com.sorianotapia.places.PlaceContainer;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
+
+import static com.sorianotapia.events.EventName.DAILY_PRICE_UPDATE_EVENT;
 
 public class EventFactory {
 
@@ -40,7 +43,7 @@ public class EventFactory {
 
     public static void pushRandomPlaceEvent(Place place, Player player) {
 
-        if (Math.random() < 0.2) { // Esto se podía meter en un parámetro
+        if (Math.random() < GameSettings.RANDOM_PLACE_EVENT_FREQ) { // Esto se podía meter en un parámetro
             Controller.pushEventMessage(new EventMessage(
                     ofName(randomPlaceEvents.get(ThreadLocalRandom.current().nextInt(randomPlaceEvents.size())),
                             player),
@@ -50,23 +53,27 @@ public class EventFactory {
 
     public static void pushRandomUserEvents(Player player) {
 
-        if (Math.random() < 0.9) { // Esto se podía meter en un parámetro
-//            Controller.pushEventMessage(new EventMessage(
-//                    ofName(randomUserEvents.get(ThreadLocalRandom.current().nextInt(randomPlaceEvents.size())),
-//                            player),
-//                    player.getLocation()));
+        if (Math.random() < GameSettings.RANDOM_USER_EVENT_FREQ) { // Esto se podía meter en un parámetro
             Controller.pushEventMessage(new EventMessage(
-                    ofName(EventName.POLICE_COMBAT_EVENT,
+                    ofName(randomUserEvents.get(ThreadLocalRandom.current().nextInt(randomPlaceEvents.size())),
                             player),
                     player.getLocation()));
+//            Controller.pushEventMessage(new EventMessage(
+//                    ofName(EventName.POLICE_COMBAT_EVENT,
+//                            player),
+//                    player.getLocation()));
+//        }
         }
     }
-
 
     public static void pushRandomPlaceEvents(Player player) {
         for (int i = 0; i < PlaceContainer.size(); i++) {
             pushRandomPlaceEvent(PlaceContainer.getPlaceByIndex(i), player);
         }
+    }
+
+    public static void pushDailyPriceUpdateEvent(Player player){
+        Controller.pushEventMessage(new EventMessage(new UpdatePricesDailyEvent(player), null));
     }
 
     public static void pushDebtEvent() {
@@ -88,6 +95,7 @@ public class EventFactory {
             case RECLAIM_DEBT_EVENT -> new ReclaimDebtEvent(player);
             case MONEY_ROBBERY_EVENT -> new MoneyRobberyEvent(player);
             case STUFF_ROBBERY_EVENT -> new StuffRobberyEvent(player);
+            case DAILY_PRICE_UPDATE_EVENT -> new UpdatePricesDailyEvent(player);
         };
     }
 }

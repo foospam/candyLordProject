@@ -1,13 +1,16 @@
 package com.sorianotapia.combat;
 
 import com.sorianotapia.accessories.Arm;
+import com.sorianotapia.accessories.DisplaySymbols;
 
 import java.util.ArrayList;
 
 public class Policeman extends NPC {
     public Policeman(Arm arm) {
         super(arm);
+        icon = DisplaySymbols.POLICE_OFFICER.toString();
     }
+
 
     @Override
     public String escapeEnemies(ArrayList<Fighter> enemies) {

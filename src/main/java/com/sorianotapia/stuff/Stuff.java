@@ -1,5 +1,7 @@
 package com.sorianotapia.stuff;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Stuff {
     private final String name;
     private int price;
@@ -19,6 +21,10 @@ public class Stuff {
 
     public void updatePrice() {
         updatePrice(minPrice, maxPrice);
+    }
+
+    public void randomPriceUpdate(int percentage){
+        price = (int) (price * (1 - (percentage/100) + (Math.random() * 2 * percentage / 100)));
     }
 
     public void priceUp() {updatePrice(price, maxPrice);}

@@ -1,6 +1,7 @@
 package com.sorianotapia.screens;
 
 import com.sorianotapia.Controller;
+import com.sorianotapia.GameSettings;
 import com.sorianotapia.fromVersion1.Player;
 
 public class HitDebitorScreen extends AbstractScreen{
@@ -10,7 +11,7 @@ public class HitDebitorScreen extends AbstractScreen{
 
     @Override
     public void handleUserInput(Player player) {
-        player.setHarm(100); // TO DO: Parametrizar esto
+        player.setHarm(GameSettings.DEBITOR_HARM);
         int overdue = Integer.parseInt(Controller.inputBuffer.get(0))-1;
 
         if (overdue > 0) {

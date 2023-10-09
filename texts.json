@@ -10,7 +10,7 @@
   },
   "SELECT_DRUG_TO_BUY": {
     "badInputPrompt": "Please enter a number from 1 to 8!",
-    "prompt": "Which drugs are you interested in?\n\n    1. Cocaine        5. Crystal\n    2. Heroine        6. Grass\n    3. Crack          7. Speed\n    4. Acid           8. Ludes\n",
+    "prompt": "What stuff are you interested in?\n\n    1. %1$-20s 5. %5$-20s\n    2. %2$-20s 6. %6$-20s\n    3. %3$-20s 7. %7$-20s\n    4. %4$-20s 8. %8$-20s\n",
     "validInput": "[1-8]",
     "passInput": true,
     "defaultNextScreen": "SELECT_QTY_TO_BUY"
@@ -31,7 +31,7 @@
   },
   "SELECT_DRUG_TO_SELL": {
     "badInputPrompt": "Please enter a number from 1 to 8!",
-    "prompt": "Which drugs do you want to unload?\n\n    1. Cocaine        5. Crystal\n    2. Heroine        6. Grass\n    3. Crack          7. Speed\n    4. Acid           8. Ludes\n",
+    "prompt": "What stuff do you want to unload?\n\n    1. %1$-20s 5. %5$-20s\n    2. %2$-20s 6. %6$-20s\n    3. %3$-20s 7. %7$-20s\n    4. %4$-20s 8. %8$-20s\n",
     "validInput": "[1-8]",
     "passInput": true,
     "defaultNextScreen": "SELECT_QTY_TO_SELL"
@@ -120,7 +120,7 @@
     "prompt": "How much have you brought me?",
     "validInput": "\\d+"
   },
-  "PAY_BACK_MONEY": {
+  "PAY_BACK_IN_FULL": {
     "prompt": "You pay in full? It's a pleasure to make business with you, sir.",
     "validInput": ""
   },
@@ -178,7 +178,7 @@
     "prompt": "A gangster steps out of a dark alley and puts a gun to your temple.\n\"Give me all that sweet stuff of yours!\"\nYou give him all you have on you.",
     "validInput": ""
   },
-  "ROB_ALL_MONEY_NO_OK": {
+  "ROB_ALL_STUFF_NO_OK": {
     "prompt": "A gangster steps out of a dark alley and puts a gun to your temple.\n\"Give me all that sweet stuff of yours!\"\nUnfortunately, you don't carry anything. He hits you with the back of his gun.\n\"Now I'll have to go cold turkey!\"\nYou get away injured.",
     "validInput": ""
   },
@@ -191,7 +191,7 @@
     "prompt": "Here you are! It's a pleasure to make business with you!",
     "validInput": ""
   },
-  "BUY_STUFF_CARRIER_NO_OK": {
+  "BUY_STUFF_CARRIER_NO": {
     "prompt": "Your miss. That was some sweet merch!",
     "validInput": ""
   },
@@ -238,7 +238,7 @@
   },
   "SET_COMBAT": {
     "badInputPrompt": "Just type a number, we'll see how many come to your call!",
-    "prompt": "Someone must have ratted on you, because Five-Oh is on you. %s cop%s %s trying to bring you in! How much reinforcement do you want to bring?%n",
+    "prompt": "Someone must have ratted on you, because Five-Oh is on you. %s cop%s %s trying to bring you in! How much reinforcement do you want to bring? (Max: %s) %n",
     "validInput": "\\d+"
   },
   "COMBAT_ACTION_SELECTION": {

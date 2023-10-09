@@ -10,7 +10,13 @@ public class Holster {
     private int armsInUse;
     private String stringRep;
 
-
+    {
+        add(ArmContainer.getArmByName("Beretta"));
+        add(ArmContainer.getArmByName("Beretta"));
+        add(ArmContainer.getArmByName("Beretta"));
+        add(ArmContainer.getArmByName("Beretta"));
+        add(ArmContainer.getArmByName("Beretta"));
+    }
 
     public ArrayList<Arm> getTopGuns(int quantity){
         if (quantity <= armList.size()){

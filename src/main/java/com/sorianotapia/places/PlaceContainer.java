@@ -22,7 +22,8 @@ public class PlaceContainer {
         for (int i = 0; i < NUMBER_OF_PLACES; i++) {
             String placeName = NameContainer.getRandomPlaceName();
             Point placeCoordinates = points.get(i);
-            places.add(new Place(placeName, placeCoordinates));
+            Place place = new Place(placeName, placeCoordinates);
+            places.add(place);
         }
     }
 
@@ -121,5 +122,11 @@ public class PlaceContainer {
 
     public static int size(){
         return places.size();
+    }
+
+    public static void randomUpdateStuffPrices(){
+        for (Place place : places){
+            place.updateStuffPrices();
+        }
     }
 }

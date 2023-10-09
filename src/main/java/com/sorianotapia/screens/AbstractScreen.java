@@ -96,4 +96,5 @@ public abstract class AbstractScreen {
     public ScreenName getName(){
         return name;
     }
+
 }

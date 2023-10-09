@@ -15,13 +15,11 @@ public class BankDepositScreen extends AbstractScreen {
         int quantity = Integer.parseInt(Controller.inputBuffer.get(0));
 
         switch(player.setDeposits(quantity)){
-            case(0) : {
-                setNextScreen(ScreenFactory.ofName(ScreenName.EVENT_LOOP));
-                break;
+            case SUCCESS -> {
+                setNextScreen(ScreenFactory.ofName(ScreenName.MAIN_SELECTION));
             }
-            case(-1) : {
+            case INSUFFICIENT_MONEY -> {
                 setNextScreen(ScreenFactory.ofName(ScreenName.DEPOSIT_EXCEEDED));
-                break;
             }
         }
     }

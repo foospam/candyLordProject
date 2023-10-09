@@ -2,6 +2,7 @@ package com.sorianotapia.fromVersion1;
 
 import com.sorianotapia.MethodAnswers;
 import com.sorianotapia.accessories.Arm;
+import com.sorianotapia.accessories.DisplaySymbols;
 import com.sorianotapia.accessories.Holster;
 import com.sorianotapia.accessories.StuffCarrier;
 import com.sorianotapia.combat.Fighter;
@@ -28,6 +29,7 @@ public class Player implements Fighter {
     private HashMap<Arm, Integer> armMap;
     private Arm armInHand;
     private Holster holster;
+    private String icon = DisplaySymbols.PLAYER.toString();
 
 
     public int getHealth() {
@@ -78,7 +80,7 @@ public class Player implements Fighter {
     }
 
 
-    public int withdrawMoney(int amount) {
+    public MethodAnswers withdrawMoney(int amount) {
         return bankAccount.withdraw(amount);
     }
 
@@ -86,7 +88,7 @@ public class Player implements Fighter {
         return bankAccount.getDeposits();
     }
 
-    public int setDeposits(int amount) {
+    public MethodAnswers setDeposits(int amount) {
         return bankAccount.deposit(amount);
     }
 
@@ -161,6 +163,7 @@ public class Player implements Fighter {
         } else if (quantity == 0) {
             return MethodAnswers.QUANTITY_ZERO;
         } else {
+            increaseReputationBySale(totalIncome);
             cash += totalIncome;
             int oldQuantityOnHand = stuffOnHand.get(stuff);
             stuffOnHand.put(stuff, oldQuantityOnHand - quantity);
@@ -297,5 +300,46 @@ public class Player implements Fighter {
 
     public Arm getArmInHand(){
         return armInHand;
+    }
+
+    public Arm giveArmInHand() {
+        Arm arm = armInHand;
+        armInHand = null;
+        return arm;
+    }
+
+    public void pickArm(Arm arm){
+        holster.add(arm);
+    }
+
+    public String combatInfoString(){
+        return icon +" You: "+armInHand.toString()+", "+health+" health points";
+    };
+
+    public void increaseReputation(){
+        reputation++;
+    }
+
+    public void decreaseReputation(){
+        reputation--;
+    }
+
+    public void increaseReputation(int points){
+        for (int i = 0; i < points; i++) {
+            increaseReputation();
+        }
+    }
+
+    // Implements the logic by which reputation increases after business
+    private void increaseReputationBySale(int income){
+
+        if (reputation > 0 && income + cash + getDeposits() > reputation * 10000) { // Transformar esto en parámetro "CREDIT FACTOR"
+            while (reputation * 10000 < income + cash){
+                increaseReputation();
+            }
+        }
+        else if (reputation == 0 && income > cash + debt.getValue()) {
+            increaseReputation();
+        }
     }
 }

@@ -29,16 +29,16 @@ public class ArmContainer {
     private static void readAllStuffCarriers() {
 
         try {
-            String defaultArmName = root.at("/default/name").asText();
-
             root.forEach(s -> {
                 String name = s.get("name").asText();
                 int harm = s.get("harm").asInt();
                 int accuracy = s.get("accuracy").asInt();
                 int price = s.get("price").asInt();
-                Arm arm = new Arm(name, harm, accuracy, price);
+                boolean isDefault = s.has("default") ? true : false;
 
-                if (arm.getName().equals(defaultArmName)) {
+                Arm arm = new Arm(name, harm, accuracy, price, isDefault);
+
+                if (arm.isDefault()) {
                     defaultArm = arm;
                 }
                 else {

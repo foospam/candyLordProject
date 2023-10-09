@@ -11,6 +11,10 @@ import java.util.ArrayList;
 
 public class SetCombatScreen extends AbstractScreen {
 
+    public static void main(String[] args) {
+        System.out.println("\uD83D\uDC6E");
+    }
+
     public SetCombatScreen(ScreenName name) {
         super(name);
     }
@@ -18,24 +22,29 @@ public class SetCombatScreen extends AbstractScreen {
     @Override
     public String render(Player player) {
 
-        int numberOfCops = Integer.parseInt(Controller.inputBuffer.get(0));
+
+        int numberOfCops = (int) Controller.getDisplayInformationBuffer()[0];
+        int numberOfPossibleAllies = player.getReputation() -1;
 
         return String.format(prompt,
                 String.valueOf(numberOfCops),
                 numberOfCops == 1 ? "" : "s",
-                numberOfCops == 1 ? "is" : "are");
+                numberOfCops == 1 ? "is" : "are",
+                String.valueOf(numberOfPossibleAllies));
         }
 
     @Override
     public void handleUserInput(Player player) {
         int numberOfCops = Integer.parseInt(Controller.inputBuffer.get(0));
-        int numberOfAllies = Integer.parseInt(Controller.inputBuffer.get(1));
+        int requestedAllies = Integer.parseInt(Controller.inputBuffer.get(1));
+
+        int numberOfAllies = Math.min(requestedAllies, player.getReputation()-1);
 
         ArrayList<Fighter> cops = new ArrayList<>();
 
         for (int i = 0; i < numberOfCops; i++) {
             Policeman policeman = new Policeman(ArmContainer.getRandomArm());
-            policeman.setName("Cop "+i);
+            policeman.setName("Cop "+(i+1));
             cops.add(policeman);
         }
 
@@ -43,8 +52,9 @@ public class SetCombatScreen extends AbstractScreen {
         player.setArmInHand(player.getTopGun());
         for (int i = 0; i < numberOfAllies; i++) {
             Accomplice accomplice = new Accomplice(player.getTopGun(), player.getReputation());
-            accomplice.setName("Accomplice "+i);
+            accomplice.setName("Accomplice "+(i+1));
             allies.add(accomplice);
+            player.decreaseReputation();
         }
 
         CombatActionSelection screen = (CombatActionSelection) ScreenFactory.ofName(ScreenName.COMBAT_ACTION_SELECTION);
