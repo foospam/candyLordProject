@@ -13,16 +13,16 @@ public class Policeman extends NPC {
 
 
     @Override
-    public String escapeEnemies(ArrayList<Fighter> enemies) {
+    public Object[] escapeEnemies(ArrayList<Fighter> enemies) {
         inBattle = false;
-        return name + " escaped the fight scene!";
+        return new Object[]{true, name};
     }
 
     @Override
     public void setArmInHand(Arm arm) {
     }
     @Override
-    public String act(ArrayList<Fighter> enemies) {
+    public Object[] act(ArrayList<Fighter> enemies) {
         if (Math.random() < 0.8){
             return shootRandomEnemy(enemies);
         }

@@ -118,7 +118,7 @@ public class Controller {
 
 
     private void render() {
-        if (null != screen.getHeading()) {
+        if (screen.getHeading()) {
             gameInfo.updateGameInfo(player, date);
             System.out.println(gameInfo.printUserStats());
             System.out.println(gameInfo.printUserArmory());

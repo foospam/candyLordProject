@@ -37,6 +37,7 @@ public class ScreenFactory {
                 case SET_COMBAT -> new SetCombatScreen(name);
                 case COMBAT_ACTION_SELECTION -> new CombatActionSelection(name);
                 case COMBAT_RESULT -> new CombatResultScreen(name);
+                case QUIT_CONFIRMATION -> new QuitConfirmationScreen(name);
                 case STASH_EXCEEDED, HOLD_EXCEEDED, CASH_EXCEEDED, DEPOSIT_EXCEEDED, WITHDRAW_LIMIT_EXCEEDED, HEALED,
                         NOT_HEALED, NO_CASH_FOR_HEALING, BORROW_MONEY_TOO_MUCH,
                         BORROW_MONEY_TOO_LITTLE,

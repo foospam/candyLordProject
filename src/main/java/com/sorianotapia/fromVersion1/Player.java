@@ -30,6 +30,7 @@ public class Player implements Fighter {
     private Arm armInHand;
     private Holster holster;
     private String icon = DisplaySymbols.PLAYER.toString();
+    private boolean isInBattle;
 
 
     public int getHealth() {
@@ -40,9 +41,9 @@ public class Player implements Fighter {
 
         if (health > 0) {
             this.health = health;
-        }
-        else {
+        } else {
             this.health = 0;
+            isInBattle = false;
             EventFactory.pushGameOverEvent();
         }
     }
@@ -75,7 +76,7 @@ public class Player implements Fighter {
         bankAccount = new BankAccount(this);
         location = PlaceContainer.getRandomPlace();
         stuffOnHand = new HashMap<>();
-        for (String name: TextContainer.getStuffNames()) stuffOnHand.put(name, 0);
+        for (String name : TextContainer.getStuffNames()) stuffOnHand.put(name, 0);
 
     }
 
@@ -184,27 +185,27 @@ public class Player implements Fighter {
         return maxHold;
     }
 
-    public int getHealingCost(){
+    public int getHealingCost() {
         return hospital.getHealingCost(this);
     }
 
-    public int getHealingDays(){
+    public int getHealingDays() {
         return hospital.getHealingTime(this);
     }
 
-    public int heal(){
+    public int heal() {
         return hospital.heal(this);
     }
 
-    public MethodAnswers borrowMoney(int amount){
+    public MethodAnswers borrowMoney(int amount) {
         return debt.borrow(this, amount);
     }
 
-    public MethodAnswers payBackDebt(int amount){
+    public MethodAnswers payBackDebt(int amount) {
         return debt.payBack(this, amount);
     }
 
-    public String translateStuffIndexToName(int index){
+    public String translateStuffIndexToName(int index) {
         return location.getStuffName(index);
     }
 
@@ -213,13 +214,13 @@ public class Player implements Fighter {
         return stuffOnHand.get(stuff);
     }
 
-    private void setLocation(Place location){
+    private void setLocation(Place location) {
         this.location = location;
     }
 
-    public MethodAnswers travel(Place destination, int ticketPrice){
+    public MethodAnswers travel(Place destination, int ticketPrice) {
         if (ticketPrice > cash) return MethodAnswers.INSUFFICIENT_MONEY;
-        else if(destination == location) return MethodAnswers.SAME_ORIGIN_AND_DESTINATION;
+        else if (destination == location) return MethodAnswers.SAME_ORIGIN_AND_DESTINATION;
         else {
             cash -= ticketPrice;
             location = destination;
@@ -227,53 +228,54 @@ public class Player implements Fighter {
         }
     }
 
-    public void emptyPockets(){
+    public void emptyPockets() {
         this.cash = 0;
     }
 
-    public void emptyHold(){
-        for (String key: stuffOnHand.keySet()){
+    public void emptyHold() {
+        for (String key : stuffOnHand.keySet()) {
             stuffOnHand.put(key, 0);
         }
         hold = maxHold;
     }
 
-    public void setHarm(int harm){
-        setHealth(health-harm);
+    public void setHarm(int harm) {
+        setHealth(health - harm);
     }
 
     public int getOverdue() {
         return debt.getOverdue();
     }
 
-    public void extendPaymentPeriod(){
+    public void extendPaymentPeriod() {
         debt.extendPaymentPeriod();
     }
 
     @Override
-    public String shootRandomEnemy(ArrayList<Fighter> enemies) {
+    public Object[] shootRandomEnemy(ArrayList<Fighter> enemies) {
         Fighter enemy = enemies.get(ThreadLocalRandom.current().nextInt(enemies.size()));
-        return "You "+armInHand.shoot(enemy);
+        return armInHand.shoot(enemy, getName());
     }
 
     @Override
-    public String escapeEnemies(ArrayList<Fighter> enemies) {
+    public Object[] escapeEnemies(ArrayList<Fighter> enemies) {
         for (Fighter enemy : enemies) {
             int fighterRoll = gunRoll();
             int enemyRoll = enemy.gunRoll();
             if (enemyRoll > fighterRoll) {
-                return "You tried to chicken out, but the cops were quicker. Good luck next time!";
+                return new Object[]{false, getName()};
             }
         }
-        return "You chickened out like the chicken you are!";
+        isInBattle = false;
+        return new Object[]{true, getName()};
     }
 
-    public int gunRoll(){
+    public int gunRoll() {
         return ThreadLocalRandom.current().nextInt(armInHand.getAccuracy())
                 + ThreadLocalRandom.current().nextInt(armInHand.getHarm());
     }
 
-    public int harmRoll(){
+    public int harmRoll() {
         return ThreadLocalRandom.current().nextInt(armInHand.getHarm());
     }
 
@@ -286,19 +288,19 @@ public class Player implements Fighter {
         return "You";
     }
 
-    public Arm getTopGun(){
+    public Arm getTopGun() {
         return holster.getTopGun();
     }
 
-    public boolean isDead(){
+    public boolean isDead() {
         return (health == 0);
     }
 
-    public boolean isInBattle(){
-        return true;
+    public boolean isInBattle() {
+        return isInBattle;
     }
 
-    public Arm getArmInHand(){
+    public Arm getArmInHand() {
         return armInHand;
     }
 
@@ -308,43 +310,50 @@ public class Player implements Fighter {
         return arm;
     }
 
-    public void pickArm(Arm arm){
+    public void pickArm(Arm arm) {
         holster.add(arm);
     }
 
-    public String combatInfoString(){
-        return icon +" You: "+armInHand.toString()+", "+health+" health points";
-    };
+    public String combatInfoString() {
+        return icon + " You: " + armInHand.toString() + ", " + health + " health points";
+    }
 
-    public void increaseReputation(){
+    ;
+
+    public void increaseReputation() {
         reputation++;
     }
 
-    public void decreaseReputation(){
+    public void decreaseReputation() {
         reputation--;
     }
 
-    public void increaseReputation(int points){
+    public void increaseReputation(int points) {
         for (int i = 0; i < points; i++) {
             increaseReputation();
         }
     }
 
     // Implements the logic by which reputation increases after business
-    private void increaseReputationBySale(int income){
+    private void increaseReputationBySale(int income) {
 
         if (reputation > 0 && income + cash + getDeposits() > reputation * 10000) { // Transformar esto en parámetro "CREDIT FACTOR"
-            while (reputation * 10000 < income + cash){
+            while (reputation * 10000 < income + cash) {
                 increaseReputation();
             }
-        }
-        else if (reputation == 0 && income > cash + debt.getValue()) {
+        } else if (reputation == 0 && income > cash + debt.getValue()) {
             increaseReputation();
         }
     }
 
-    public Holster getHolster(){
+    public Holster getHolster() {
         return holster;
-    };
+    }
+
+    ;
+
+    public void setIsInBattle(boolean inBattle) {
+        isInBattle = inBattle;
+    }
 
 }

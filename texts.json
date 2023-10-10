@@ -100,6 +100,11 @@
       "transitionDelay": false,
       "defaultNextScreen": null
     },
+    "MAIN_SELECTION" : {
+      "badInputPrompt" : "Just type one of the capital letters highlighted in the options. It's not rocket science!",
+      "prompt": "Here are your possible plans:\n(B)uy stuff              (S)ell stuff             (J)et to another city\n(V)isit the bank         Go to the (H)ospital     See the (L)oan shark\n(R)elax and do nothing   (Q)uit like a coward\nWhat do you do?",
+      "validInput" : "[BSJVHLRQ]"
+    },
     "SELECT_DRUG_TO_BUY": {
       "badInputPrompt": "Please enter a number from 1 to 8!",
       "prompt": "What stuff are you interested in?\n\n    1. %1$-20s 5. %5$-20s\n    2. %2$-20s 6. %6$-20s\n    3. %3$-20s 7. %7$-20s\n    4. %4$-20s 8. %8$-20s\n",
@@ -289,7 +294,7 @@
     },
     "BUY_ARM": {
       "badInputPrompt": "Just say yes or no, man. I don't have all day.",
-      "prompt": "A shady guy with a military look approaches in a dark alley. Do you want to buy a %s?%nIt's a powerful weapon! You hit somebody, they get %s points south.%nWith an accuracy of %s, you cannot miss.%nThe unit costs %s. I can give you %s for %s, you take it or leave it.",
+      "prompt": "A shady guy with a military look approaches in a dark alley. Do you want to buy a %s?%nIt's a powerful weapon! You hit somebody, they get %s stitches.%nWith an accuracy of %s, you cannot miss.%nThe unit costs %s. I can give you %s for %s, you take it or leave it.",
       "validInput": "[YN]"
     },
     "BUY_ARM_OK": {
@@ -330,14 +335,30 @@
     },
     "SET_COMBAT": {
       "badInputPrompt": "Just type a number, we'll see how many come to your call!",
-      "prompt": "Someone must have ratted on you, because Five-Oh is on you. %s cop%s %s trying to bring you in! How much reinforcement do you want to bring? (Max: %s) %n",
+      "prompt": "Someone must have snitched on you, because Five-Oh is on you. %s cop%s %s trying to bring you in! How much reinforcement do you want to bring? (Max: %s) %n",
       "validInput": "\\d+"
     },
     "COMBAT_ACTION_SELECTION": {
       "badInputPrompt": "Just type G for 'go' or F for 'fight', man!",
-      "prompt": "What do you do now?",
+      "prompt": "THIS IS THE SITUATION:%n%sWhat do you do now? (G)o or (F)ight!",
       "validInput": "[GF]"
+    },
+    "QUIT_CONFIRMATION": {
+      "badInputPrompt": "Just type Y or N, man!",
+      "prompt": "Do you really want to chicken out after building this mess?",
+      "validInput": "[YN]"
     }
+  },
+  "battlePrompts": {
+    "escaped": "%s escaped the battle scene!",
+    "youEscaped": "You tried to chicken out, but the cops were quicker. Good luck next time!",
+    "youEscapedNot": "You tried to chicken out, but the cops were quicker. Good luck next time!",
+    "hit": "%s shot %s. %s took %s points of harm.",
+    "miss": "%s shot %s. %s missed.",
+    "killed": "%s has bitten the dust!",
+    "youKilled": "You have bitten the dust!",
+    "youWin": "You have won! Your reputation is intact!",
+    "retriveArm": "You retrieve a %s from the battlefield."
   }
 }
 

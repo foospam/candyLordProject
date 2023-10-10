@@ -3,7 +3,6 @@ package com.sorianotapia.screens;
 import com.sorianotapia.Controller;
 import com.sorianotapia.GameInfo;
 import com.sorianotapia.fromVersion1.Player;
-import com.sorianotapia.headings.HeadingNames;
 
 import java.util.ArrayList;
 
@@ -11,17 +10,7 @@ public class MainSelectionScreen extends AbstractScreen {
 
     public MainSelectionScreen(ScreenName name) {
         super(name);
-        this.heading = HeadingNames.STAT_PAGE_DRUGS;
-        this.validInput = "[BSJVHLR]";
-        this.prompt = """
-                Here's a list of your possible plans dude:
-                (B)uy Drugs                 (V)isit the bank
-                (S)ell Drugs                Go to the (H)ospital
-                (J)et to another city       See the (L)oan shark
-                (R)elax and do nothing
-                
-                Make up your mind!
-                """;
+        heading = true;
     }
 
     @Override
@@ -46,6 +35,7 @@ public class MainSelectionScreen extends AbstractScreen {
             case "H" -> ScreenFactory.ofName(ScreenName.GO_TO_HOSPITAL);
             case "L" -> ScreenFactory.ofName(ScreenName.LOAN_SHARK);
             case "R" -> ScreenFactory.ofName(ScreenName.RELAX);
+            case "Q" -> ScreenFactory.ofName(ScreenName.QUIT_CONFIRMATION);
             default -> ScreenFactory.ofName(ScreenName.MAIN_SELECTION);
         });
     }

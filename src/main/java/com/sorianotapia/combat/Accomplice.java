@@ -16,16 +16,16 @@ public class Accomplice extends NPC {
     }
 
     @Override
-    public String escapeEnemies(ArrayList<Fighter> enemies) {
+    public Object[] escapeEnemies(ArrayList<Fighter> enemies) {
         for (Fighter enemy : enemies) {
             int fighterRoll = gunRoll();
             int enemyRoll = enemy.gunRoll();
             if (enemyRoll > fighterRoll) {
-                return name + " tried to escape, but the enemy was quicker!";
+                return new Object[]{false, name};
+                };
             }
-        }
         inBattle = false;
-        return name + " chickened out of the fight scene.";
+        return new Object[]{true, name};
     }
 
     @Override
@@ -34,7 +34,7 @@ public class Accomplice extends NPC {
     }
 
     @Override
-    public String act(ArrayList<Fighter> enemies) {
+    public Object[] act(ArrayList<Fighter> enemies) {
         double willignessToFight =
                         ((double) health / 100) *
                         ((double) bossReputation / (double) (bossReputation+1));

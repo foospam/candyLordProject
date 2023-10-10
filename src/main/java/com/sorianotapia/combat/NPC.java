@@ -22,13 +22,13 @@ public abstract class NPC implements Fighter {
     }
 
     @Override
-    public String shootRandomEnemy(ArrayList<Fighter> enemies) {
+    public Object[] shootRandomEnemy(ArrayList<Fighter> enemies) {
         Fighter enemy = enemies.get(ThreadLocalRandom.current().nextInt(enemies.size()));
-        return name + armInHand.shoot(enemy);
+        return armInHand.shoot(enemy, name);
     }
 
     @Override
-    public abstract String escapeEnemies(ArrayList<Fighter> enemies);
+    public abstract Object[] escapeEnemies(ArrayList<Fighter> enemies);
 
     @Override
     public void setHarm(int harm) {
@@ -45,7 +45,7 @@ public abstract class NPC implements Fighter {
         return ThreadLocalRandom.current().nextInt(armInHand.getHarm());
     }
 
-    public abstract String act (ArrayList<Fighter> enemies);
+    public abstract Object[] act(ArrayList<Fighter> enemies);
 
     public String getName(){
         return this.name;

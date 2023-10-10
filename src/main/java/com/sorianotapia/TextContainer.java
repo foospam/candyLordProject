@@ -133,4 +133,17 @@ public class TextContainer {
         return arms;
     }
 
+    public static String getBattlePrompts(String string) {
+
+        String prompt = "";
+
+        try {
+            prompt = root.get("battlePrompts").get(string).asText();
+        } catch (NullPointerException E) {
+            throw new NullPointerException("The text could not be found.");
+        }
+
+        return prompt;
+    }
+
 }

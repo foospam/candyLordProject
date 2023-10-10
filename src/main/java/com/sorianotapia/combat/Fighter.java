@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public interface Fighter {
 
-    public String shootRandomEnemy(ArrayList<Fighter> enemies);
-    public String escapeEnemies(ArrayList<Fighter> enemies);
+    public Object[] shootRandomEnemy(ArrayList<Fighter> enemies);
+    public Object[] escapeEnemies(ArrayList<Fighter> enemies);
     public void setHarm(int harm);
     public int gunRoll();
     public int harmRoll();

@@ -2,7 +2,6 @@ package com.sorianotapia.screens;
 
 import com.sorianotapia.TextContainer;
 import com.sorianotapia.fromVersion1.Player;
-import com.sorianotapia.headings.HeadingNames;
 
 import java.util.ArrayList;
 
@@ -11,7 +10,7 @@ public abstract class AbstractScreen {
     AbstractScreen nextScreen;
     ScreenName name;
     String validInput;
-    HeadingNames heading;
+    boolean heading;
     String prompt;
     String badInputPrompt;
     String defaultNextScreen;
@@ -57,7 +56,7 @@ public abstract class AbstractScreen {
         return badInputPrompt;
     }
 
-    public HeadingNames getHeading(){
+    public boolean getHeading(){
         return heading;
     }
 

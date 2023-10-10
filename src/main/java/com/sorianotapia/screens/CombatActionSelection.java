@@ -1,6 +1,7 @@
 package com.sorianotapia.screens;
 
 import com.sorianotapia.Controller;
+import com.sorianotapia.TextContainer;
 import com.sorianotapia.accessories.Arm;
 import com.sorianotapia.combat.Accomplice;
 import com.sorianotapia.combat.Fighter;
@@ -23,15 +24,14 @@ public class CombatActionSelection extends AbstractScreen {
     public String render(Player player) {
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(prompt+"\n\nTHIS IS THE SITUATION\n");
-        stringBuilder.append(player.combatInfoString()+"\n");
-        for (Fighter fighter: allies) {
-            stringBuilder.append(fighter.combatInfoString()+"\n");
+        stringBuilder.append(player.combatInfoString() + "\n");
+        for (Fighter fighter : allies) {
+            stringBuilder.append(fighter.combatInfoString() + "\n");
         }
-        for (Fighter fighter: cops) {
-            stringBuilder.append(fighter.combatInfoString()+"\n");
+        for (Fighter fighter : cops) {
+            stringBuilder.append(fighter.combatInfoString() + "\n");
         }
-        return stringBuilder.toString();
+        return String.format(prompt, stringBuilder.toString());
     }
 
     public void setAllies(ArrayList<Fighter> allies) {
@@ -54,29 +54,28 @@ public class CombatActionSelection extends AbstractScreen {
 
         String fightDecision = Controller.inputBuffer.get(0);
 
-        System.out.println("Cops: " + cops.size());
-
         switch (fightDecision) {
             case "G" -> {
-                String escaped = player.escapeEnemies(cops);
-                if (!escaped.contains("tried")) {
-                    resultStrings.add(escaped);
+                player.escapeEnemies(cops);
+                if (!player.isInBattle()) {
+                    resultStrings.add(TextContainer.getBattlePrompts("youEscaped"));
                     next.setBattleOver(true);
+                } else {
+                    resultStrings.add(TextContainer.getBattlePrompts("youEscapedNot"));
                 }
             }
             case "F" -> {
                 if (player.getArmInHand() == null) {
                     Arm topGun = player.getTopGun();
-                    System.out.println("Topgun is null: " + (topGun == null));
-                    player.setArmInHand(player.getTopGun());
+                    player.setArmInHand(topGun);
                 }
-                resultStrings.add(player.shootRandomEnemy(cops));
+                resultStrings.add(getBattleResultString(player.shootRandomEnemy(cops)));
 
                 // Remove cops killed by player and increase reputation for them
 
                 for (int i = cops.size() - 1; i >= 0; i--) {
                     if (cops.get(i).isDead()) {
-                        resultStrings.add(cops.get(i).getName() + " has bitten the dust!");
+                        resultStrings.add(String.format(TextContainer.getBattlePrompts("killed"), cops.get(i).getName()));
                         player.increaseReputation();
                         cops.remove(i);
                     }
@@ -98,12 +97,12 @@ public class CombatActionSelection extends AbstractScreen {
         if (!cops.isEmpty()) {
             for (Fighter ally : allies) {
                 Accomplice accomplice = (Accomplice) ally;
-                resultStrings.add((accomplice.act(cops)));
+                resultStrings.add(getBattleResultString(accomplice.act(cops)));
 
                 // Remove dead characters from cop list:
                 for (int i = cops.size() - 1; i >= 0; i--) {
                     if (cops.get(i).isDead()) {
-                        resultStrings.add(cops.get(i).getName() + " has bitten the dust!");
+                        resultStrings.add(String.format(TextContainer.getBattlePrompts("killed"), cops.get(i).getName()));
                         cops.remove(i);
                     }
                 }
@@ -129,16 +128,16 @@ public class CombatActionSelection extends AbstractScreen {
         COP_ATTACK:
         for (Fighter cop : cops) {
             Policeman policeman = (Policeman) cop;
-            resultStrings.add((policeman.act(allies)));
+            resultStrings.add(getBattleResultString(policeman.act(allies)));
 
             // Remove dead characters from allies list:
             for (int i = allies.size() - 1; i >= 0; i--) {
                 if (player.isDead()) {
-                    resultStrings.add("You have bitten the dust!");
+                    resultStrings.add(TextContainer.getBattlePrompts("youKilled"));
                     break COP_ATTACK;
                 }
                 if (allies.get(i).isDead()) {
-                    resultStrings.add(allies.get(i).getName() + " has bitten the dust!");
+                    resultStrings.add(String.format(TextContainer.getBattlePrompts("killed"), allies.get(i).getName()));
                     allies.remove(i);
                 }
             }
@@ -157,13 +156,14 @@ public class CombatActionSelection extends AbstractScreen {
         }
 
         if (cops.isEmpty()) {
+            player.setIsInBattle(false);
             player.getReputation();
-            resultStrings.add("You have won!");
+            resultStrings.add(TextContainer.getBattlePrompts("youWin"));
             for (Fighter fighter : allies) {
                 Arm arm = fighter.giveArmInHand();
                 if (!arm.isDefault()) {
                     player.pickArm(arm);
-                    resultStrings.add("You retrieved a " + arm.getName() + " from the battle field.");
+                    resultStrings.add(String.format(TextContainer.getBattlePrompts("retrieveArm"), arm.getName()));
                 }
             }
             next.setBattleOver(true);
@@ -175,4 +175,30 @@ public class CombatActionSelection extends AbstractScreen {
         setNextScreen(next);
     }
 
+    private String getBattleResultString(Object[] result) {
+        if (result.length == 3) {
+            if ((int) result[2] == -1) {
+                return String.format(TextContainer.getBattlePrompts("miss"),
+                        result[0],
+                        result[1],
+                        result[0]);
+            } else {
+                return String.format(TextContainer.getBattlePrompts("hit"),
+                        result[0],
+                        result[1],
+                        result[1],
+                        result[2]);
+            }
+        } else {
+            if ((boolean) result[0] == true) {
+                return String.format(TextContainer.getBattlePrompts("escaped"),
+                        result[1]
+                );
+            } else {
+                return String.format(TextContainer.getBattlePrompts("escapedNot"),
+                        result[1]);
+            }
+        }
+    }
 }
+

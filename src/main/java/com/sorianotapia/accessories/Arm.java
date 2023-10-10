@@ -1,5 +1,6 @@
 package com.sorianotapia.accessories;
 
+import com.sorianotapia.TextContainer;
 import com.sorianotapia.combat.Fighter;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -36,6 +37,14 @@ public class Arm implements Comparable {
         return name;
     }
 
+    public static String HIT;
+    public static String MISS;
+
+
+    static {
+           HIT = TextContainer.getBattlePrompts("hit");
+           MISS = TextContainer.getBattlePrompts("miss");
+    }
 
     @Override
     public int compareTo(Object o) {
@@ -45,13 +54,13 @@ public class Arm implements Comparable {
         else return 0;
     }
 
-    public String shoot(Fighter fighter){
+    public Object[] shoot(Fighter target, String shooterName){
         int die = ThreadLocalRandom.current().nextInt(100);
         if (die <= accuracy){
-            fighter.setHarm(harm);
-            return " attacked "+fighter.getName()+". "+fighter.getName() +" took " + harm + " points of harm.";
+            target.setHarm(harm);
+            return new Object[]{shooterName, target.getName(), harm};
         }
-        return " attacked "+fighter.getName()+" and missed.";
+        return new Object[]{shooterName, target.getName(), -1};
     }
 
     public boolean isDefault() {
