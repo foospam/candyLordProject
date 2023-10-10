@@ -1,54 +1,34 @@
 package com.sorianotapia.accessories;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.sorianotapia.TextContainer;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
 public class ArmContainer {
     private static ArrayList<Arm> valueList = new ArrayList<>();
     private static HashMap<String, Arm> valueMap = new HashMap<>();
-    private static ObjectMapper mapper = new ObjectMapper();
     private static Arm defaultArm;
-    private static ObjectNode root;
-
-    private static int armsInUse = 0;
 
     static {
-        try {
-            setFile("arms.json");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        setValues();
     }
 
-    private static void readAllStuffCarriers() {
+    private static void setValues() {
 
-        try {
-            root.forEach(s -> {
-                String name = s.get("name").asText();
-                int harm = s.get("harm").asInt();
-                int accuracy = s.get("accuracy").asInt();
-                int price = s.get("price").asInt();
-                boolean isDefault = s.has("default") ? true : false;
+        valueList.clear();
+        valueMap.clear();
 
-                Arm arm = new Arm(name, harm, accuracy, price, isDefault);
-
-                if (arm.isDefault()) {
-                    defaultArm = arm;
-                }
-                else {
-                    valueMap.put(name, arm);
-                    valueList.add(arm);
-                }
-            });
-        } catch (NullPointerException E) {
-            throw new NullPointerException("The name file does not contain any arm elements.");
-        }
+        ArrayList<Arm> arms = TextContainer.readAllArms();
+        arms.forEach(s -> {
+            if (s.isDefault()) {
+                defaultArm = s;
+            }
+            else {
+                valueMap.put(s.getName(), s);
+                valueList.add(s);
+            }
+        });
     }
 
     public static Arm getRandomArm() {
@@ -64,15 +44,7 @@ public class ArmContainer {
         return valueMap.get(name);
     }
 
-    public static void setFile(String fileName) throws IOException {
-        root = (ObjectNode) mapper.readTree(new File(fileName));
-        readAllStuffCarriers();
-    }
-
     public static Arm getDefaultArm(){
         return defaultArm;
     }
-
-
-
 }

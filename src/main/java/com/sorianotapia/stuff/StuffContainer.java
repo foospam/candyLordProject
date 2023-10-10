@@ -1,7 +1,6 @@
 package com.sorianotapia.stuff;
 
 import com.sorianotapia.TextContainer;
-import com.sorianotapia.places.NameContainer;
 
 import java.util.ArrayList;
 import java.util.HashMap;

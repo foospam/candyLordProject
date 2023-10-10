@@ -1,12 +1,12 @@
 package com.sorianotapia;
 
+import com.sorianotapia.accessories.StuffCarrierContainer;
 import com.sorianotapia.events.Event;
 import com.sorianotapia.events.EventMessage;
 import com.sorianotapia.events.EventFactory;
 import com.sorianotapia.events.EventQueue;
 import com.sorianotapia.fromVersion1.LoanSharkDebt;
 import com.sorianotapia.fromVersion1.Player;
-import com.sorianotapia.places.NameContainer;
 import com.sorianotapia.screens.AbstractScreen;
 import com.sorianotapia.screens.ScreenFactory;
 import com.sorianotapia.screens.ScreenName;
@@ -31,6 +31,7 @@ public class Controller {
 
         Controller controller = new Controller(player, gameDate);
         //controller.player.setHealth(50);
+
         controller.run();
     }
 

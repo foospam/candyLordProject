@@ -8,7 +8,6 @@ import com.sorianotapia.accessories.Holster;
 import com.sorianotapia.accessories.StuffCarrier;
 import com.sorianotapia.combat.Fighter;
 import com.sorianotapia.events.EventFactory;
-import com.sorianotapia.places.NameContainer;
 import com.sorianotapia.places.Place;
 import com.sorianotapia.places.PlaceContainer;
 

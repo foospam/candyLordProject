@@ -3,6 +3,8 @@ package com.sorianotapia;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.sorianotapia.accessories.Arm;
+import com.sorianotapia.accessories.StuffCarrier;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,31 +25,30 @@ public class TextContainer {
     private static ObjectNode root;
 
 
-    public static String getScreenText(String screenName, String stringText){
+    public static String getScreenText(String screenName, String stringText) {
         try {
             return root.get("screen_texts").get(screenName).get(stringText).asText();
-        }
-        catch (NullPointerException E) {
+        } catch (NullPointerException E) {
             if (root.get("screen_texts").get("default_values").get(stringText).isNull())
                 return null;
             else return root.get("screen_texts").get("default_values").get(stringText).asText();
         }
-    };
+    }
 
-    public static boolean getScreenBool(String screenName, String stringText){
+    ;
+
+    public static boolean getScreenBool(String screenName, String stringText) {
         try {
             return root.get("screen_texts").get(screenName).get(stringText).asBoolean();
-        }
-        catch (NullPointerException E) {
+        } catch (NullPointerException E) {
             return root.get("screen_texts").get("default_values").get(stringText).asBoolean();
         }
     }
 
-    public static int getScreenInt(String screenName, String stringText){
+    public static int getScreenInt(String screenName, String stringText) {
         try {
             return root.get("screen_texts").get(screenName).get(stringText).asInt();
-        }
-        catch (NullPointerException E) {
+        } catch (NullPointerException E) {
             return root.get("screen_texts").get("default_values").get(stringText).asInt();
         }
     }
@@ -87,12 +88,49 @@ public class TextContainer {
         return null;
     }
 
-    public static ArrayList<String> getPlaceNames(){
+    public static ArrayList<String> getPlaceNames() {
         return placeNames;
     }
 
-    public static ArrayList<String> getStuffNames(){
+    public static ArrayList<String> getStuffNames() {
         return stuffNames;
+    }
+
+    public static ArrayList<StuffCarrier> getAllStuffCarriers() {
+        ArrayList<StuffCarrier> stuffCarriers = new ArrayList<>();
+
+        try {
+            root.get("stuffCarriers").forEach(s -> {
+                String name = s.get("name").asText();
+                int hold = s.get("hold").asInt();
+                int price = s.get("price").asInt();
+                StuffCarrier carrier = new StuffCarrier(name, hold, price);
+                stuffCarriers.add(carrier);
+            });
+        } catch (NullPointerException E) {
+            throw new NullPointerException("The name file does not contain any carrier elements.");
+        }
+        return stuffCarriers;
+    }
+
+    public static ArrayList<Arm> readAllArms() {
+
+        ArrayList<Arm> arms = new ArrayList<>();
+
+        try {
+            root.get("arms").forEach(s -> {
+                String name = s.get("name").asText();
+                int harm = s.get("harm").asInt();
+                int accuracy = s.get("accuracy").asInt();
+                int price = s.get("price").asInt();
+                boolean isDefault = s.has("default") ? true : false;
+                Arm arm = new Arm(name, harm, accuracy, price, isDefault);
+                arms.add(arm);
+            });
+        } catch (NullPointerException E) {
+            throw new NullPointerException("The name file does not contain any arm elements.");
+        }
+        return arms;
     }
 
 }

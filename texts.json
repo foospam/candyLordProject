@@ -63,7 +63,7 @@
     "Mint Q",
     "Sugarator"
   ],
-  "stuff_carriers": {
+  "stuffCarriers": {
     "1": {
       "name": "Old trenchcoat",
       "hold": 10,
