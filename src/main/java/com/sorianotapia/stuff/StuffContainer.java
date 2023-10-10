@@ -1,5 +1,6 @@
 package com.sorianotapia.stuff;
 
+import com.sorianotapia.TextContainer;
 import com.sorianotapia.places.NameContainer;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class StuffContainer {
     }
 
     private void fillStuffList(){
-        ArrayList<String> stuffNames = NameContainer.getStuffNames();
+        ArrayList<String> stuffNames = TextContainer.getStuffNames();
         for (int i = 0; i < stuffNames.size(); i++) {
             String stuffName = stuffNames.get(i);
             Stuff newStuff = new Stuff(stuffName,

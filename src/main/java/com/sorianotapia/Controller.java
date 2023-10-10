@@ -19,7 +19,7 @@ public class Controller {
 
     public static void main(String[] args) throws IOException {
         TextContainer.setFile("texts.json");
-        NameContainer.setFile("placeNames.json");
+//        NameContainer.setFile("placeNames.json");
         GameDate gameDate = new GameDate();
         Player player = new Player();
         LoanSharkDebt debt = new LoanSharkDebt();

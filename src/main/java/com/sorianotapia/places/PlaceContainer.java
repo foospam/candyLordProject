@@ -1,5 +1,7 @@
 package com.sorianotapia.places;
 
+import com.sorianotapia.TextContainer;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -20,7 +22,7 @@ public class PlaceContainer {
         ArrayList<Point> points = getPoints();
 
         for (int i = 0; i < NUMBER_OF_PLACES; i++) {
-            String placeName = NameContainer.getRandomPlaceName();
+            String placeName = TextContainer.getRandomPlaceName();
             Point placeCoordinates = points.get(i);
             Place place = new Place(placeName, placeCoordinates);
             places.add(place);

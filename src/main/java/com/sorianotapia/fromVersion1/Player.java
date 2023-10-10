@@ -1,6 +1,7 @@
 package com.sorianotapia.fromVersion1;
 
 import com.sorianotapia.MethodAnswers;
+import com.sorianotapia.TextContainer;
 import com.sorianotapia.accessories.Arm;
 import com.sorianotapia.accessories.DisplaySymbols;
 import com.sorianotapia.accessories.Holster;
@@ -75,7 +76,7 @@ public class Player implements Fighter {
         bankAccount = new BankAccount(this);
         location = PlaceContainer.getRandomPlace();
         stuffOnHand = new HashMap<>();
-        for (String name: NameContainer.getStuffNames()) stuffOnHand.put(name, 0);
+        for (String name: TextContainer.getStuffNames()) stuffOnHand.put(name, 0);
 
     }
 
