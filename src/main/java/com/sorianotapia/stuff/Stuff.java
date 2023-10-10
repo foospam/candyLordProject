@@ -24,7 +24,15 @@ public class Stuff {
     }
 
     public void randomPriceUpdate(int percentage){
-        price = (int) (price * (1 - (percentage/100) + (Math.random() * 2 * percentage / 100)));
+
+        double randomIncrease = ((1 + Math.random()*percentage)+100)/100;
+        double randomDecrease = ((1 - Math.random()*percentage)+100)/100;
+//        System.out.println(randomFactor+ " "+price+" "+(price*randomFactor));
+//        int newPrice = (int) (price*randomFactor);
+
+        double randomFactor = Math.random() < 0.5 ? randomIncrease : randomDecrease;
+
+        price = (int) (price * randomFactor);
     }
 
     public void priceUp() {updatePrice(price, maxPrice);}

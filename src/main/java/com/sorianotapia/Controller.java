@@ -1,6 +1,5 @@
 package com.sorianotapia;
 
-import com.sorianotapia.accessories.StuffCarrierContainer;
 import com.sorianotapia.events.Event;
 import com.sorianotapia.events.EventMessage;
 import com.sorianotapia.events.EventFactory;
@@ -17,9 +16,18 @@ import java.util.*;
 
 public class Controller {
 
+    private AbstractScreen screen;
+    public static ArrayList<String> inputBuffer;
+    private Scanner scanner;
+    private Player player;
+    private ScreenFactory screenFactory;
+    private GameDate date;
+    private GameInfo gameInfo;
+    private static EventQueue eventMessageQueue;
+    private static Object[] displayInformationBuffer;
+
     public static void main(String[] args) throws IOException {
         TextContainer.setFile("texts.json");
-//        NameContainer.setFile("placeNames.json");
         GameDate gameDate = new GameDate();
         Player player = new Player();
         LoanSharkDebt debt = new LoanSharkDebt();
@@ -34,17 +42,6 @@ public class Controller {
 
         controller.run();
     }
-
-    private AbstractScreen screen;
-    public static ArrayList<String> inputBuffer;
-    private Scanner scanner;
-    private Player player;
-    private ScreenFactory screenFactory;
-    private GameDate date;
-    private GameInfo gameInfo;
-    private static EventQueue eventMessageQueue;
-
-    private static Object[] displayInformationBuffer;
 
     public Controller(Player player, GameDate gameDate) {
         inputBuffer = new ArrayList<>();
@@ -158,7 +155,9 @@ public class Controller {
     }
 
     public static Object[] getDisplayInformationBuffer() {
-        return displayInformationBuffer;
+        Object[] buffer = displayInformationBuffer;
+        displayInformationBuffer = null;
+        return buffer;
     }
 
     public static void setDisplayInformationBuffer(Object[] displayInformation) {

@@ -1,5 +1,6 @@
 package com.sorianotapia.fromVersion1;
 
+import com.sorianotapia.GameSettings;
 import com.sorianotapia.MethodAnswers;
 import com.sorianotapia.TextContainer;
 import com.sorianotapia.accessories.Arm;
@@ -66,18 +67,17 @@ public class Player implements Fighter {
 
     public Player() {
         hospital = new Hospital();
-        health = 100;
-        reputation = 1;
-        cash = 500;
-        maxHold = 10;
-        hold = 10;
+        health = GameSettings.INITIAL_HEALTH;
+        reputation = GameSettings.INITIAL_REPUTATION;
+        cash = GameSettings.INITIAL_CASH;
+        maxHold = GameSettings.INITIAL_HOLD;
+        hold = GameSettings.INITIAL_HOLD;
 
         holster = new Holster();
         bankAccount = new BankAccount(this);
         location = PlaceContainer.getRandomPlace();
         stuffOnHand = new HashMap<>();
         for (String name : TextContainer.getStuffNames()) stuffOnHand.put(name, 0);
-
     }
 
 

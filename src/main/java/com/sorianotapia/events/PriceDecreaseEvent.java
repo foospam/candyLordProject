@@ -25,7 +25,7 @@ public class PriceDecreaseEvent extends PlaceEvent{
 
         if (isLocalEvent()) {
             Controller.setDisplayInformationBuffer(new Object[]{stuff.getName()});
-            controller.setScreen(ScreenFactory.ofName(ScreenName.EVENT_PRICE_INCREASE));
+            controller.setScreen(ScreenFactory.ofName(ScreenName.EVENT_PRICE_DECREASE));
         }
     }
 

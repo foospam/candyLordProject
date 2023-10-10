@@ -351,7 +351,7 @@
   },
   "battlePrompts": {
     "escaped": "%s escaped the battle scene!",
-    "youEscaped": "You tried to chicken out, but the cops were quicker. Good luck next time!",
+    "youEscaped": "You chickenend out like the chicken you are!",
     "youEscapedNot": "You tried to chicken out, but the cops were quicker. Good luck next time!",
     "hit": "%s shot %s. %s took %s points of harm.",
     "miss": "%s shot %s. %s missed.",

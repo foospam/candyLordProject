@@ -10,5 +10,8 @@ public class GameSettings {
     public static final int PRICE_PER_KM = AROUND_WORLD_TICKET_PRICE / WORLD_SIZE;
     public static final int MIN_DISTANCE = 5;
     public static final int NUMBER_OF_PLACES = 8;
-
+    public static final int INITIAL_HEALTH = 100;
+    public static final int INITIAL_CASH = 500;
+    public static final int INITIAL_HOLD = 10;
+    public static final int INITIAL_REPUTATION = 1;
 }
