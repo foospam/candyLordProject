@@ -230,7 +230,7 @@
     },
     "TRAVEL": {
       "badInputPrompt": "Just type the number of your destination",
-      "prompt": "You are at the airport.%n%s Where do you want to go?%n%s%n",
+      "prompt": "You are at the airport.%nWhere do you want to go?%n%s%n",
       "validInput": "\\d+"
     },
     "TRAVEL_OK": {

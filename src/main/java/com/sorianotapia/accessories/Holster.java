@@ -56,18 +56,28 @@ public class Holster {
         printTopGuns();
     }
 
-    private void printTopGuns(){
+    public String printTopGuns(){
         StringBuilder stringBuilder = new StringBuilder();
         ArrayList<Arm> arms = new ArrayList<>(armMap.keySet());
         Collections.reverse(arms);
 
         int upperBoundary = Math.min(arms.size(), 3);
         for (int i = 0; i < upperBoundary; i++) {
-            stringBuilder.append(arms.get(i).getName()+": "+armMap.get(arms.get(i)));
+
+            stringBuilder.append(
+                    String.format("%s (%s, %s %s %s %s) ",
+                            arms.get(i).getName(),
+                            armMap.get(arms.get(i)),
+                            DisplaySymbols.HARM.toString(),
+                            arms.get(i).getHarm(),
+                            DisplaySymbols.ACCURACY.toString(),
+                            arms.get(i).getAccuracy()));
             if (i < upperBoundary -1) {
                 stringBuilder.append("\n");
             }
         }
+
+        return stringBuilder.toString();
     }
 
     public String toString(){

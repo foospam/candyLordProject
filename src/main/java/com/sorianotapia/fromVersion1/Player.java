@@ -342,4 +342,9 @@ public class Player implements Fighter {
             increaseReputation();
         }
     }
+
+    public Holster getHolster(){
+        return holster;
+    };
+
 }

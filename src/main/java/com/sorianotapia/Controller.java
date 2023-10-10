@@ -118,53 +118,18 @@ public class Controller {
 
 
     private void render() {
-        gameInfo.updateGameInfo(player, date);
-        System.out.println(gameInfo.printStuff());
-        System.out.println(gameInfo.printUserStats());
-
-//        System.out.println(screen.getName());
-        if (null != screen.getHeading())
-            System.out.printf(screen.getHeading().getTemplate() + "%n", getFullStats());
+        if (null != screen.getHeading()) {
+            gameInfo.updateGameInfo(player, date);
+            System.out.println(gameInfo.printUserStats());
+            System.out.println(gameInfo.printUserArmory());
+            System.out.println(gameInfo.printStuff());
+        }
         String prompt = screen.render(player);
         if (prompt != null && prompt != "null") System.out.println(prompt);
     }
 
     public void setScreen(AbstractScreen screen) {
         this.screen = screen;
-    }
-
-    public Object[] getFullStats() {
-        Object[] objects = new Object[28];
-        objects[0] = player.getStuffOnHand(0);
-        objects[1] = player.getStuffOnHand(1);
-        objects[2] = player.getStuffOnHand(2);
-        objects[3] = player.getStuffOnHand(3);
-        objects[4] = player.getStuffOnHand(4);
-        objects[5] = player.getStuffOnHand(5);
-        objects[6] = player.getStuffOnHand(6);
-        objects[7] = player.getStuffOnHand(7);
-        objects[8] = player.getLocation().getStuffPrice(player.translateStuffIndexToName(0));
-        objects[9] = player.getLocation().getStuffPrice(player.translateStuffIndexToName(1));
-        objects[10] = player.getLocation().getStuffPrice(player.translateStuffIndexToName(2));
-        objects[11] = player.getLocation().getStuffPrice(player.translateStuffIndexToName(3));
-        objects[12] = player.getLocation().getStuffPrice(player.translateStuffIndexToName(4));
-        objects[13] = player.getLocation().getStuffPrice(player.translateStuffIndexToName(5));
-        objects[14] = player.getLocation().getStuffPrice(player.translateStuffIndexToName(6));
-        objects[15] = player.getLocation().getStuffPrice(player.translateStuffIndexToName(7));
-        objects[16] = date.getStringDate();
-        objects[17] = player.getLocation().getName();
-        objects[18] = player.getHold();
-        objects[19] = player.getMaxHold();
-        objects[20] = player.getCash();
-        objects[21] = player.getDeposits();
-        objects[22] = player.getDebtValue();
-        objects[23] = player.getDebtValue() > 0 ? String.format("(%2d)", player.getDebtDays()) : "";
-        objects[24] = 0; //player.getNumberOfGuns();
-        objects[25] = "None"; // player.getGunType();
-        objects[26] = player.getReputation();
-        objects[27] = player.getHealth();
-
-        return objects;
     }
 
     private void update() {
@@ -192,15 +157,15 @@ public class Controller {
         eventMessageQueue.add(eventMessage);
     }
 
-    public static Object[] getDisplayInformationBuffer(){
+    public static Object[] getDisplayInformationBuffer() {
         return displayInformationBuffer;
     }
 
-    public static void setDisplayInformationBuffer(Object[] displayInformation){
+    public static void setDisplayInformationBuffer(Object[] displayInformation) {
         displayInformationBuffer = displayInformation;
     }
 
-    public static void resetDisplayInformationBuffer(){
+    public static void resetDisplayInformationBuffer() {
         displayInformationBuffer = null;
     }
 }

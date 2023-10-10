@@ -68,6 +68,42 @@ public enum DisplaySymbols {
         public String toString() {
             return "\uD83D\uDCB3";
         }
+    },
+
+    HAND {
+        @Override
+        public String toString() {return "\uD83D\uDED2";}
+    },
+
+    MONEY{
+        @Override
+        public String toString() { return "\uD83D\uDCB2"; }
+    },
+
+    REPUTATION {
+        @Override
+        public String toString() { return "\uD83D\uDC51"; }
+
+    },
+
+    GUN {
+        @Override
+        public String toString() { return "\uD83D\uDD2B";}
+    },
+
+    HARM {
+        @Override
+        public String toString() { return "\uD83D\uDCA5";}
+    },
+
+    ACCURACY {
+        @Override
+        public String toString() { return "\uD83C\uDFAF";}
+    },
+
+    STASH {
+        @Override
+        public String toString() { return "\uD83D\uDCBC";}
     }
     ;
 

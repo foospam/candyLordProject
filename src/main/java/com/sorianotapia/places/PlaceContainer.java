@@ -1,5 +1,6 @@
 package com.sorianotapia.places;
 
+import com.sorianotapia.GameSettings;
 import com.sorianotapia.TextContainer;
 
 import java.awt.*;
@@ -8,20 +9,12 @@ import java.util.ArrayList;
 public class PlaceContainer {
     private static ArrayList<Place> places;
 
-    private static int NUMBER_OF_PLACES;
-    private static int PRICE_PER_KM;
-    private static int WORLD_SIZE;
-    private static int MIN_DISTANCE;
 
     static {
-        WORLD_SIZE = 20;
-        PRICE_PER_KM = 500/WORLD_SIZE;
-        MIN_DISTANCE = 5;
-        NUMBER_OF_PLACES = 8;
         places = new ArrayList<>();
         ArrayList<Point> points = getPoints();
 
-        for (int i = 0; i < NUMBER_OF_PLACES; i++) {
+        for (int i = 0; i < GameSettings.NUMBER_OF_PLACES; i++) {
             String placeName = TextContainer.getRandomPlaceName();
             Point placeCoordinates = points.get(i);
             Place place = new Place(placeName, placeCoordinates);
@@ -33,7 +26,7 @@ public class PlaceContainer {
     public static int[] returnTicketPrices(Place origin) {
         int[] ticketPrices = new int[places.size()];
         for (int i = 0; i < places.size(); i++) {
-            ticketPrices[i] = (int) (origin.distanceTo(places.get(i)) * PRICE_PER_KM);
+            ticketPrices[i] = (int) (origin.distanceTo(places.get(i)) * GameSettings.PRICE_PER_KM);
         }
         return ticketPrices;
     }
@@ -67,10 +60,10 @@ public class PlaceContainer {
         points.add(getRandomPoint());
 
         externalloop:
-        while (points.size() < NUMBER_OF_PLACES) {
+        while (points.size() < GameSettings.NUMBER_OF_PLACES) {
             Point point = getRandomPoint();
             for (Point point2 : points) {
-                if (point.distance(point2) < MIN_DISTANCE) continue externalloop;
+                if (point.distance(point2) < GameSettings.MIN_DISTANCE) continue externalloop;
             }
             ;
             points.add(point);
@@ -80,7 +73,7 @@ public class PlaceContainer {
     }
 
     private static Point getRandomPoint() {
-        return new Point((int) (Math.random() * WORLD_SIZE), (int) (Math.random() * WORLD_SIZE));
+        return new Point((int) (Math.random() * GameSettings.WORLD_SIZE), (int) (Math.random() * GameSettings.WORLD_SIZE));
     }
 
     public static String getMap(){
@@ -90,21 +83,21 @@ public class PlaceContainer {
     }
 
     public static String getMap(ArrayList<Point> points) {
-        StringBuilder map = new StringBuilder("x".repeat(WORLD_SIZE * WORLD_SIZE));
+        StringBuilder map = new StringBuilder("x".repeat(GameSettings.WORLD_SIZE * GameSettings.WORLD_SIZE));
 
         for (Point point :
                 points) {
-            int pointLocation = point.x * WORLD_SIZE + point.y;
+            int pointLocation = point.x * GameSettings.WORLD_SIZE + point.y;
             map.replace(pointLocation, pointLocation + 1, String.valueOf(points.indexOf(point)+1));
 
 
         }
-        for (int i = 1; i < WORLD_SIZE; i++)
+        for (int i = 1; i < GameSettings.WORLD_SIZE; i++)
             //╔═╗║
-            map.insert(i * WORLD_SIZE + (3*(i-1)), "║\n║");
-        System.out.println(map.toString());
-        map.insert(0, "╔"+"═".repeat(WORLD_SIZE*3)+"╗\n║");
-        map.insert(map.length()-2, "║\n╚"+"═".repeat(WORLD_SIZE*3)+"╝\n");
+            map.insert(i * GameSettings.WORLD_SIZE + (3*(i-1)), "║\n║");
+//        System.out.println(map.toString());
+        map.insert(0, "╔"+"═".repeat(GameSettings.WORLD_SIZE*3)+"╗\n║");
+        map.insert(map.length()-2, "║\n╚"+"═".repeat(GameSettings.WORLD_SIZE*3)+"╝\n");
 
         String worldMap = map.toString().replaceAll("x", "   ").replaceAll("(\\d)", " $1 ");
         return worldMap;
