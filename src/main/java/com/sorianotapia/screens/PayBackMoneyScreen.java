@@ -12,13 +12,13 @@ public class PayBackMoneyScreen extends AbstractScreen {
 
     @Override
     public void handleUserInput(Player player) {
-        switch(player.payBackDebt(Integer.parseInt(Controller.inputBuffer.get(0)))) {
+        int paybackAmount = Integer.parseInt(Controller.inputBuffer.get(0));
+        switch(player.payBackDebt(paybackAmount)) {
             case DEBT_CANCELLED -> {
                 setNextScreen(ScreenFactory.ofName(ScreenName.PAY_BACK_IN_FULL));
             }
             case PARTIAL_PAYBACK_OK -> {
-                Controller.inputBuffer.clear();
-                Controller.inputBuffer.add(String.valueOf(player.getDebtValue()));
+                Controller.setDisplayInformationBuffer(new Object[]{player.getDebtValue()});
                 setNextScreen(ScreenFactory.ofName(ScreenName.PAY_BACK_PARTIALLY));
             }
             case INSUFFICIENT_MONEY -> {

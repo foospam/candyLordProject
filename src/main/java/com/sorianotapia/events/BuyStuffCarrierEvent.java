@@ -19,11 +19,23 @@ public class BuyStuffCarrierEvent extends UserEvent {
 
     public void run(Controller controller) {
         if (isLocalEvent()) {
+
             StuffCarrier stuffContainer = StuffCarrierContainer.getRandomCarrier();
+
+            String merchName = stuffContainer.getName();
+            int merchHold = stuffContainer.getHold();
+            int merchPrice = stuffContainer.getPrice();
+
+            Controller.setDisplayInformationBuffer(
+                    new Object[]{
+                            merchName,
+                            merchHold,
+                            merchPrice
+                    }
+            );
+
             Controller.inputBuffer.clear();
             Controller.inputBuffer.add(stuffContainer.getName());
-            Controller.inputBuffer.add(String.valueOf(stuffContainer.getHold()));
-            Controller.inputBuffer.add(String.valueOf(stuffContainer.getPrice()));
             controller.setScreen(ScreenFactory.ofName(ScreenName.BUY_STUFF_CARRIER));
         }
     }

@@ -193,7 +193,7 @@ public class Player implements Fighter {
         return hospital.getHealingTime(this);
     }
 
-    public int heal() {
+    public MethodAnswers heal() {
         return hospital.heal(this);
     }
 

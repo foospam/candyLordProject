@@ -15,20 +15,15 @@ public class BuyArmScreen extends AbstractScreen {
     }
 
     public String render(Player player) {
-        String merchName = Controller.inputBuffer.get(0);
-        String merchHarm = Controller.inputBuffer.get(1);
-        String merchAccuracy = Controller.inputBuffer.get(2);
-        String merchPrice = Controller.inputBuffer.get(3);
-        String merchQuantity = Controller.inputBuffer.get(4);
-        String merchTotalPrice = Controller.inputBuffer.get(5);
-        return String.format(prompt, merchName, merchHarm, merchAccuracy, merchPrice, merchQuantity, merchTotalPrice);
+        return String.format(prompt, Controller.getDisplayInformationBuffer());
     }
 
     @Override
     public void handleUserInput(Player player) {
         Arm arm = ArmContainer.getArmByName(Controller.inputBuffer.get(0));
-        int quantity = Integer.valueOf(Controller.inputBuffer.get(4));
-        if (Controller.inputBuffer.get(6).equals("N")) {
+        int quantity = Integer.valueOf(Controller.inputBuffer.get(1));
+
+        if (Controller.inputBuffer.get(2).equals("N")) {
             setNextScreen(ScreenFactory.ofName(ScreenName.BUY_ARM_NO_OK));
         } else {
             switch (player.buyArm(arm, quantity)) {

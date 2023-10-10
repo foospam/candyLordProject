@@ -11,8 +11,7 @@ public class ReclaimLoanScreen extends AbstractScreen{
 
     @Override
     public void handleUserInput(Player player) {
-        Controller.inputBuffer.clear();
-        Controller.inputBuffer.add(String.valueOf(player.getOverdue()));
+        Controller.setDisplayInformationBuffer(new Object[]{player.getOverdue()});
         setNextScreen(ScreenFactory.ofName(ScreenName.HIT_DEBITOR));
     }
 }

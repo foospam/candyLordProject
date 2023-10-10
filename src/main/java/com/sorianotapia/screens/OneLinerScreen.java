@@ -13,11 +13,8 @@ public class OneLinerScreen extends AbstractScreen {
 
     @Override
     public String render(Player player) {
-        if (!Controller.inputBuffer.isEmpty()) {
-            return String.format(prompt, Controller.inputBuffer.get(0))
-                    .concat("\n(Press enter to continue.)"); // Ojo esto solo vale para un valor
-        }
-        return super.render(player).concat("\n(Press enter to continue.)");
+        return String.format(prompt, Controller.getDisplayInformationBuffer())
+                .concat("\n(Press enter to continue.)");
     }
 
     @Override

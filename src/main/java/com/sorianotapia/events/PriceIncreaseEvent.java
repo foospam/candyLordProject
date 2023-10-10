@@ -23,8 +23,7 @@ public class PriceIncreaseEvent extends PlaceEvent{
         stuff.priceUp(30);
 
         if (isLocalEvent()) {
-            Controller.inputBuffer.clear();
-            Controller.inputBuffer.add(stuff.getName());
+            Controller.setDisplayInformationBuffer(new Object[]{stuff.getName()});
             controller.setScreen(ScreenFactory.ofName(ScreenName.EVENT_PRICE_INCREASE));
         }
     }

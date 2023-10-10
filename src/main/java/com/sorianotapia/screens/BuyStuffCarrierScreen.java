@@ -13,16 +13,13 @@ public class BuyStuffCarrierScreen extends AbstractScreen {
     }
 
     public String render(Player player) {
-        String merchName = Controller.inputBuffer.get(0);
-        String merchHold = Controller.inputBuffer.get(1);
-        String merchPrice = Controller.inputBuffer.get(2);
-        return String.format(prompt, merchName, merchHold, merchPrice);
+        return String.format(prompt, Controller.getDisplayInformationBuffer());
     }
 
     @Override
     public void handleUserInput(Player player) {
         StuffCarrier carrier = StuffCarrierContainer.getCarrierByName(Controller.inputBuffer.get(0));
-        if (Controller.inputBuffer.get(3).equals("N")) {
+        if (Controller.inputBuffer.get(1).equals("N")) {
             setNextScreen(ScreenFactory.ofName(ScreenName.BUY_STUFF_CARRIER_NO));
         } else {
             switch (player.buyStuffCarrier(carrier)) {

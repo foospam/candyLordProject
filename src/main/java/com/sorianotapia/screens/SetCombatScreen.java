@@ -11,17 +11,12 @@ import java.util.ArrayList;
 
 public class SetCombatScreen extends AbstractScreen {
 
-    public static void main(String[] args) {
-        System.out.println("\uD83D\uDC6E");
-    }
-
     public SetCombatScreen(ScreenName name) {
         super(name);
     }
 
     @Override
     public String render(Player player) {
-
 
         int numberOfCops = (int) Controller.getDisplayInformationBuffer()[0];
         int numberOfPossibleAllies = player.getReputation() -1;

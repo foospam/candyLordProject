@@ -7,40 +7,34 @@ import java.util.ArrayList;
 
 public class GoToHospitalScreen extends AbstractScreen {
     public GoToHospitalScreen(ScreenName name) {
-
         super(name);
     }
 
     @Override
-    public String render(Player player){
+    public String render(Player player) {
         return String.format(prompt, player.getHealingCost());
     }
 
     @Override
     public void handleUserInput(Player player) {
-        switch(Controller.inputBuffer.get(0)){
-            case "Y": {
+        switch (Controller.inputBuffer.get(0)) {
+            case "Y" -> {
 
                 int healingDays = player.getHealingDays();
-                switch(player.heal()){
-                    case 0: {
-                        Controller.inputBuffer.set(0, String.valueOf(healingDays));
+                switch (player.heal()) {
+                    case SUCCESS -> {
+                        Controller.setDisplayInformationBuffer(new Object[]{healingDays});
                         setAdvanceDay(healingDays);
                         setNextScreen(ScreenFactory.ofName(ScreenName.HEALED));
-                        break;
                     }
-                    case -1: {
+                    case INSUFFICIENT_MONEY -> {
                         setNextScreen(ScreenFactory.ofName(ScreenName.NO_CASH_FOR_HEALING));
-                        break;
+
                     }
                 }
-                break;
-
-
             }
-            case "N": {
+            case "N" -> {
                 setNextScreen(ScreenFactory.ofName(ScreenName.NOT_HEALED));
-                break;
             }
         }
 

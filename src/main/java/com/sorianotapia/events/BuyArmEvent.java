@@ -19,15 +19,25 @@ public class BuyArmEvent extends UserEvent {
     public void run(Controller controller) {
         if (isLocalEvent()) {
             Arm arm = ArmContainer.getRandomArm();
+
+            int quantity = (int) (Math.random() * 5) + 1;
+            int totalPrice = quantity * arm.getPrice();
+
+            Controller.setDisplayInformationBuffer(
+                    new Object[]{
+                            arm.getName(),
+                            arm.getHarm(),
+                            arm.getAccuracy(),
+                            arm.getPrice(),
+                            quantity,
+                            totalPrice
+                    }
+            );
+
             Controller.inputBuffer.clear();
             Controller.inputBuffer.add(arm.getName());
-            Controller.inputBuffer.add(String.valueOf(arm.getHarm()));
-            Controller.inputBuffer.add(String.valueOf(arm.getAccuracy()));
-            Controller.inputBuffer.add(String.valueOf(arm.getPrice()));
-            int quantity = (int) (Math.random() * 5) + 1;
-            int total_price = quantity * arm.getPrice();
             Controller.inputBuffer.add(String.valueOf(quantity));
-            Controller.inputBuffer.add(String.valueOf(total_price));
+
             controller.setScreen(ScreenFactory.ofName(ScreenName.BUY_ARM));
         }
     }

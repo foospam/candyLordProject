@@ -13,10 +13,7 @@ public class InputGrabberScreen extends AbstractScreen {
 
     @Override
     public String render(Player player) {
-        if (Controller.getDisplayInformationBuffer() != null && Controller.getDisplayInformationBuffer().length != 0) {
-            return String.format(prompt, Controller.getDisplayInformationBuffer());
-        }
-        else return prompt;
+        return String.format(prompt, Controller.getDisplayInformationBuffer());
     }
 
     @Override
