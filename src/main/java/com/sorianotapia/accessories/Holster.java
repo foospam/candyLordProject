@@ -80,7 +80,20 @@ public class Holster {
         return stringBuilder.toString();
     }
 
+    public ArrayList<Arm> getArmList(){
+        return armList;
+    }
+
     public String toString(){
         return stringRep;
+    }
+
+    public Holster(ArrayList<String> arms){
+        for (String arm: arms){
+            this.add(ArmContainer.getArmByName(arm));
+        }
+    }
+
+    public Holster(){
     }
 }

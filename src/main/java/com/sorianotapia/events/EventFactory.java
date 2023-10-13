@@ -53,7 +53,7 @@ public class EventFactory {
 
     public static void pushRandomUserEvents(Player player) {
 
-        if (Math.random() < GameSettings.RANDOM_USER_EVENT_FREQ) { // Esto se podía meter en un parámetro
+        if (Math.random() < GameSettings.RANDOM_USER_EVENT_FREQ) {
 //            Controller.pushEventMessage(new EventMessage(
 //                    ofName(randomUserEvents.get(ThreadLocalRandom.current().nextInt(randomPlaceEvents.size())),
 //                            player),

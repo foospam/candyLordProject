@@ -124,4 +124,8 @@ public class PlaceContainer {
             place.updateStuffPrices();
         }
     }
+
+    public static void setPlaces(ArrayList<Place> placeArray){
+        places = placeArray;
+    }
 }

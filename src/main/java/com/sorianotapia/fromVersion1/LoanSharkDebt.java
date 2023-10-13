@@ -42,6 +42,14 @@ public class LoanSharkDebt implements TimeListener {
         INTEREST = 10;
     }
 
+    public LoanSharkDebt(int value, int paymentPeriod, boolean activeCredit, int overdue){
+        this();
+        this.value = value;
+        this.paymentPeriod = paymentPeriod;
+        this.overdue = overdue;
+        this.activeCredit = activeCredit;
+    }
+
     public int getValue() {
         return value;
     }
@@ -141,5 +149,9 @@ public class LoanSharkDebt implements TimeListener {
 
     public void extendPaymentPeriod(){
         paymentPeriod = 10;
+    }
+
+    public boolean getActiveCredit() {
+        return activeCredit;
     }
 }

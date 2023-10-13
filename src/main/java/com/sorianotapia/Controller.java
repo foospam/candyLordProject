@@ -1,5 +1,6 @@
 package com.sorianotapia;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sorianotapia.events.Event;
 import com.sorianotapia.events.EventMessage;
 import com.sorianotapia.events.EventFactory;
@@ -49,7 +50,7 @@ public class Controller {
         this.player = player;
         //player = new Player();
         screenFactory = new ScreenFactory();
-        screen = screenFactory.ofName(ScreenName.MAIN_SELECTION);
+        screen = screenFactory.ofName(ScreenName.WELCOME_SCREEN);
         date = gameDate;
         gameInfo = new GameInfo(player, gameDate);
         eventMessageQueue = new EventQueue();
@@ -58,6 +59,20 @@ public class Controller {
     public void run() {
         while (true) {
             render();
+            try {
+                try {
+                    Serializer.serializePlaces();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                Serializer.serializeHolster(player.getHolster());
+                Serializer.serializePlayer(player);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+
+            Serializer.loadPlaces();
+
             if (screen.getName() == ScreenName.EVENT_LOOP) {
                 handleEvents();
             }
@@ -66,6 +81,7 @@ public class Controller {
             if (screen.getName() == ScreenName.GOOD_BYE) {
                 break;
             }
+
             update();
         }
     }

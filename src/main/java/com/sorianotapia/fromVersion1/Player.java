@@ -1,5 +1,6 @@
 package com.sorianotapia.fromVersion1;
 
+import com.sorianotapia.GameInfo;
 import com.sorianotapia.GameSettings;
 import com.sorianotapia.MethodAnswers;
 import com.sorianotapia.TextContainer;
@@ -214,7 +215,11 @@ public class Player implements Fighter {
         return stuffOnHand.get(stuff);
     }
 
-    private void setLocation(Place location) {
+    public HashMap<String, Integer> getStuffOnHandMap(){
+        return stuffOnHand;
+    }
+
+    public void setLocation(Place location) {
         this.location = location;
     }
 
@@ -356,4 +361,33 @@ public class Player implements Fighter {
         isInBattle = inBattle;
     }
 
+    public Player(GameInfo gameInfo){
+
+    }
+
+    public void setPlayerInfo(Player player, GameInfo gameInfo){
+//        player.setLocation();
+//        player.setHealth();
+//        player.setReputation();
+//        player.sethHold();
+//        player.setMaxHold();
+//        player.setCash();
+//        player.setDeposits();
+//        player.setDebt();
+//        player.setDebtDays();
+//        player.setHolster();
+    }
+
+    public boolean getActiveCredit(){
+        return debt.getActiveCredit();
+    }
+
+    public void setHold(int hold) {
+        this.hold = hold;
+    }
+
+
+    public void setMaxHold(int maxHold) {
+        this.maxHold = maxHold;
+    }
 }

@@ -15,6 +15,7 @@ public class ScreenFactory {
         if (container.containsKey(name)) return container.get(name);
         else {
             AbstractScreen screen = switch (name) {
+                case WELCOME_SCREEN -> new WelcomeScreen(name);
                 case MAIN_SELECTION -> new MainSelectionScreen(name);
                 case SELECT_DRUG_TO_BUY, SELECT_DRUG_TO_SELL -> new InputGrabberScreen(name);
                 case SELECT_QTY_TO_BUY -> new SelectDrugQtyToBuyScreen(name);
