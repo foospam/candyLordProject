@@ -20,7 +20,7 @@ public class Controller {
     private AbstractScreen screen;
     public static ArrayList<String> inputBuffer;
     private Scanner scanner;
-    private Player player;
+    private static Player player;
     private ScreenFactory screenFactory;
     private GameDate date;
     private GameInfo gameInfo;
@@ -30,10 +30,11 @@ public class Controller {
     public static void main(String[] args) throws IOException {
         TextContainer.setFile("texts.json");
         GameDate gameDate = new GameDate();
-        Player player = new Player();
+        Player newPlayer = new Player();
         LoanSharkDebt debt = new LoanSharkDebt();
-        player.setDebt(debt);
+        newPlayer.setDebt(debt);
         gameDate.subscribe(debt);
+        player = newPlayer;
 
         EventFactory.initializeEvents(player);
 
@@ -44,10 +45,10 @@ public class Controller {
         controller.run();
     }
 
-    public Controller(Player player, GameDate gameDate) {
+    public Controller(Player newPlayer, GameDate gameDate) {
         inputBuffer = new ArrayList<>();
         scanner = new Scanner(System.in);
-        this.player = player;
+        player = newPlayer;
         //player = new Player();
         screenFactory = new ScreenFactory();
         screen = screenFactory.ofName(ScreenName.WELCOME_SCREEN);
@@ -56,22 +57,13 @@ public class Controller {
         eventMessageQueue = new EventQueue();
     }
 
+    public static void setPlayer(Player newPlayer) {
+        player = newPlayer;
+    }
+
     public void run() {
         while (true) {
             render();
-            try {
-                try {
-                    Serializer.serializePlaces();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                Serializer.serializeHolster(player.getHolster());
-                Serializer.serializePlayer(player);
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
-
-            Serializer.loadPlaces();
 
             if (screen.getName() == ScreenName.EVENT_LOOP) {
                 handleEvents();

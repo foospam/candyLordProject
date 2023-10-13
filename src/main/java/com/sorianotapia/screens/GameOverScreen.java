@@ -1,6 +1,7 @@
 package com.sorianotapia.screens;
 
 import com.sorianotapia.Controller;
+import com.sorianotapia.Serializer;
 import com.sorianotapia.fromVersion1.Player;
 
 public class GameOverScreen extends AbstractScreen {
@@ -10,7 +11,7 @@ public class GameOverScreen extends AbstractScreen {
 
     @Override
     public void handleUserInput(Player player) {
-        switch (Controller.inputBuffer.get(0)){
+        switch (Controller.inputBuffer.get(0)) {
             case "N" -> {
                 setNextScreen(ScreenFactory.ofName(ScreenName.GOOD_BYE));
             }

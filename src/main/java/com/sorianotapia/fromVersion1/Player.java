@@ -390,4 +390,33 @@ public class Player implements Fighter {
     public void setMaxHold(int maxHold) {
         this.maxHold = maxHold;
     }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "maxHold=" + maxHold +
+                ", hold=" + hold +
+                ", health=" + health +
+                ", hospital=" + hospital +
+                ", reputation=" + reputation +
+                ", cash=" + cash +
+                ", debt=" + debt +
+                ", bankAccount=" + bankAccount +
+                ", location=" + location +
+                ", stuffOnHand=" + stuffOnHand +
+                ", armMap=" + armMap +
+                ", armInHand=" + armInHand +
+                ", holster=" + holster +
+                ", icon='" + icon + '\'' +
+                ", isInBattle=" + isInBattle +
+                '}';
+    }
+
+    public void setHolster(Holster holster) {
+        this.holster = holster;
+    }
+
+    public void setStuffOnHand(HashMap<String, Integer> stuffOnHand) {
+        this.stuffOnHand = stuffOnHand;
+    }
 }

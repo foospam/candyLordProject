@@ -1,6 +1,7 @@
 package com.sorianotapia.screens;
 
 import com.sorianotapia.Controller;
+import com.sorianotapia.Serializer;
 import com.sorianotapia.fromVersion1.Player;
 
 public class QuitConfirmationScreen extends AbstractScreen {
@@ -15,6 +16,10 @@ public class QuitConfirmationScreen extends AbstractScreen {
                 setNextScreen(ScreenFactory.ofName(ScreenName.MAIN_SELECTION));
             }
             case "Y" -> {
+                try {
+                    Serializer.saveGame(player);
+                } catch (Exception e) {
+                }
                 setNextScreen(ScreenFactory.ofName(ScreenName.GOOD_BYE));
             }
         }

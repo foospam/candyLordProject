@@ -1,7 +1,10 @@
 package com.sorianotapia.screens;
 
 import com.sorianotapia.Controller;
+import com.sorianotapia.Serializer;
 import com.sorianotapia.fromVersion1.Player;
+
+import java.io.IOException;
 
 public class WelcomeScreen extends AbstractScreen {
 
@@ -17,7 +20,12 @@ public class WelcomeScreen extends AbstractScreen {
                 setNextScreen(ScreenFactory.ofName(ScreenName.MAIN_SELECTION));
             }
             case "2" -> {
-                setNextScreen(ScreenFactory.ofName(ScreenName.GOOD_BYE));
+                try {
+                    Serializer.loadGame();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                setNextScreen(ScreenFactory.ofName(ScreenName.MAIN_SELECTION));
             }
         }
     }

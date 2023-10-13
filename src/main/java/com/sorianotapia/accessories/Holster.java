@@ -12,10 +12,6 @@ public class Holster {
 
     {
         add(ArmContainer.getArmByName("Beretta"));
-        add(ArmContainer.getArmByName("Beretta"));
-        add(ArmContainer.getArmByName("Beretta"));
-        add(ArmContainer.getArmByName("Beretta"));
-        add(ArmContainer.getArmByName("Beretta"));
     }
 
     public ArrayList<Arm> getTopGuns(int quantity){
@@ -95,5 +91,10 @@ public class Holster {
     }
 
     public Holster(){
+    }
+
+    public void clear() {
+        armMap.clear();
+        armList.clear();
     }
 }

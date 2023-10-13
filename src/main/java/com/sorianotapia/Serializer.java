@@ -33,6 +33,8 @@ public class Serializer {
         module.addSerializer(Player.class, new CustomPlayerSerializer(Player.class));
 
         module.addDeserializer(Place.class, new CustomPlaceDeserializer(Place.class));
+        module.addDeserializer(Player.class, new CustomPlayerDeserializer(Player.class));
+        module.addDeserializer(Holster.class, new CustomHolsterDeserializer(Holster.class));
 
         mapper.registerModule(module);
     }
@@ -42,7 +44,27 @@ public class Serializer {
         System.out.println(mapper.writeValueAsString(place));
     }
 
-    public static void serializePlaces() throws IOException {
+    public static void loadGame() throws IOException {
+        loadPlaces();
+        Player player = loadPlayer();
+        Controller.setPlayer(player);
+    }
+
+    public static void saveGame(Player player) throws IOException {
+
+        ArrayNode placeNode = serializePlaces();
+        ObjectNode holsterNode = serializeHolster(player.getHolster());
+        ObjectNode playerNode = serializePlayer(player);
+
+        ObjectNode rootNode = (ObjectNode) mapper.createObjectNode();
+        rootNode.put("places", placeNode);
+        rootNode.put("player", playerNode);
+
+        mapper.writeValue(new File("savedgame.json"), rootNode);
+        System.out.println("hecho");
+    }
+
+    private static ArrayNode serializePlaces() throws IOException {
         ArrayNode rootNode = (ArrayNode) mapper.createArrayNode();
 
         for (int i = 0; i < 8; i++) {
@@ -53,20 +75,24 @@ public class Serializer {
         }
 
         mapper.writeValue(new File("savedplacecontainer.json"), rootNode);
+        return rootNode;
     }
 
 
-    public static void serializeHolster(Holster holster) throws JsonProcessingException {
-        System.out.println(mapper.writeValueAsString(holster));
+    private static ObjectNode serializeHolster(Holster holster) throws JsonProcessingException {
+        String playerString = mapper.writeValueAsString(holster);
+        return (ObjectNode) mapper.readTree(playerString);
+
     }
 
-    public static void serializePlayer(Player player) throws JsonProcessingException {
-        System.out.println(mapper.writeValueAsString(player));
+    private static ObjectNode serializePlayer(Player player) throws JsonProcessingException {
+        String playerString = mapper.writeValueAsString(player);
+        return (ObjectNode) mapper.readTree(playerString);
     }
 
-    public static void loadPlaces() {
+    private static void loadPlaces() {
         try {
-            JsonNode placeNode = mapper.readTree(new File("savedplacecontainer.json"));
+            JsonNode placeNode = mapper.readTree(new File("savedgame.json")).get("places");
             placeNode.forEach(s -> {
                 try {
                     Place place = mapper.readValue(s.toString(), Place.class);
@@ -80,15 +106,27 @@ public class Serializer {
         }
     }
 
-    public static Holster loadHolster() {
+    private static Holster loadHolster() {
         try {
-            JsonNode holsterNode = mapper.readTree(new File("savedholster.json"));
+            JsonNode holsterNode = mapper.readTree(new File("savedgame.json")).get("holster");
             Holster holster = mapper.readValue(holsterNode.toString(), Holster.class);
             return holster;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+    private static Player loadPlayer(){
+        try {
+            JsonNode playerNode = mapper.readTree(new File("savedgame.json")).get("player");
+            System.out.println(playerNode);
+            Player player  = mapper.readValue(playerNode.toString(), Player.class);
+            return player;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }
 
@@ -167,9 +205,19 @@ class CustomPlayerSerializer extends StdSerializer<Player> {
         jsonGenerator.writeNumberField("cash", player.getCash());
         jsonGenerator.writeNumberField("deposits", player.getDeposits());
 
+        jsonGenerator.writeArrayFieldStart("armList");
+        for (Arm s : player.getHolster().getArmList()) {
+            try {
+                jsonGenerator.writeString(s.getName());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        jsonGenerator.writeEndArray();
+
         jsonGenerator.writeObjectFieldStart("debt");
-        jsonGenerator.writeNumberField("value", player.getDebtValue()); // OJO! serializar esto aparte
-        jsonGenerator.writeNumberField("paymentPeriod", player.getDebtDays()); // OJO! serializar esto aparte
+        jsonGenerator.writeNumberField("value", player.getDebtValue());
+        jsonGenerator.writeNumberField("paymentPeriod", player.getDebtDays());
         jsonGenerator.writeBooleanField("activeCredit", player.getActiveCredit());
         jsonGenerator.writeNumberField("overdue", player.getOverdue());
         jsonGenerator.writeEndObject();
@@ -249,6 +297,19 @@ class CustomPlayerDeserializer extends StdDeserializer<Player> {
         player.setCash(node.get("cash").asInt());
         player.setDeposits(node.get("deposits").asInt());
 
+
+        Holster holster = new Holster();
+        holster.clear();
+
+        ArrayNode armListNode = (ArrayNode) node.get("armList");
+        armListNode.forEach(s -> {
+            System.out.println("One go!");
+            Arm arm = ArmContainer.getArmByName(s.asText());
+            holster.add(arm);
+        });
+
+        player.setHolster(holster);
+
         ObjectNode debtNode = (ObjectNode) node.get("debt");
         LoanSharkDebt debt = new LoanSharkDebt(
                 debtNode.get("value").asInt(),
@@ -260,10 +321,15 @@ class CustomPlayerDeserializer extends StdDeserializer<Player> {
         player.setDebt(debt);
 
         HashMap<String, Integer> stuffOnHand = new HashMap<>();
-        ObjectNode stuffNode = (ObjectNode) node.get("stuffOnhand");
+        ArrayNode stuffNode = (ArrayNode) node.get("stuffOnHand");
+
+        System.out.println("Printing stuff on hand:");
         stuffNode.forEach(s -> {
-            stuffOnHand.put(stuffNode.get("name").asText(), stuffNode.get("quantity").asInt());
+            System.out.println(s.get("name").asText()+" "+s.get("quantity").asInt());
+            stuffOnHand.put(s.get("name").asText(), s.get("quantity").asInt());
         });
+
+        player.setStuffOnHand(stuffOnHand);
 
         return player;
     }
