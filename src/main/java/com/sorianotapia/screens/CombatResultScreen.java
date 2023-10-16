@@ -1,6 +1,6 @@
 package com.sorianotapia.screens;
 
-import com.sorianotapia.fromVersion1.Player;
+import com.sorianotapia.player.Player;
 
 import java.util.LinkedList;
 

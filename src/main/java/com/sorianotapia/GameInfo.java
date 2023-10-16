@@ -2,8 +2,7 @@ package com.sorianotapia;
 
 import com.sorianotapia.accessories.DisplaySymbols;
 import com.sorianotapia.accessories.Holster;
-import com.sorianotapia.fromVersion1.Player;
-import com.sorianotapia.places.PlaceContainer;
+import com.sorianotapia.player.Player;
 
 import java.util.ArrayList;
 

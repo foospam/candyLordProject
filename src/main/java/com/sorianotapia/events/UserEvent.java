@@ -1,11 +1,7 @@
 package com.sorianotapia.events;
 
-import com.sorianotapia.Controller;
-import com.sorianotapia.fromVersion1.Player;
+import com.sorianotapia.player.Player;
 import com.sorianotapia.places.Place;
-import com.sorianotapia.screens.ScreenFactory;
-
-import java.util.ArrayList;
 
 public abstract class UserEvent implements Event {
 

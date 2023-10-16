@@ -2,14 +2,12 @@ package com.sorianotapia.events;
 
 import com.sorianotapia.Controller;
 import com.sorianotapia.GameSettings;
-import com.sorianotapia.fromVersion1.Player;
+import com.sorianotapia.player.Player;
 import com.sorianotapia.places.Place;
 import com.sorianotapia.places.PlaceContainer;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
-
-import static com.sorianotapia.events.EventName.DAILY_PRICE_UPDATE_EVENT;
 
 public class EventFactory {
 

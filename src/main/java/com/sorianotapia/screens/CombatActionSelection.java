@@ -6,9 +6,8 @@ import com.sorianotapia.accessories.Arm;
 import com.sorianotapia.combat.Accomplice;
 import com.sorianotapia.combat.Fighter;
 import com.sorianotapia.combat.Policeman;
-import com.sorianotapia.fromVersion1.Player;
+import com.sorianotapia.player.Player;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 

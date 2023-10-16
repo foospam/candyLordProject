@@ -3,9 +3,7 @@ package com.sorianotapia.screens;
 import com.sorianotapia.Controller;
 import com.sorianotapia.accessories.StuffCarrier;
 import com.sorianotapia.accessories.StuffCarrierContainer;
-import com.sorianotapia.fromVersion1.Player;
-
-import java.util.ArrayList;
+import com.sorianotapia.player.Player;
 
 public class BuyStuffCarrierScreen extends AbstractScreen {
     public BuyStuffCarrierScreen(ScreenName name) {

@@ -1,14 +1,10 @@
 package com.sorianotapia.screens;
 
 import com.sorianotapia.Controller;
-import com.sorianotapia.GameInfo;
 import com.sorianotapia.GameSettings;
-import com.sorianotapia.MethodAnswers;
-import com.sorianotapia.fromVersion1.Player;
+import com.sorianotapia.player.Player;
 import com.sorianotapia.places.Place;
 import com.sorianotapia.places.PlaceContainer;
-
-import java.util.ArrayList;
 
 public class TravelScreen extends AbstractScreen {
 

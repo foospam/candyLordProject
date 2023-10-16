@@ -1,8 +1,6 @@
-package com.sorianotapia.fromVersion1;
+package com.sorianotapia.player;
 
 import com.sorianotapia.MethodAnswers;
-
-import java.lang.reflect.Method;
 
 public class BankAccount {
     private int deposits;

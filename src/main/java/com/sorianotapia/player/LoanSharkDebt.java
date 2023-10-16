@@ -1,11 +1,8 @@
-package com.sorianotapia.fromVersion1;
+package com.sorianotapia.player;
 
-import com.sorianotapia.Controller;
 import com.sorianotapia.MethodAnswers;
 import com.sorianotapia.TimeListener;
 import com.sorianotapia.events.EventFactory;
-import com.sorianotapia.events.EventMessage;
-import com.sorianotapia.events.ReclaimDebtEvent;
 
 public class LoanSharkDebt implements TimeListener {
     public static void main(String[] args) {

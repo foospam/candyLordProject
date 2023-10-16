@@ -10,8 +10,8 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.sorianotapia.accessories.Arm;
 import com.sorianotapia.accessories.ArmContainer;
 import com.sorianotapia.accessories.Holster;
-import com.sorianotapia.fromVersion1.LoanSharkDebt;
-import com.sorianotapia.fromVersion1.Player;
+import com.sorianotapia.player.LoanSharkDebt;
+import com.sorianotapia.player.Player;
 import com.sorianotapia.places.Place;
 import com.sorianotapia.places.PlaceContainer;
 

@@ -1,7 +1,7 @@
 package com.sorianotapia.screens;
 
 import com.sorianotapia.Controller;
-import com.sorianotapia.fromVersion1.Player;
+import com.sorianotapia.player.Player;
 
 public class ReclaimLoanScreen extends AbstractScreen{
 

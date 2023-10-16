@@ -2,7 +2,7 @@ package com.sorianotapia.screens;
 
 import com.sorianotapia.Controller;
 import com.sorianotapia.Serializer;
-import com.sorianotapia.fromVersion1.Player;
+import com.sorianotapia.player.Player;
 
 import java.io.IOException;
 

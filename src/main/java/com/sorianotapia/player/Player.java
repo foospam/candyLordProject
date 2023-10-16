@@ -1,4 +1,4 @@
-package com.sorianotapia.fromVersion1;
+package com.sorianotapia.player;
 
 import com.sorianotapia.GameInfo;
 import com.sorianotapia.GameSettings;

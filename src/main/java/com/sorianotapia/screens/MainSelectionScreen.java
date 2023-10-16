@@ -2,9 +2,7 @@ package com.sorianotapia.screens;
 
 import com.sorianotapia.Controller;
 import com.sorianotapia.GameInfo;
-import com.sorianotapia.fromVersion1.Player;
-
-import java.util.ArrayList;
+import com.sorianotapia.player.Player;
 
 public class MainSelectionScreen extends AbstractScreen {
 

@@ -1,6 +1,6 @@
 package com.sorianotapia;
 
-import com.sorianotapia.fromVersion1.Player;
+import com.sorianotapia.player.Player;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.

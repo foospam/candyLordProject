@@ -1,9 +1,7 @@
 package com.sorianotapia.screens;
 
 import com.sorianotapia.TextContainer;
-import com.sorianotapia.fromVersion1.Player;
-
-import java.util.ArrayList;
+import com.sorianotapia.player.Player;
 
 public abstract class AbstractScreen {
 
