@@ -16,6 +16,11 @@ public class GameDate implements EventFeed {
     }
 
     public GameDate(String value){
+        this();
+        this.value = LocalDate.parse(value, DateTimeFormatter.ofPattern("MM/dd/uu"));
+    }
+
+    public void setDate(String value){
         this.value = LocalDate.parse(value, DateTimeFormatter.ofPattern("MM/dd/uu"));
     }
 

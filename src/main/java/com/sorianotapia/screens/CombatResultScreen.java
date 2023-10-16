@@ -32,11 +32,7 @@ public class CombatResultScreen extends AbstractScreen {
             }
         } else if (battleOver) {
             setBattleOver(false);
-            if (player.isDead()) {
-                setNextScreen(ScreenFactory.ofName(ScreenName.EVENT_LOOP));
-            } else {
-                setNextScreen(ScreenFactory.ofName(ScreenName.MAIN_SELECTION));
-            }
+            setNextScreen(ScreenFactory.ofName(ScreenName.EVENT_LOOP));
         } else {
             setNextScreen(ScreenFactory.ofName(ScreenName.COMBAT_ACTION_SELECTION));
         }

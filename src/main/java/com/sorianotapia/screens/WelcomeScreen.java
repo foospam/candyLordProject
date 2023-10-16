@@ -1,7 +1,7 @@
 package com.sorianotapia.screens;
 
 import com.sorianotapia.Controller;
-import com.sorianotapia.Serializer;
+import com.sorianotapia.GamePersistor;
 import com.sorianotapia.player.Player;
 
 import java.io.IOException;
@@ -21,7 +21,7 @@ public class WelcomeScreen extends AbstractScreen {
             }
             case "2" -> {
                 try {
-                    Serializer.loadGame();
+                    GamePersistor.loadGame();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

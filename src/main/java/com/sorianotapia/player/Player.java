@@ -94,7 +94,11 @@ public class Player implements Fighter {
         return bankAccount.deposit(amount);
     }
 
-    public void setDebt(LoanSharkDebt debt) {
+    public LoanSharkDebt getDebt(){
+        return debt;
+    }
+
+    public void setDebt(LoanSharkDebt debt){
         this.debt = debt;
     }
 

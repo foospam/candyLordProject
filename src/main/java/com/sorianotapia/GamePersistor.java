@@ -20,13 +20,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class Serializer {
+public class GamePersistor {
 
     static ObjectMapper mapper = new ObjectMapper();
 
     static {
         SimpleModule module =
-                new SimpleModule("CustomCarSerializer", new Version(1, 0, 0, null, null, null));
+                new SimpleModule("SimpleModule", new Version(1, 0, 0, null, null, null));
 
         module.addSerializer(Place.class, new CustomPlaceSerializer(Place.class));
         module.addSerializer(Player.class, new CustomPlayerSerializer(Player.class));
@@ -41,9 +41,11 @@ public class Serializer {
 
     public static void loadGame() throws IOException {
         loadPlaces();
+        GameDate gameDate = loadGameDate();
+        Controller.setGameDate(gameDate);
         Player player = loadPlayer();
         Controller.setPlayer(player);
-        Controller.setGameDate(loadGameDate());
+        gameDate.subscribe(player.getDebt());
     }
 
     public static void saveGame(Player player) throws IOException {
@@ -92,7 +94,6 @@ public class Serializer {
             placeNode.forEach(s -> {
                 try {
                     Place place = mapper.readValue(s.toString(), Place.class);
-                    System.out.println(place.getName());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -105,7 +106,6 @@ public class Serializer {
     private static Player loadPlayer(){
         try {
             JsonNode playerNode = mapper.readTree(new File("savedgame.json")).get("player");
-            System.out.println(playerNode);
             Player player  = mapper.readValue(playerNode.toString(), Player.class);
             return player;
         } catch (IOException e) {
@@ -116,9 +116,7 @@ public class Serializer {
     private static GameDate loadGameDate(){
         try {
             JsonNode gameDateNode = mapper.readTree(new File("savedgame.json")).get("gameDate");
-            System.out.println(gameDateNode);
             GameDate gameDate  = mapper.readValue(gameDateNode.toString(), GameDate.class);
-            Controller.setGameDate(gameDate);
             return gameDate;
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -258,7 +256,6 @@ class CustomPlayerDeserializer extends StdDeserializer<Player> {
 
         ArrayNode armListNode = (ArrayNode) node.get("armList");
         armListNode.forEach(s -> {
-            System.out.println("One go!");
             Arm arm = ArmContainer.getArmByName(s.asText());
             holster.add(arm);
         });
@@ -278,9 +275,7 @@ class CustomPlayerDeserializer extends StdDeserializer<Player> {
         HashMap<String, Integer> stuffOnHand = new HashMap<>();
         ArrayNode stuffNode = (ArrayNode) node.get("stuffOnHand");
 
-        System.out.println("Printing stuff on hand:");
         stuffNode.forEach(s -> {
-            System.out.println(s.get("name").asText()+" "+s.get("quantity").asInt());
             stuffOnHand.put(s.get("name").asText(), s.get("quantity").asInt());
         });
 

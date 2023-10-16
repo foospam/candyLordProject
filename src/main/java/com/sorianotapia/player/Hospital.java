@@ -1,5 +1,4 @@
 package com.sorianotapia.player;
-
 import com.sorianotapia.MethodAnswers;
 
 public class Hospital {
@@ -23,7 +22,6 @@ public class Hospital {
 
     public int getHealingCost(Player player){
         int lifePointDiff = 100 - player.getHealth();
-        return (int) Math.pow(2, (double) (2 + lifePointDiff / 10));
+        return (int) Math.pow(2, (double) (3 + lifePointDiff / 10));
     }
-
 }

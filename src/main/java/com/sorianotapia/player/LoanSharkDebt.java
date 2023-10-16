@@ -130,7 +130,7 @@ public class LoanSharkDebt implements TimeListener {
         if (activeCredit) {
             for (int i = 0; i < days; i++) {
                 raiseDebt();
-                updatePaymentPeriod(days);
+                updatePaymentPeriod(1);
             }
         }
     }

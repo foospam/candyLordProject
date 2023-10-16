@@ -39,7 +39,7 @@ public class ScreenFactory {
                 case COMBAT_ACTION_SELECTION -> new CombatActionSelection(name);
                 case COMBAT_RESULT -> new CombatResultScreen(name);
                 case QUIT_CONFIRMATION -> new QuitConfirmationScreen(name);
-                case STASH_EXCEEDED, HOLD_EXCEEDED, CASH_EXCEEDED, DEPOSIT_EXCEEDED, WITHDRAW_LIMIT_EXCEEDED, HEALED,
+                case STASH_EXCEEDED, HOLD_EXCEEDED, CASH_EXCEEDED, DEPOSIT_EXCEEDED, WITHDRAW_LIMIT_EXCEEDED,
                         NOT_HEALED, NO_CASH_FOR_HEALING, BORROW_MONEY_TOO_MUCH,
                         BORROW_MONEY_TOO_LITTLE,
                         BORROW_MONEY_NOT_OK, PAY_BACK_IN_FULL, PAY_BACK_PARTIALLY,
@@ -51,7 +51,7 @@ public class ScreenFactory {
                         ROB_ALL_MONEY, ROB_ALL_MONEY_NO_OK,
                         ROB_ALL_STUFF, ROB_ALL_STUFF_NO_OK,
                         BUY_ARM_NO_OK, BUY_ARM_OK,
-                        WARN_DEBITOR -> new EventLoopOneLinerScreen(name);
+                        WARN_DEBITOR, HEALED -> new EventLoopOneLinerScreen(name);
                 default -> null;
             };
 
