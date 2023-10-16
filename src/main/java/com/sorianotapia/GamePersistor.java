@@ -72,7 +72,6 @@ public class GamePersistor {
             rootNode.add(addedNode);
         }
 
-        mapper.writeValue(new File("savedplacecontainer.json"), rootNode);
         return rootNode;
     }
 

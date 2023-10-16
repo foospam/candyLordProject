@@ -1,1 +1,374 @@
-{"places":[{"name":"Cincinatti","x":18,"y":2,"stuff":[{"name":"Bubble head","price":49181},{"name":"Fizzy Dizzs","price":17317},{"name":"Funny Frogs","price":5877},{"name":"Red Tongues","price":1352},{"name":"Chocolate Punch","price":367},{"name":"Licorice Krispies","price":158},{"name":"Mint Q","price":80},{"name":"Sugarator","price":9}]},{"name":"Leeds","x":7,"y":14,"stuff":[{"name":"Bubble head","price":61023},{"name":"Fizzy Dizzs","price":15808},{"name":"Funny Frogs","price":5026},{"name":"Red Tongues","price":931},{"name":"Chocolate Punch","price":517},{"name":"Licorice Krispies","price":154},{"name":"Mint Q","price":28},{"name":"Sugarator","price":11}]},{"name":"Montreal","x":4,"y":4,"stuff":[{"name":"Bubble head","price":55235},{"name":"Fizzy Dizzs","price":13702},{"name":"Funny Frogs","price":6511},{"name":"Red Tongues","price":1124},{"name":"Chocolate Punch","price":585},{"name":"Licorice Krispies","price":118},{"name":"Mint Q","price":27},{"name":"Sugarator","price":7}]},{"name":"Manhattan","x":7,"y":0,"stuff":[{"name":"Bubble head","price":43756},{"name":"Fizzy Dizzs","price":13911},{"name":"Funny Frogs","price":2763},{"name":"Red Tongues","price":1430},{"name":"Chocolate Punch","price":700},{"name":"Licorice Krispies","price":200},{"name":"Mint Q","price":59},{"name":"Sugarator","price":23}]},{"name":"Gotham","x":15,"y":6,"stuff":[{"name":"Bubble head","price":60647},{"name":"Fizzy Dizzs","price":12691},{"name":"Funny Frogs","price":3895},{"name":"Red Tongues","price":2187},{"name":"Chocolate Punch","price":451},{"name":"Licorice Krispies","price":228},{"name":"Mint Q","price":64},{"name":"Sugarator","price":23}]},{"name":"Acapulco","x":17,"y":13,"stuff":[{"name":"Bubble head","price":55629},{"name":"Fizzy Dizzs","price":16767},{"name":"Funny Frogs","price":3245},{"name":"Red Tongues","price":1480},{"name":"Chocolate Punch","price":572},{"name":"Licorice Krispies","price":157},{"name":"Mint Q","price":29},{"name":"Sugarator","price":8}]},{"name":"Metropolis","x":3,"y":18,"stuff":[{"name":"Bubble head","price":58579},{"name":"Fizzy Dizzs","price":8955},{"name":"Funny Frogs","price":4882},{"name":"Red Tongues","price":1630},{"name":"Chocolate Punch","price":303},{"name":"Licorice Krispies","price":170},{"name":"Mint Q","price":40},{"name":"Sugarator","price":22}]},{"name":"Cape Town","x":12,"y":18,"stuff":[{"name":"Bubble head","price":21372},{"name":"Fizzy Dizzs","price":12062},{"name":"Funny Frogs","price":5613},{"name":"Red Tongues","price":994},{"name":"Chocolate Punch","price":442},{"name":"Licorice Krispies","price":83},{"name":"Mint Q","price":59},{"name":"Sugarator","price":23}]}],"player":{"location":"Cincinatti","health":20,"reputation":1,"hold":3,"maxHold":10,"cash":43000,"deposits":0,"armList":["Beretta","Beretta","Stonethrower","Bazooka"],"debt":{"value":1000,"paymentPeriod":3,"activeCredit":true,"overdue":1},"stuffOnHand":[{"name":"Mint Q","quantity":0},{"name":"Fizzy Dizzs","quantity":0},{"name":"Funny Frogs","quantity":0},{"name":"Chocolate Punch","quantity":0},{"name":"Sugarator","quantity":7},{"name":"Bubble head","quantity":0},{"name":"Red Tongues","quantity":0},{"name":"Licorice Krispies","quantity":0}]},"gameDate":{"gameDate":"04/04/88"}}
+{
+  "places": [
+    {
+      "name": "Cape Town",
+      "x": 14,
+      "y": 6,
+      "stuff": [
+        {
+          "name": "Bubble head",
+          "price": 52980
+        },
+        {
+          "name": "Fizzy Dizzs",
+          "price": 10098
+        },
+        {
+          "name": "Funny Frogs",
+          "price": 5759
+        },
+        {
+          "name": "Red Tongues",
+          "price": 1550
+        },
+        {
+          "name": "Chocolate Punch",
+          "price": 366
+        },
+        {
+          "name": "Licorice Krispies",
+          "price": 113
+        },
+        {
+          "name": "Mint Q",
+          "price": 81
+        },
+        {
+          "name": "Sugarator",
+          "price": 19
+        }
+      ]
+    },
+    {
+      "name": "Leeds",
+      "x": 19,
+      "y": 16,
+      "stuff": [
+        {
+          "name": "Bubble head",
+          "price": 25455
+        },
+        {
+          "name": "Fizzy Dizzs",
+          "price": 14092
+        },
+        {
+          "name": "Funny Frogs",
+          "price": 4767
+        },
+        {
+          "name": "Red Tongues",
+          "price": 775
+        },
+        {
+          "name": "Chocolate Punch",
+          "price": 714
+        },
+        {
+          "name": "Licorice Krispies",
+          "price": 190
+        },
+        {
+          "name": "Mint Q",
+          "price": 51
+        },
+        {
+          "name": "Sugarator",
+          "price": 12
+        }
+      ]
+    },
+    {
+      "name": "Manhattan",
+      "x": 10,
+      "y": 16,
+      "stuff": [
+        {
+          "name": "Bubble head",
+          "price": 58145
+        },
+        {
+          "name": "Fizzy Dizzs",
+          "price": 15290
+        },
+        {
+          "name": "Funny Frogs",
+          "price": 3872
+        },
+        {
+          "name": "Red Tongues",
+          "price": 1337
+        },
+        {
+          "name": "Chocolate Punch",
+          "price": 615
+        },
+        {
+          "name": "Licorice Krispies",
+          "price": 197
+        },
+        {
+          "name": "Mint Q",
+          "price": 42
+        },
+        {
+          "name": "Sugarator",
+          "price": 18
+        }
+      ]
+    },
+    {
+      "name": "Montreal",
+      "x": 1,
+      "y": 0,
+      "stuff": [
+        {
+          "name": "Bubble head",
+          "price": 29112
+        },
+        {
+          "name": "Fizzy Dizzs",
+          "price": 14396
+        },
+        {
+          "name": "Funny Frogs",
+          "price": 4776
+        },
+        {
+          "name": "Red Tongues",
+          "price": 1291
+        },
+        {
+          "name": "Chocolate Punch",
+          "price": 364
+        },
+        {
+          "name": "Licorice Krispies",
+          "price": 85
+        },
+        {
+          "name": "Mint Q",
+          "price": 53
+        },
+        {
+          "name": "Sugarator",
+          "price": 16
+        }
+      ]
+    },
+    {
+      "name": "Metropolis",
+      "x": 4,
+      "y": 6,
+      "stuff": [
+        {
+          "name": "Bubble head",
+          "price": 59299
+        },
+        {
+          "name": "Fizzy Dizzs",
+          "price": 11670
+        },
+        {
+          "name": "Funny Frogs",
+          "price": 3965
+        },
+        {
+          "name": "Red Tongues",
+          "price": 1233
+        },
+        {
+          "name": "Chocolate Punch",
+          "price": 669
+        },
+        {
+          "name": "Licorice Krispies",
+          "price": 133
+        },
+        {
+          "name": "Mint Q",
+          "price": 35
+        },
+        {
+          "name": "Sugarator",
+          "price": 23
+        }
+      ]
+    },
+    {
+      "name": "Gotham",
+      "x": 18,
+      "y": 2,
+      "stuff": [
+        {
+          "name": "Bubble head",
+          "price": 55279
+        },
+        {
+          "name": "Fizzy Dizzs",
+          "price": 8789
+        },
+        {
+          "name": "Funny Frogs",
+          "price": 5953
+        },
+        {
+          "name": "Red Tongues",
+          "price": 1844
+        },
+        {
+          "name": "Chocolate Punch",
+          "price": 440
+        },
+        {
+          "name": "Licorice Krispies",
+          "price": 96
+        },
+        {
+          "name": "Mint Q",
+          "price": 60
+        },
+        {
+          "name": "Sugarator",
+          "price": 13
+        }
+      ]
+    },
+    {
+      "name": "Cincinatti",
+      "x": 5,
+      "y": 19,
+      "stuff": [
+        {
+          "name": "Bubble head",
+          "price": 25137
+        },
+        {
+          "name": "Fizzy Dizzs",
+          "price": 13136
+        },
+        {
+          "name": "Funny Frogs",
+          "price": 6138
+        },
+        {
+          "name": "Red Tongues",
+          "price": 1937
+        },
+        {
+          "name": "Chocolate Punch",
+          "price": 391
+        },
+        {
+          "name": "Licorice Krispies",
+          "price": 136
+        },
+        {
+          "name": "Mint Q",
+          "price": 55
+        },
+        {
+          "name": "Sugarator",
+          "price": 18
+        }
+      ]
+    },
+    {
+      "name": "Acapulco",
+      "x": 11,
+      "y": 2,
+      "stuff": [
+        {
+          "name": "Bubble head",
+          "price": 33936
+        },
+        {
+          "name": "Fizzy Dizzs",
+          "price": 16910
+        },
+        {
+          "name": "Funny Frogs",
+          "price": 3256
+        },
+        {
+          "name": "Red Tongues",
+          "price": 1678
+        },
+        {
+          "name": "Chocolate Punch",
+          "price": 363
+        },
+        {
+          "name": "Licorice Krispies",
+          "price": 176
+        },
+        {
+          "name": "Mint Q",
+          "price": 34
+        },
+        {
+          "name": "Sugarator",
+          "price": 11
+        }
+      ]
+    }
+  ],
+  "player": {
+    "location": "Cincinatti",
+    "health": 20,
+    "reputation": 1,
+    "hold": 3,
+    "maxHold": 10,
+    "cash": 43000,
+    "deposits": 0,
+    "armList": [
+      "Bazooka",
+      "Beretta",
+      "Beretta",
+      "Stonethrower"
+    ],
+    "debt": {
+      "value": 1100,
+      "paymentPeriod": 2,
+      "activeCredit": true,
+      "overdue": 1
+    },
+    "stuffOnHand": [
+      {
+        "name": "Mint Q",
+        "quantity": 0
+      },
+      {
+        "name": "Fizzy Dizzs",
+        "quantity": 0
+      },
+      {
+        "name": "Funny Frogs",
+        "quantity": 0
+      },
+      {
+        "name": "Chocolate Punch",
+        "quantity": 0
+      },
+      {
+        "name": "Sugarator",
+        "quantity": 7
+      },
+      {
+        "name": "Bubble head",
+        "quantity": 0
+      },
+      {
+        "name": "Red Tongues",
+        "quantity": 0
+      },
+      {
+        "name": "Licorice Krispies",
+        "quantity": 0
+      }
+    ]
+  },
+  "gameDate": {
+    "gameDate": "04/05/88"
+  }
+}
