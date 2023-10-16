@@ -1,6 +1,6 @@
 package com.sorianotapia.screens;
 
-import com.sorianotapia.GameSettings;
+import com.sorianotapia.controller.GameSettings;
 import com.sorianotapia.player.Player;
 
 public class RobStuffScreen extends AbstractScreen {

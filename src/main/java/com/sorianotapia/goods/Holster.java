@@ -1,6 +1,6 @@
-package com.sorianotapia.accessories;
+package com.sorianotapia.goods;
 
-import com.sorianotapia.TextContainer;
+import com.sorianotapia.auxiliaries.TextContainer;
 
 import java.util.ArrayList;
 import java.util.Collections;

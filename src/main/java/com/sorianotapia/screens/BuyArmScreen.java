@@ -1,8 +1,8 @@
 package com.sorianotapia.screens;
 
-import com.sorianotapia.Controller;
-import com.sorianotapia.accessories.Arm;
-import com.sorianotapia.accessories.ArmContainer;
+import com.sorianotapia.controller.Controller;
+import com.sorianotapia.goods.Arm;
+import com.sorianotapia.goods.ArmContainer;
 import com.sorianotapia.player.Player;
 
 public class BuyArmScreen extends AbstractScreen {

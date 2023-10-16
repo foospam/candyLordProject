@@ -1,7 +1,7 @@
 package com.sorianotapia.places;
 
-import com.sorianotapia.GameSettings;
-import com.sorianotapia.TextContainer;
+import com.sorianotapia.controller.GameSettings;
+import com.sorianotapia.auxiliaries.TextContainer;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package com.sorianotapia.combat;
 
-import com.sorianotapia.accessories.Arm;
-import com.sorianotapia.accessories.DisplaySymbols;
+import com.sorianotapia.goods.Arm;
+import com.sorianotapia.goods.DisplaySymbols;
 
 import java.util.ArrayList;
 

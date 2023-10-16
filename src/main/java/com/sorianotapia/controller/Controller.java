@@ -1,5 +1,6 @@
-package com.sorianotapia;
+package com.sorianotapia.controller;
 
+import com.sorianotapia.auxiliaries.TextContainer;
 import com.sorianotapia.events.Event;
 import com.sorianotapia.events.EventMessage;
 import com.sorianotapia.events.EventFactory;
@@ -129,7 +130,7 @@ public class Controller {
         if (screen.getHeading()) {
             gameInfo.updateGameInfo(player, date);
             System.out.println(gameInfo.printUserStats());
-            System.out.println(gameInfo.printUserArmory());
+            System.out.println(gameInfo.printUserHolster());
             System.out.println(gameInfo.printStuff());
         }
         String prompt = screen.render(player);

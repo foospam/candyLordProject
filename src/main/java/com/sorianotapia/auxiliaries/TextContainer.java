@@ -1,10 +1,10 @@
-package com.sorianotapia;
+package com.sorianotapia.auxiliaries;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.sorianotapia.accessories.Arm;
-import com.sorianotapia.accessories.StuffCarrier;
+import com.sorianotapia.goods.Arm;
+import com.sorianotapia.goods.StuffCarrier;
 
 import java.io.File;
 import java.io.IOException;

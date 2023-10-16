@@ -1,6 +1,4 @@
-package com.sorianotapia.stuff;
-
-import java.util.concurrent.ThreadLocalRandom;
+package com.sorianotapia.goods;
 
 public class Stuff {
     private final String name;
@@ -27,8 +25,6 @@ public class Stuff {
 
         double randomIncrease = ((1 + Math.random()*percentage)+100)/100;
         double randomDecrease = ((1 - Math.random()*percentage)+100)/100;
-//        System.out.println(randomFactor+ " "+price+" "+(price*randomFactor));
-//        int newPrice = (int) (price*randomFactor);
 
         double randomFactor = Math.random() < 0.5 ? randomIncrease : randomDecrease;
 

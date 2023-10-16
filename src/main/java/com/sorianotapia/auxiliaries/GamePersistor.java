@@ -1,4 +1,4 @@
-package com.sorianotapia;
+package com.sorianotapia.auxiliaries;
 
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
@@ -7,9 +7,11 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import com.sorianotapia.accessories.Arm;
-import com.sorianotapia.accessories.ArmContainer;
-import com.sorianotapia.accessories.Holster;
+import com.sorianotapia.controller.Controller;
+import com.sorianotapia.controller.GameDate;
+import com.sorianotapia.goods.Arm;
+import com.sorianotapia.goods.ArmContainer;
+import com.sorianotapia.goods.Holster;
 import com.sorianotapia.player.LoanSharkDebt;
 import com.sorianotapia.player.Player;
 import com.sorianotapia.places.Place;

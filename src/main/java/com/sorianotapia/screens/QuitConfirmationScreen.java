@@ -1,7 +1,7 @@
 package com.sorianotapia.screens;
 
-import com.sorianotapia.Controller;
-import com.sorianotapia.GamePersistor;
+import com.sorianotapia.controller.Controller;
+import com.sorianotapia.auxiliaries.GamePersistor;
 import com.sorianotapia.player.Player;
 
 public class QuitConfirmationScreen extends AbstractScreen {

@@ -1,7 +1,7 @@
 package com.sorianotapia.screens;
 
-import com.sorianotapia.Controller;
-import com.sorianotapia.TextContainer;
+import com.sorianotapia.controller.Controller;
+import com.sorianotapia.auxiliaries.TextContainer;
 import com.sorianotapia.player.Player;
 
 public class OneLinerScreen extends AbstractScreen {

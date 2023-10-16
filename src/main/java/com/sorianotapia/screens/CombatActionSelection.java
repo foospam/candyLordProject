@@ -1,8 +1,8 @@
 package com.sorianotapia.screens;
 
-import com.sorianotapia.Controller;
-import com.sorianotapia.TextContainer;
-import com.sorianotapia.accessories.Arm;
+import com.sorianotapia.controller.Controller;
+import com.sorianotapia.auxiliaries.TextContainer;
+import com.sorianotapia.goods.Arm;
 import com.sorianotapia.combat.Accomplice;
 import com.sorianotapia.combat.Fighter;
 import com.sorianotapia.combat.Policeman;

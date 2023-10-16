@@ -1,6 +1,6 @@
-package com.sorianotapia.stuff;
+package com.sorianotapia.goods;
 
-import com.sorianotapia.TextContainer;
+import com.sorianotapia.auxiliaries.TextContainer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,7 +8,6 @@ import java.util.HashMap;
 public class StuffContainer {
     HashMap<String, Integer> stuffMap;
     ArrayList<Stuff> stuffList;
-
 
     public StuffContainer(){
         stuffList = new ArrayList<>();
@@ -28,29 +27,29 @@ public class StuffContainer {
         }
     }
 
-
-    public Stuff getStuff(String name){
-        return stuffList.get(stuffMap.get(name));
-    }
-
     public int getPrice(String name){
+
         return stuffList.get(stuffMap.get(name)).getPrice();
     }
 
     public int getPrice(int index){
+
         return stuffList.get(index).getPrice();
     }
 
     public String getStuffName(int index){
+
         return stuffList.get(index).getName();
     }
 
 
     public Stuff getStuff(int index){
+
         return stuffList.get(index);
     }
 
     public int getSize(){
+
         return stuffList.size();
     }
 

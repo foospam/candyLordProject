@@ -1,8 +1,8 @@
 package com.sorianotapia.screens;
 
-import com.sorianotapia.Controller;
-import com.sorianotapia.accessories.StuffCarrier;
-import com.sorianotapia.accessories.StuffCarrierContainer;
+import com.sorianotapia.controller.Controller;
+import com.sorianotapia.goods.StuffCarrier;
+import com.sorianotapia.goods.StuffCarrierContainer;
 import com.sorianotapia.player.Player;
 
 public class BuyStuffCarrierScreen extends AbstractScreen {

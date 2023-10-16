@@ -1,4 +1,4 @@
-package com.sorianotapia;
+package com.sorianotapia.controller;
 
 public class GameSettings {
     public static final int DEBITOR_HARM = 25;

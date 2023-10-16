@@ -1,8 +1,7 @@
-package com.sorianotapia.accessories;
+package com.sorianotapia.goods;
 
-import com.sorianotapia.TextContainer;
+import com.sorianotapia.auxiliaries.TextContainer;
 import com.sorianotapia.combat.Fighter;
-import org.w3c.dom.Text;
 
 import java.util.concurrent.ThreadLocalRandom;
 

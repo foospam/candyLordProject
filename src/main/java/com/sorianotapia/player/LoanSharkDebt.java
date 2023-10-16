@@ -1,8 +1,8 @@
 package com.sorianotapia.player;
 
-import com.sorianotapia.GameSettings;
-import com.sorianotapia.MethodAnswers;
-import com.sorianotapia.TimeListener;
+import com.sorianotapia.controller.GameSettings;
+import com.sorianotapia.auxiliaries.MethodAnswers;
+import com.sorianotapia.controller.TimeListener;
 import com.sorianotapia.events.EventFactory;
 
 public class LoanSharkDebt implements TimeListener {
@@ -124,7 +124,4 @@ public class LoanSharkDebt implements TimeListener {
         return value;
     }
 
-    @Override
-    public void updateEvents(Object... args) {
-    }
 }

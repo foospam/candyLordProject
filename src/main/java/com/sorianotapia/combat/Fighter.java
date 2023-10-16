@@ -1,6 +1,6 @@
 package com.sorianotapia.combat;
 
-import com.sorianotapia.accessories.Arm;
+import com.sorianotapia.goods.Arm;
 
 import java.util.ArrayList;
 

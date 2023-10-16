@@ -1,6 +1,6 @@
 package com.sorianotapia.screens;
 
-import com.sorianotapia.TextContainer;
+import com.sorianotapia.auxiliaries.TextContainer;
 import com.sorianotapia.player.Player;
 
 public abstract class AbstractScreen {

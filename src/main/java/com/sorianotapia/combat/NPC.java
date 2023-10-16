@@ -1,10 +1,8 @@
 package com.sorianotapia.combat;
 
-import com.sorianotapia.TextContainer;
-import com.sorianotapia.accessories.Arm;
-import com.sorianotapia.accessories.DisplaySymbols;
-import com.sorianotapia.combat.Fighter;
-import org.w3c.dom.Text;
+import com.sorianotapia.auxiliaries.TextContainer;
+import com.sorianotapia.goods.Arm;
+import com.sorianotapia.goods.DisplaySymbols;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;

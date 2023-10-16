@@ -1,13 +1,12 @@
 package com.sorianotapia.player;
 
-import com.sorianotapia.GameInfo;
-import com.sorianotapia.GameSettings;
-import com.sorianotapia.MethodAnswers;
-import com.sorianotapia.TextContainer;
-import com.sorianotapia.accessories.Arm;
-import com.sorianotapia.accessories.DisplaySymbols;
-import com.sorianotapia.accessories.Holster;
-import com.sorianotapia.accessories.StuffCarrier;
+import com.sorianotapia.controller.GameSettings;
+import com.sorianotapia.auxiliaries.MethodAnswers;
+import com.sorianotapia.auxiliaries.TextContainer;
+import com.sorianotapia.goods.Arm;
+import com.sorianotapia.goods.DisplaySymbols;
+import com.sorianotapia.goods.Holster;
+import com.sorianotapia.goods.StuffCarrier;
 import com.sorianotapia.combat.Fighter;
 import com.sorianotapia.events.EventFactory;
 import com.sorianotapia.places.Place;

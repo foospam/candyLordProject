@@ -371,7 +371,10 @@
     "pluralEnding": "s",
     "copName": "Cop",
     "accompliceName": "Accomplice",
-    "travelPriceRow": " %d. %-15s (%3s $)   %d. %-18s (%3s $)%n"
+    "travelPriceRow": " %d. %-15s (%3s $)   %d. %-18s (%3s $)%n",
+    "userStatsRow": "%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s (%s) ",
+    "stuffDataRow": "%s %-18s (%s %3s %s %5s $)    %s %-18s (%s %3s %s %5s $)%n"
+
   }
 }
 

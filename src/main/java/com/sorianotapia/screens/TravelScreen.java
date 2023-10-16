@@ -1,8 +1,8 @@
 package com.sorianotapia.screens;
 
-import com.sorianotapia.Controller;
-import com.sorianotapia.GameSettings;
-import com.sorianotapia.TextContainer;
+import com.sorianotapia.controller.Controller;
+import com.sorianotapia.controller.GameSettings;
+import com.sorianotapia.auxiliaries.TextContainer;
 import com.sorianotapia.player.Player;
 import com.sorianotapia.places.Place;
 import com.sorianotapia.places.PlaceContainer;

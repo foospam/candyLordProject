@@ -1,6 +1,6 @@
 package com.sorianotapia.events;
 
-import com.sorianotapia.Controller;
+import com.sorianotapia.controller.Controller;
 import com.sorianotapia.player.Player;
 import com.sorianotapia.places.Place;
 

@@ -1,7 +1,7 @@
 package com.sorianotapia.screens;
 
-import com.sorianotapia.Controller;
-import com.sorianotapia.GameSettings;
+import com.sorianotapia.controller.Controller;
+import com.sorianotapia.controller.GameSettings;
 import com.sorianotapia.player.Player;
 
 public class HitDebitorScreen extends AbstractScreen{

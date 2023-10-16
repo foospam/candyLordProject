@@ -1,11 +1,10 @@
-package com.sorianotapia;
+package com.sorianotapia.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 
-public class GameDate implements EventFeed {
+public class GameDate implements TimeFeed {
 
     ArrayList<TimeListener> listeners;
     LocalDate value;
@@ -20,14 +19,6 @@ public class GameDate implements EventFeed {
         this.value = LocalDate.parse(value, DateTimeFormatter.ofPattern("MM/dd/uu"));
     }
 
-    public void setDate(String value){
-        this.value = LocalDate.parse(value, DateTimeFormatter.ofPattern("MM/dd/uu"));
-    }
-
-    public void updateDate(){
-        updateDate(1);
-    }
-
     public void updateDate(int days){
         value = value.plusDays(days);
         notify(days);
@@ -37,25 +28,15 @@ public class GameDate implements EventFeed {
         return value.format(DateTimeFormatter.ofPattern("MM/dd/uu"));
     }
 
+    @Override
+    public void subscribe(TimeListener timeListener) {
 
+        listeners.add(timeListener);
+    }
 
     public void notify(int days){
         for (TimeListener listener : listeners) {
             listener.updateTime(days);
         }
     }
-
-    @Override
-    public void subscribe(EventListener eventListener) {
-        listeners.add((TimeListener) eventListener);
-    }
-
-    @Override
-    public void notify(Object... args) {
-        for (TimeListener listener: listeners) {
-            listener.updateTime((Integer) args[0]);
-        }
-    }
-
-
 }

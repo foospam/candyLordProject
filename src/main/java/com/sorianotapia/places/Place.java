@@ -1,21 +1,10 @@
 package com.sorianotapia.places;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.Version;
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.JsonNodeCreator;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import com.sorianotapia.GameSettings;
-import com.sorianotapia.stuff.Stuff;
-import com.sorianotapia.stuff.StuffContainer;
-import org.w3c.dom.Node;
+import com.sorianotapia.controller.GameSettings;
+import com.sorianotapia.goods.Stuff;
+import com.sorianotapia.goods.StuffContainer;
 
 import java.awt.Point;
-import java.io.File;
-import java.io.IOException;
 
 public class Place {
 

@@ -1,7 +1,7 @@
 package com.sorianotapia.screens;
 
-import com.sorianotapia.Controller;
-import com.sorianotapia.GameInfo;
+import com.sorianotapia.controller.Controller;
+import com.sorianotapia.controller.GameInfo;
 import com.sorianotapia.player.Player;
 
 public class MainSelectionScreen extends AbstractScreen {

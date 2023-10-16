@@ -1,4 +1,4 @@
-package com.sorianotapia.accessories;
+package com.sorianotapia.goods;
 
 public enum DisplaySymbols {
     POLICE_OFFICER {

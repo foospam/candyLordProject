@@ -1,6 +1,6 @@
 package com.sorianotapia.screens;
 
-import com.sorianotapia.Controller;
+import com.sorianotapia.controller.Controller;
 import com.sorianotapia.player.Player;
 
 public class GoToHospitalScreen extends AbstractScreen {

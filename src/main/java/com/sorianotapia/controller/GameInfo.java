@@ -1,7 +1,8 @@
-package com.sorianotapia;
+package com.sorianotapia.controller;
 
-import com.sorianotapia.accessories.DisplaySymbols;
-import com.sorianotapia.accessories.Holster;
+import com.sorianotapia.goods.DisplaySymbols;
+import com.sorianotapia.goods.Holster;
+import com.sorianotapia.auxiliaries.TextContainer;
 import com.sorianotapia.player.Player;
 
 import java.util.ArrayList;
@@ -68,7 +69,7 @@ public class GameInfo {
         int halfTable = 4; // Parametrize this!
         for (int i = 0; i < halfTable; i++) {
             int j = i + halfTable;
-            String row = String.format("%s %-18s (%s %3s %s %5s $)    %s %-18s (%s %3s %s %5s $)%n",
+            String row = String.format(TextContainer.getGeneralTexts("stuffDataRow"),
                     DisplaySymbols.STUFF_SYMBOL.toString(),
                     stuffNames.get(i),
                     DisplaySymbols.HAND.toString(),
@@ -89,7 +90,7 @@ public class GameInfo {
 
     public String printUserStats(){
         StringBuilder stringBuilder = new StringBuilder();
-        String placeTimeHealth = String.format("%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s (%s) ",
+        String userStatsRow = String.format(TextContainer.getGeneralTexts("userStatsRow"),
                 DisplaySymbols.MAP.toString(),
                 location,
                 DisplaySymbols.TIME.toString(),
@@ -109,16 +110,18 @@ public class GameInfo {
                 hold,
                 maxHold
                 );
-        stringBuilder.append(placeTimeHealth);
+        stringBuilder.append(userStatsRow);
         return stringBuilder.toString();
     }
 
-    public String printUserArmory(){
+    public String printUserHolster(){
+
         return holster.printTopGuns();
     }
 
 
     public ArrayList<String> getStuffNames(){
+
         return stuffNames;
     }
 }
