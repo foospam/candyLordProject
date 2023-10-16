@@ -14,4 +14,12 @@ public class GameSettings {
     public static final int INITIAL_CASH = 500;
     public static final int INITIAL_HOLD = 10;
     public static final int INITIAL_REPUTATION = 1;
+
+    // Loan shark settings
+
+    public static final int BASIC_LOAN = 10000;
+    public static final int MIN_LOAN = 1000;
+    public static final int MAX_PAYMENT_PERIOD = 15;
+    public static final int MIN_PAYMENT_PERIOD = 3;
+    public static final int INTEREST_RATE = 10;
 }

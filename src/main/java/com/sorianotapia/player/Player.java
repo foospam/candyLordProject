@@ -34,38 +34,6 @@ public class Player implements Fighter {
     private String icon = DisplaySymbols.PLAYER.toString();
     private boolean isInBattle;
 
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-
-        if (health > 0) {
-            this.health = health;
-        } else {
-            this.health = 0;
-            isInBattle = false;
-            EventFactory.pushGameOverEvent();
-        }
-    }
-
-    public int getReputation() {
-        return reputation;
-    }
-
-    public void setReputation(int reputation) {
-        this.reputation = reputation;
-    }
-
-    public int getCash() {
-        return cash;
-    }
-
-    public void setCash(int cash) {
-        this.cash = cash;
-    }
-
     public Player() {
         hospital = new Hospital();
         health = GameSettings.INITIAL_HEALTH;
@@ -73,71 +41,11 @@ public class Player implements Fighter {
         cash = GameSettings.INITIAL_CASH;
         maxHold = GameSettings.INITIAL_HOLD;
         hold = GameSettings.INITIAL_HOLD;
-
         holster = new Holster();
         bankAccount = new BankAccount(this);
         location = PlaceContainer.getRandomPlace();
         stuffOnHand = new HashMap<>();
         for (String name : TextContainer.getStuffNames()) stuffOnHand.put(name, 0);
-    }
-
-
-    public MethodAnswers withdrawMoney(int amount) {
-        return bankAccount.withdraw(amount);
-    }
-
-    public int getDeposits() {
-        return bankAccount.getDeposits();
-    }
-
-    public MethodAnswers setDeposits(int amount) {
-        return bankAccount.deposit(amount);
-    }
-
-    public LoanSharkDebt getDebt(){
-        return debt;
-    }
-
-    public void setDebt(LoanSharkDebt debt){
-        this.debt = debt;
-    }
-
-    public int getDebtValue() {
-        if (debt != null) return debt.getValue();
-        else return 0;
-    }
-
-    public int getDebtDays() {
-        if (debt != null) return debt.getPaymentPeriod();
-        else return 0;
-    }
-
-    public MethodAnswers buyStuffCarrier(StuffCarrier carrier) {
-        int hold = carrier.getHold();
-        int price = carrier.getPrice();
-
-        if (price > cash) {
-            return MethodAnswers.INSUFFICIENT_MONEY;
-        } else {
-            cash -= price;
-            this.maxHold = hold;
-            return MethodAnswers.SUCCESS;
-        }
-    }
-
-
-    public MethodAnswers buyArm(Arm arm, int quantity) {
-        int totalPrice = arm.getPrice() * quantity;
-
-        if (totalPrice > cash) {
-            return MethodAnswers.INSUFFICIENT_MONEY;
-        } else {
-            cash -= totalPrice;
-            for (int i = 0; i < quantity; i++) {
-                holster.add(arm);
-            }
-            return MethodAnswers.SUCCESS;
-        }
     }
 
     public MethodAnswers buyStuff(String stuff, int quantity) {
@@ -173,24 +81,22 @@ public class Player implements Fighter {
         }
     }
 
-    public Place getLocation() {
-        return location;
+    public MethodAnswers travel(Place destination, int ticketPrice) {
+        if (ticketPrice > cash) return MethodAnswers.INSUFFICIENT_MONEY;
+        else if (destination == location) return MethodAnswers.SAME_ORIGIN_AND_DESTINATION;
+        else {
+            cash -= ticketPrice;
+            location = destination;
+            return MethodAnswers.SUCCESS;
+        }
     }
 
-    public int getHold() {
-        return hold;
+    public MethodAnswers withdrawMoney(int amount) {
+        return bankAccount.withdraw(amount);
     }
 
-    public int getMaxHold() {
-        return maxHold;
-    }
-
-    public int getHealingCost() {
-        return hospital.getHealingCost(this);
-    }
-
-    public int getHealingDays() {
-        return hospital.getHealingTime(this);
+    public MethodAnswers setDeposits(int amount) {
+        return bankAccount.deposit(amount);
     }
 
     public MethodAnswers heal() {
@@ -205,54 +111,33 @@ public class Player implements Fighter {
         return debt.payBack(this, amount);
     }
 
-    public String translateStuffIndexToName(int index) {
-        return location.getStuffName(index);
-    }
+    // Event-related methods
 
-    public int getStuffOnHand(int index) {
-        String stuff = translateStuffIndexToName(index);
-        return stuffOnHand.get(stuff);
-    }
+    public MethodAnswers buyStuffCarrier(StuffCarrier carrier) {
+        int hold = carrier.getHold();
+        int price = carrier.getPrice();
 
-    public HashMap<String, Integer> getStuffOnHandMap(){
-        return stuffOnHand;
-    }
-
-    public void setLocation(Place location) {
-        this.location = location;
-    }
-
-    public MethodAnswers travel(Place destination, int ticketPrice) {
-        if (ticketPrice > cash) return MethodAnswers.INSUFFICIENT_MONEY;
-        else if (destination == location) return MethodAnswers.SAME_ORIGIN_AND_DESTINATION;
-        else {
-            cash -= ticketPrice;
-            location = destination;
+        if (price > cash) {
+            return MethodAnswers.INSUFFICIENT_MONEY;
+        } else {
+            cash -= price;
+            this.maxHold = hold;
             return MethodAnswers.SUCCESS;
         }
     }
 
-    public void emptyPockets() {
-        this.cash = 0;
-    }
+    public MethodAnswers buyArm(Arm arm, int quantity) {
+        int totalPrice = arm.getPrice() * quantity;
 
-    public void emptyHold() {
-        for (String key : stuffOnHand.keySet()) {
-            stuffOnHand.put(key, 0);
+        if (totalPrice > cash) {
+            return MethodAnswers.INSUFFICIENT_MONEY;
+        } else {
+            cash -= totalPrice;
+            for (int i = 0; i < quantity; i++) {
+                holster.add(arm);
+            }
+            return MethodAnswers.SUCCESS;
         }
-        hold = maxHold;
-    }
-
-    public void setHarm(int harm) {
-        setHealth(health - harm);
-    }
-
-    public int getOverdue() {
-        return debt.getOverdue();
-    }
-
-    public void extendPaymentPeriod() {
-        debt.extendPaymentPeriod();
     }
 
     @Override
@@ -283,6 +168,168 @@ public class Player implements Fighter {
         return ThreadLocalRandom.current().nextInt(armInHand.getHarm());
     }
 
+    public Arm giveArmInHand() {
+        Arm arm = armInHand;
+        armInHand = null;
+        return arm;
+    }
+
+    public void pickArm(Arm arm) {
+        holster.add(arm);
+    }
+
+    public String combatInfoString() {
+        return icon + " You: " + armInHand.toString() + ", " + health + " health points";
+    };
+
+    // Auxiliary methods
+
+    public String translateStuffIndexToName(int index) {
+        return location.getStuffName(index);
+    }
+
+    public void emptyHold() {
+        for (String key : stuffOnHand.keySet()) {
+            stuffOnHand.put(key, 0);
+        }
+        hold = maxHold;
+    }
+
+    public void emptyPockets() {
+        this.cash = 0;
+    }
+
+    public void extendPaymentPeriod() {
+        debt.extendPaymentPeriod();
+    }
+
+    public void increaseReputation() {
+        reputation++;
+    }
+
+    public void decreaseReputation() {
+        reputation--;
+    }
+
+    private void increaseReputationBySale(int income) {
+
+        if (reputation > 0 && income + cash + getDeposits() > reputation * 10000) { // Transformar esto en parámetro "CREDIT FACTOR"
+            while (reputation * 10000 < income + cash) {
+                increaseReputation();
+            }
+        } else if (reputation == 0 && income > cash + debt.getValue()) {
+            increaseReputation();
+        }
+    }
+
+    // Getters and setters
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+
+        if (health > 0) {
+            this.health = health;
+        } else {
+            this.health = 0;
+            isInBattle = false;
+            EventFactory.pushGameOverEvent();
+        }
+    }
+
+    public int getReputation() {
+        return reputation;
+    }
+
+    public void setReputation(int reputation) {
+        this.reputation = reputation;
+    }
+
+    public int getCash() {
+        return cash;
+    }
+
+    public void setCash(int cash) {
+        this.cash = cash;
+    }
+
+    public int getDeposits() {
+        return bankAccount.getDeposits();
+    }
+
+    public LoanSharkDebt getDebt(){
+        return debt;
+    }
+
+    public void setDebt(LoanSharkDebt debt){
+        this.debt = debt;
+    }
+
+    public int getDebtValue() {
+        if (debt != null) return debt.getValue();
+        else return 0;
+    }
+
+    public int getDebtDays() {
+        if (debt != null) return debt.getPaymentPeriod();
+        else return 0;
+    }
+
+    public int getHold() {
+        return hold;
+    }
+
+    public void setHold(int hold) {
+        this.hold = hold;
+    }
+
+    public int getMaxHold() {
+        return maxHold;
+    }
+
+    public void setMaxHold(int maxHold) {
+        this.maxHold = maxHold;
+    }
+
+    public int getHealingCost() {
+        return hospital.getHealingCost(this);
+    }
+
+    public int getHealingDays() {
+        return hospital.getHealingTime(this);
+    }
+
+    public int getStuffOnHand(int index) {
+        String stuff = translateStuffIndexToName(index);
+        return stuffOnHand.get(stuff);
+    }
+
+    public void setStuffOnHand(HashMap<String, Integer> stuffOnHand) {
+        this.stuffOnHand = stuffOnHand;
+    }
+
+    public HashMap<String, Integer> getStuffOnHandMap(){
+        return stuffOnHand;
+    }
+
+    public Place getLocation() {
+        return location;
+    }
+
+    public void setLocation(Place location) {
+        this.location = location;
+    }
+
+    public void setHarm(int harm) {
+        setHealth(health - harm);
+    }
+
+    public int getOverdue() {
+        return debt.getOverdue();
+    }
+
     public void setArmInHand(Arm armInHand) {
         this.armInHand = armInHand;
     }
@@ -303,91 +350,23 @@ public class Player implements Fighter {
     public boolean isInBattle() {
         return isInBattle;
     }
-
     public Arm getArmInHand() {
         return armInHand;
     }
-
-    public Arm giveArmInHand() {
-        Arm arm = armInHand;
-        armInHand = null;
-        return arm;
-    }
-
-    public void pickArm(Arm arm) {
-        holster.add(arm);
-    }
-
-    public String combatInfoString() {
-        return icon + " You: " + armInHand.toString() + ", " + health + " health points";
-    }
-
-    ;
-
-    public void increaseReputation() {
-        reputation++;
-    }
-
-    public void decreaseReputation() {
-        reputation--;
-    }
-
-    public void increaseReputation(int points) {
-        for (int i = 0; i < points; i++) {
-            increaseReputation();
-        }
-    }
-
-    // Implements the logic by which reputation increases after business
-    private void increaseReputationBySale(int income) {
-
-        if (reputation > 0 && income + cash + getDeposits() > reputation * 10000) { // Transformar esto en parámetro "CREDIT FACTOR"
-            while (reputation * 10000 < income + cash) {
-                increaseReputation();
-            }
-        } else if (reputation == 0 && income > cash + debt.getValue()) {
-            increaseReputation();
-        }
-    }
-
     public Holster getHolster() {
         return holster;
-    }
+    };
 
-    ;
+    public void setHolster(Holster holster) {
+        this.holster = holster;
+    }
 
     public void setIsInBattle(boolean inBattle) {
         isInBattle = inBattle;
     }
 
-    public Player(GameInfo gameInfo){
-
-    }
-
-    public void setPlayerInfo(Player player, GameInfo gameInfo){
-//        player.setLocation();
-//        player.setHealth();
-//        player.setReputation();
-//        player.sethHold();
-//        player.setMaxHold();
-//        player.setCash();
-//        player.setDeposits();
-//        player.setDebt();
-//        player.setDebtDays();
-//        player.setHolster();
-    }
-
     public boolean getActiveCredit(){
         return debt.getActiveCredit();
-    }
-
-    public void setHold(int hold) {
-        this.hold = hold;
-    }
-
-
-    public void setMaxHold(int maxHold) {
-        this.maxHold = maxHold;
     }
 
     @Override
@@ -409,13 +388,5 @@ public class Player implements Fighter {
                 ", icon='" + icon + '\'' +
                 ", isInBattle=" + isInBattle +
                 '}';
-    }
-
-    public void setHolster(Holster holster) {
-        this.holster = holster;
-    }
-
-    public void setStuffOnHand(HashMap<String, Integer> stuffOnHand) {
-        this.stuffOnHand = stuffOnHand;
     }
 }

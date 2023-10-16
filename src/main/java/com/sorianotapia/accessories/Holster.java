@@ -14,19 +14,6 @@ public class Holster {
         add(ArmContainer.getArmByName("Beretta"));
     }
 
-    public ArrayList<Arm> getTopGuns(int quantity){
-        if (quantity <= armList.size()){
-            return (ArrayList<Arm>) armList.subList(0,quantity);
-        }
-        else {
-            ArrayList<Arm> topGuns = new ArrayList<Arm>(armList);
-            for (int i = 0; i < quantity - armList.size(); i++) {
-                topGuns.add(ArmContainer.getDefaultArm());
-            }
-            return topGuns;
-        }
-    }
-
     public Arm getTopGun(){
         if (armList.isEmpty()) {
             return ArmContainer.getDefaultArm();
@@ -48,27 +35,37 @@ public class Holster {
             armMap.put(arm, armMap.get(arm)+1);
         }
 
+        Collections.sort(armList);
         Collections.reverse(armList);
-        printTopGuns();
     }
 
     public String printTopGuns(){
         StringBuilder stringBuilder = new StringBuilder();
-        ArrayList<Arm> arms = new ArrayList<>(armMap.keySet());
-        Collections.reverse(arms);
 
-        int upperBoundary = Math.min(arms.size(), 3);
-        for (int i = 0; i < upperBoundary; i++) {
+        //ArrayList<Arm> arms = new ArrayList<>(armMap.keySet());
+
+        ArrayList<Arm> differentArms = new ArrayList<>();
+        for (Arm arm: armList) {
+            if (!differentArms.contains(arm)) {
+                differentArms.add(arm);
+            }
+            if (differentArms.size() >= 3) {
+                break;
+            }
+        }
+
+        for (int i = 0; i < differentArms.size(); i++) {
 
             stringBuilder.append(
-                    String.format("%s (%s, %s %s %s %s) ",
-                            arms.get(i).getName(),
-                            armMap.get(arms.get(i)),
+                    String.format("%s %s (%s, %s %s %s %s) ",
+                            DisplaySymbols.GUN.toString(),
+                            differentArms.get(i).getName(),
+                            armMap.get(differentArms.get(i)),
                             DisplaySymbols.HARM.toString(),
-                            arms.get(i).getHarm(),
+                            differentArms.get(i).getHarm(),
                             DisplaySymbols.ACCURACY.toString(),
-                            arms.get(i).getAccuracy()));
-            if (i < upperBoundary -1) {
+                            differentArms.get(i).getAccuracy()));
+            if (i < differentArms.size() -1) {
                 stringBuilder.append("\n");
             }
         }

@@ -114,7 +114,7 @@ public class GameInfo {
     }
 
     public String printUserArmory(){
-        return DisplaySymbols.GUN.toString()+ " " + holster.printTopGuns();
+        return holster.printTopGuns();
     }
 
 

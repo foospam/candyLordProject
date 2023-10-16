@@ -32,8 +32,8 @@ public class Arm implements Comparable {
     @Override
     public int compareTo(Object o) {
         Arm otherArm = (Arm) o;
-        if (this.harm > otherArm.harm) return 1;
-        else if (this.harm < otherArm.harm) return -1;
+        if (this.harm * this.accuracy > otherArm.harm * otherArm.accuracy) return 1;
+        else if (this.harm * this.accuracy < otherArm.harm * otherArm.accuracy) return -1;
         else return 0;
     }
 
