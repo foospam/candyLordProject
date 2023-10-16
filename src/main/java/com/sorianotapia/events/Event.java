@@ -6,7 +6,6 @@ import com.sorianotapia.places.Place;
 
 public interface Event {
 
-
     public abstract void run(Controller controller);
 
     public boolean isLocalEvent();

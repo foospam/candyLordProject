@@ -8,11 +8,13 @@ public abstract class UserEvent implements Event {
     Player player;
 
     public UserEvent(Player player) {
+
         this.player = player;
     }
 
     @Override
     public boolean isLocalEvent() {
+
         return true;
     }
 

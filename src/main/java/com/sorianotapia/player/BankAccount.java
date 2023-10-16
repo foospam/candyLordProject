@@ -7,6 +7,7 @@ public class BankAccount {
     private Player player;
 
     public BankAccount(Player player){
+
         this.player = player;
     }
 

@@ -22,4 +22,5 @@ public class GameSettings {
     public static final int MAX_PAYMENT_PERIOD = 15;
     public static final int MIN_PAYMENT_PERIOD = 3;
     public static final int INTEREST_RATE = 10;
+    public static final int ROBBER_VENGEANCE_HARM = 5;
 }

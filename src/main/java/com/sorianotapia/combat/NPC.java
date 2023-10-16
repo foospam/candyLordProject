@@ -1,8 +1,10 @@
 package com.sorianotapia.combat;
 
+import com.sorianotapia.TextContainer;
 import com.sorianotapia.accessories.Arm;
 import com.sorianotapia.accessories.DisplaySymbols;
 import com.sorianotapia.combat.Fighter;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -70,6 +72,12 @@ public abstract class NPC implements Fighter {
     }
 
     public String combatInfoString(){
-        return icon +" "+name+": "+armInHand.toString()+", "+health+" health points";
+        return String.format(TextContainer.getGeneralTexts("fighterString"),
+                icon,
+                name,
+                armInHand.toString(),
+                DisplaySymbols.HEALTH.toString(),
+                health
+                );
     };
 }

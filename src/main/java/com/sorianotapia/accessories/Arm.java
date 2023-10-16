@@ -2,6 +2,7 @@ package com.sorianotapia.accessories;
 
 import com.sorianotapia.TextContainer;
 import com.sorianotapia.combat.Fighter;
+import org.w3c.dom.Text;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -39,7 +40,8 @@ public class Arm implements Comparable {
 
     @Override
     public String toString() {
-        return name + " (harm: "+harm+", acc.: "+accuracy+")";
+
+        return String.format(TextContainer.getGeneralTexts("armString"), name, harm, accuracy);
     }
 
     public boolean isDefault() {

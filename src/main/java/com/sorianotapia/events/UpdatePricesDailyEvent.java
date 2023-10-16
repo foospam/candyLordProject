@@ -23,7 +23,6 @@ public class UpdatePricesDailyEvent extends PlaceEvent{
 
     @Override
     public void setPlace(Place place) {
-
     }
 
     @Override

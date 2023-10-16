@@ -95,7 +95,7 @@ public class PlaceContainer {
         for (int i = 1; i < GameSettings.WORLD_SIZE; i++)
             //╔═╗║
             map.insert(i * GameSettings.WORLD_SIZE + (3*(i-1)), "║\n║");
-//        System.out.println(map.toString());
+
         map.insert(0, "╔"+"═".repeat(GameSettings.WORLD_SIZE*3)+"╗\n║");
         map.insert(map.length()-2, "║\n╚"+"═".repeat(GameSettings.WORLD_SIZE*3)+"╝\n");
 

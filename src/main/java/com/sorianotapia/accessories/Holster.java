@@ -1,5 +1,7 @@
 package com.sorianotapia.accessories;
 
+import com.sorianotapia.TextContainer;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -40,10 +42,8 @@ public class Holster {
     }
 
     public String printTopGuns(){
+
         StringBuilder stringBuilder = new StringBuilder();
-
-        //ArrayList<Arm> arms = new ArrayList<>(armMap.keySet());
-
         ArrayList<Arm> differentArms = new ArrayList<>();
         for (Arm arm: armList) {
             if (!differentArms.contains(arm)) {
@@ -57,7 +57,7 @@ public class Holster {
         for (int i = 0; i < differentArms.size(); i++) {
 
             stringBuilder.append(
-                    String.format("%s %s (%s, %s %s %s %s) ",
+                    String.format(TextContainer.getGeneralTexts("holsterArmString"),
                             DisplaySymbols.GUN.toString(),
                             differentArms.get(i).getName(),
                             armMap.get(differentArms.get(i)),

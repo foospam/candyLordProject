@@ -1,6 +1,7 @@
 package com.sorianotapia.screens;
 
 import com.sorianotapia.Controller;
+import com.sorianotapia.TextContainer;
 import com.sorianotapia.accessories.ArmContainer;
 import com.sorianotapia.combat.Accomplice;
 import com.sorianotapia.combat.Fighter;
@@ -23,8 +24,8 @@ public class SetCombatScreen extends AbstractScreen {
 
         return String.format(prompt,
                 String.valueOf(numberOfCops),
-                numberOfCops == 1 ? "" : "s",
-                numberOfCops == 1 ? "is" : "are",
+                numberOfCops == 1 ? TextContainer.getGeneralTexts("singularEnding") : TextContainer.getGeneralTexts("pluralEnding"),
+                numberOfCops == 1 ? TextContainer.getGeneralTexts("is") : TextContainer.getGeneralTexts("are"),
                 String.valueOf(numberOfPossibleAllies));
         }
 
@@ -39,7 +40,7 @@ public class SetCombatScreen extends AbstractScreen {
 
         for (int i = 0; i < numberOfCops; i++) {
             Policeman policeman = new Policeman(ArmContainer.getRandomArm());
-            policeman.setName("Cop "+(i+1));
+            policeman.setName(TextContainer.getGeneralTexts("copName")+" "+(i+1));
             cops.add(policeman);
         }
 
@@ -47,7 +48,7 @@ public class SetCombatScreen extends AbstractScreen {
         player.setArmInHand(player.getTopGun());
         for (int i = 0; i < numberOfAllies; i++) {
             Accomplice accomplice = new Accomplice(player.getTopGun(), player.getReputation());
-            accomplice.setName("Accomplice "+(i+1));
+            accomplice.setName(TextContainer.getGeneralTexts("accompliceName")+ " "+(i+1));
             allies.add(accomplice);
             player.decreaseReputation();
         }

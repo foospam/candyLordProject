@@ -55,10 +55,6 @@ public class EventFactory {
                     ofName(randomUserEvents.get(ThreadLocalRandom.current().nextInt(randomUserEvents.size())),
                             player),
                     player.getLocation()));
-//            Controller.pushEventMessage(new EventMessage(
-//                    ofName(EventName.POLICE_COMBAT_EVENT,
-//                            player),
-//                    player.getLocation()));
         }
     }
 

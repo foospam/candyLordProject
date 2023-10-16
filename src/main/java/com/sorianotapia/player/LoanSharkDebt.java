@@ -81,7 +81,7 @@ public class LoanSharkDebt implements TimeListener {
         int maxCredit = getMaxCredit(player);
         int variablePaymentPeriod = GameSettings.MAX_PAYMENT_PERIOD - GameSettings.MIN_PAYMENT_PERIOD;
         double normalizedQuantity = (maxCredit - quantity) / (double) maxCredit;
-        double factor = 1 / Math.pow(variablePaymentPeriod, normalizedQuantity); // Esto y la línea de abajo se puede simplificar a variablePaymentPeriod^normalized quantity
+        double factor = 1 / Math.pow(variablePaymentPeriod, normalizedQuantity);
         int initialPaymentPeriod = (int) (variablePaymentPeriod * (1 - factor)) + GameSettings.MIN_PAYMENT_PERIOD;
 
         if (paymentPeriod <= 0) return initialPaymentPeriod;

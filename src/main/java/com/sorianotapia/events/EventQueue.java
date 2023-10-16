@@ -41,8 +41,8 @@ public class EventQueue {
     }
 
     public void add(EventMessage eventMessage) {
+
         Event event = eventMessage.getEvent();
-//        System.out.println(event.getClass());
 
         if (event instanceof PlaceEvent) {
             if (event.isLocalEvent() && !localPlaceEvents.contains(event)) {

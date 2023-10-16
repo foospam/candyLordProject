@@ -146,4 +146,17 @@ public class TextContainer {
         return prompt;
     }
 
+    public static String getGeneralTexts(String string) {
+
+        String prompt = "";
+
+        try {
+            prompt = root.get("generalTexts").get(string).asText();
+        } catch (NullPointerException E) {
+            throw new NullPointerException("The text could not be found.");
+        }
+
+        return prompt;
+    }
+
 }

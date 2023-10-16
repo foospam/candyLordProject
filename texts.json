@@ -359,6 +359,19 @@
     "youKilled": "You have bitten the dust!",
     "youWin": "You have won! Your reputation is intact!",
     "retriveArm": "You retrieve a %s from the battlefield."
+  },
+  "generalTexts": {
+    "armString" :  "%s (harm: %s, acc.: %s)",
+    "holsterArmString" : "%s %s (%s, %s %s %s %s) ",
+    "fighterString" : "%s %s: %s %s %s",
+    "enterToContinue": "\n(Press enter to continue.)",
+    "is": "is",
+    "are": "are",
+    "singularEnding": "",
+    "pluralEnding": "s",
+    "copName": "Cop",
+    "accompliceName": "Accomplice",
+    "travelPriceRow": " %d. %-15s (%3s $)   %d. %-18s (%3s $)%n"
   }
 }
 

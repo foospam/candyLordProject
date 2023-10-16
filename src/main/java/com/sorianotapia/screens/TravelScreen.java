@@ -2,6 +2,7 @@ package com.sorianotapia.screens;
 
 import com.sorianotapia.Controller;
 import com.sorianotapia.GameSettings;
+import com.sorianotapia.TextContainer;
 import com.sorianotapia.player.Player;
 import com.sorianotapia.places.Place;
 import com.sorianotapia.places.PlaceContainer;
@@ -19,7 +20,7 @@ public class TravelScreen extends AbstractScreen {
 
         int halfTable = GameSettings.NUMBER_OF_PLACES/2;
         for (int i = 0; i < halfTable; i++) {
-            String priceRow = String.format(" %d. %-15s (%3s $)   %d. %-18s (%3s $)%n",
+            String priceRow = String.format(TextContainer.getGeneralTexts("travelPriceRow"),
                     i+1, PlaceContainer.getPlaceName(i), ticketPrices[i],
                     i+halfTable+1, PlaceContainer.getPlaceName(i+halfTable), ticketPrices[i+halfTable]);
             fareTable.append(priceRow);
