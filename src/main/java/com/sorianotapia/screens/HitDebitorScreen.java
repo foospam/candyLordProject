@@ -15,7 +15,8 @@ public class HitDebitorScreen extends AbstractScreen{
         int overdue = Integer.parseInt(Controller.inputBuffer.get(0))-1;
 
         if (overdue > 0) {
-            Controller.setDisplayInformationBuffer(new Object[]{overdue});
+            Controller.inputBuffer.clear();
+            Controller.inputBuffer.add(String.valueOf(overdue));
             setNextScreen(ScreenFactory.ofName(ScreenName.HIT_DEBITOR));
         }
         else {

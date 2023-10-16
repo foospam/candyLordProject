@@ -29,39 +29,35 @@ public class Serializer {
                 new SimpleModule("CustomCarSerializer", new Version(1, 0, 0, null, null, null));
 
         module.addSerializer(Place.class, new CustomPlaceSerializer(Place.class));
-        module.addSerializer(Holster.class, new CustomHolsterSerializer(Holster.class));
         module.addSerializer(Player.class, new CustomPlayerSerializer(Player.class));
+        module.addSerializer(GameDate.class, new CustomGameDateSerializer(GameDate.class));
 
         module.addDeserializer(Place.class, new CustomPlaceDeserializer(Place.class));
         module.addDeserializer(Player.class, new CustomPlayerDeserializer(Player.class));
-        module.addDeserializer(Holster.class, new CustomHolsterDeserializer(Holster.class));
+        module.addDeserializer(GameDate.class, new CustomGameDateDeserializer(GameDate.class));
 
         mapper.registerModule(module);
-    }
-
-    public static void main(String[] args) throws JsonProcessingException {
-        Place place = new Place("Sitio", new Point(31, 41));
-        System.out.println(mapper.writeValueAsString(place));
     }
 
     public static void loadGame() throws IOException {
         loadPlaces();
         Player player = loadPlayer();
         Controller.setPlayer(player);
+        Controller.setGameDate(loadGameDate());
     }
 
     public static void saveGame(Player player) throws IOException {
 
         ArrayNode placeNode = serializePlaces();
-        ObjectNode holsterNode = serializeHolster(player.getHolster());
         ObjectNode playerNode = serializePlayer(player);
+        ObjectNode gameDateNode = serializeGameDate(Controller.date);
 
         ObjectNode rootNode = (ObjectNode) mapper.createObjectNode();
         rootNode.put("places", placeNode);
         rootNode.put("player", playerNode);
+        rootNode.put("gameDate", gameDateNode);
 
         mapper.writeValue(new File("savedgame.json"), rootNode);
-        System.out.println("hecho");
     }
 
     private static ArrayNode serializePlaces() throws IOException {
@@ -79,16 +75,16 @@ public class Serializer {
     }
 
 
-    private static ObjectNode serializeHolster(Holster holster) throws JsonProcessingException {
-        String playerString = mapper.writeValueAsString(holster);
-        return (ObjectNode) mapper.readTree(playerString);
-
-    }
-
     private static ObjectNode serializePlayer(Player player) throws JsonProcessingException {
         String playerString = mapper.writeValueAsString(player);
         return (ObjectNode) mapper.readTree(playerString);
     }
+
+    private static ObjectNode serializeGameDate(GameDate gameDate) throws JsonProcessingException {
+        String gameDateString = mapper.writeValueAsString(gameDate);
+        return (ObjectNode) mapper.readTree(gameDateString);
+    }
+
 
     private static void loadPlaces() {
         try {
@@ -106,16 +102,6 @@ public class Serializer {
         }
     }
 
-    private static Holster loadHolster() {
-        try {
-            JsonNode holsterNode = mapper.readTree(new File("savedgame.json")).get("holster");
-            Holster holster = mapper.readValue(holsterNode.toString(), Holster.class);
-            return holster;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private static Player loadPlayer(){
         try {
             JsonNode playerNode = mapper.readTree(new File("savedgame.json")).get("player");
@@ -127,6 +113,17 @@ public class Serializer {
         }
     }
 
+    private static GameDate loadGameDate(){
+        try {
+            JsonNode gameDateNode = mapper.readTree(new File("savedgame.json")).get("gameDate");
+            System.out.println(gameDateNode);
+            GameDate gameDate  = mapper.readValue(gameDateNode.toString(), GameDate.class);
+            Controller.setGameDate(gameDate);
+            return gameDate;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
 
@@ -134,18 +131,6 @@ class CustomPlaceSerializer extends StdSerializer<Place> {
 
     protected CustomPlaceSerializer(Class<Place> t) {
         super(t);
-    }
-
-    protected CustomPlaceSerializer(JavaType type) {
-        super(type);
-    }
-
-    protected CustomPlaceSerializer(Class<?> t, boolean dummy) {
-        super(t, dummy);
-    }
-
-    protected CustomPlaceSerializer(StdSerializer<?> src) {
-        super(src);
     }
 
     @Override
@@ -166,24 +151,16 @@ class CustomPlaceSerializer extends StdSerializer<Place> {
     }
 }
 
-class CustomHolsterSerializer extends StdSerializer<Holster> {
+class CustomGameDateSerializer extends StdSerializer<GameDate> {
 
-    protected CustomHolsterSerializer(Class<Holster> t) {
+    public CustomGameDateSerializer(Class<GameDate> t) {
         super(t);
     }
 
     @Override
-    public void serialize(Holster holster, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+    public void serialize(GameDate gameDate, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         jsonGenerator.writeStartObject();
-        jsonGenerator.writeArrayFieldStart("armList");
-        for (Arm s : holster.getArmList()) {
-            try {
-                jsonGenerator.writeString(s.getName());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        jsonGenerator.writeEndArray();
+        jsonGenerator.writeStringField("gameDate", gameDate.getStringDate());
         jsonGenerator.writeEndObject();
     }
 }
@@ -255,28 +232,6 @@ class CustomPlaceDeserializer extends StdDeserializer<Place> {
     }
 }
 
-class CustomHolsterDeserializer extends StdDeserializer<Holster> {
-
-    protected CustomHolsterDeserializer(Class<?> vc) {
-        super(vc);
-    }
-
-    @Override
-    public Holster deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
-        Holster holster = new Holster();
-        ObjectCodec codec = jsonParser.getCodec();
-        JsonNode node = codec.readTree(jsonParser);
-
-        JsonNode armListNode = node.get("armList");
-        armListNode.forEach(s -> {
-            Arm arm = ArmContainer.getArmByName(s.asText());
-            holster.add(arm);
-        });
-
-        return holster;
-    }
-}
-
 class CustomPlayerDeserializer extends StdDeserializer<Player> {
 
     protected CustomPlayerDeserializer(Class<?> vc) {
@@ -332,5 +287,20 @@ class CustomPlayerDeserializer extends StdDeserializer<Player> {
         player.setStuffOnHand(stuffOnHand);
 
         return player;
+    }
+}
+
+class CustomGameDateDeserializer extends StdDeserializer<GameDate>{
+
+    protected CustomGameDateDeserializer(Class<?> vc) {
+        super(vc);
+    }
+
+    @Override
+    public GameDate deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
+        ObjectCodec codec = jsonParser.getCodec();
+        JsonNode node = codec.readTree(jsonParser);
+        String dateValue = node.get("gameDate").asText();
+        return new GameDate(dateValue);
     }
 }

@@ -53,7 +53,7 @@ public class GameInfo {
         location = player.getLocation().getName();
         this.date = date.getStringDate();
         health = player.getHealth();
-
+        reputation = player.getReputation();
         hold = player.getHold();
         maxHold = player.getMaxHold();
         cash = player.getCash();

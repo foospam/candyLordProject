@@ -28,7 +28,6 @@ public class EventFactory {
         randomPlaceEvents.add(EventName.PRICE_INCREASE_EVENT);
         randomPlaceEvents.add(EventName.PRICE_DECREASE_EVENT);
 
-
         randomUserEvents.add(EventName.BUY_STUFF_CARRIER_EVENT); // TO DO, quitar del constructor el place, se puede manejar con setter ssolo
         randomUserEvents.add(EventName.BUY_ARM_EVENT);
         randomUserEvents.add(EventName.MONEY_ROBBERY_EVENT);
@@ -43,7 +42,7 @@ public class EventFactory {
 
     public static void pushRandomPlaceEvent(Place place, Player player) {
 
-        if (Math.random() < GameSettings.RANDOM_PLACE_EVENT_FREQ) { // Esto se podía meter en un parámetro
+        if (Math.random() < GameSettings.RANDOM_PLACE_EVENT_FREQ) {
             Controller.pushEventMessage(new EventMessage(
                     ofName(randomPlaceEvents.get(ThreadLocalRandom.current().nextInt(randomPlaceEvents.size())),
                             player),
@@ -54,14 +53,14 @@ public class EventFactory {
     public static void pushRandomUserEvents(Player player) {
 
         if (Math.random() < GameSettings.RANDOM_USER_EVENT_FREQ) {
-//            Controller.pushEventMessage(new EventMessage(
-//                    ofName(randomUserEvents.get(ThreadLocalRandom.current().nextInt(randomPlaceEvents.size())),
-//                            player),
-//                    player.getLocation()));
             Controller.pushEventMessage(new EventMessage(
-                    ofName(EventName.POLICE_COMBAT_EVENT,
+                    ofName(randomUserEvents.get(ThreadLocalRandom.current().nextInt(randomUserEvents.size())),
                             player),
                     player.getLocation()));
+//            Controller.pushEventMessage(new EventMessage(
+//                    ofName(EventName.POLICE_COMBAT_EVENT,
+//                            player),
+//                    player.getLocation()));
         }
     }
 

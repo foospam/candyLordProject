@@ -11,9 +11,12 @@ public class GameDate implements EventFeed {
     LocalDate value;
 
     public GameDate(){
-
         value = LocalDate.of(1988, 4, 1);
         listeners = new ArrayList<>();
+    }
+
+    public GameDate(String value){
+        this.value = LocalDate.parse(value, DateTimeFormatter.ofPattern("MM/dd/uu"));
     }
 
     public void updateDate(){
@@ -28,6 +31,7 @@ public class GameDate implements EventFeed {
     public String getStringDate(){
         return value.format(DateTimeFormatter.ofPattern("MM/dd/uu"));
     }
+
 
 
     public void notify(int days){

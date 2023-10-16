@@ -39,13 +39,11 @@ public class TravelScreen extends AbstractScreen {
         int price = PlaceContainer.returnTicketPrices(player.getLocation())[destinationIndex];
         switch (player.travel(destination, price)) {
             case SUCCESS -> {
-                Controller.inputBuffer.clear();
-                Controller.inputBuffer.add(destination.getName());
+                Controller.setDisplayInformationBuffer(new Object[]{destination.getName()});
                 setNextScreen(ScreenFactory.ofName(ScreenName.TRAVEL_OK));
             }
             case INSUFFICIENT_MONEY -> {
-                Controller.inputBuffer.clear();
-                Controller.inputBuffer.add(destination.getName());
+                Controller.setDisplayInformationBuffer(new Object[]{destination.getName()});
                 setNextScreen(ScreenFactory.ofName(ScreenName.TRAVEL_TOO_EXPENSIVE));
             }
             case SAME_ORIGIN_AND_DESTINATION -> {

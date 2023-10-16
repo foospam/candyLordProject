@@ -129,15 +129,10 @@ public class Player implements Fighter {
             return MethodAnswers.INSUFFICIENT_MONEY;
         } else {
             cash -= totalPrice;
-            int armNumber;
-            if (armMap.containsKey(arm)) {
-                armNumber = armMap.get(arm) + quantity;
-            } else {
-                armNumber = quantity;
+            for (int i = 0; i < quantity; i++) {
+                holster.add(arm);
             }
-            armMap.put(arm, armNumber);
             return MethodAnswers.SUCCESS;
-            // TO DO: Aquí hay que hacer una armería para poderlas llevar mejor, las armas. Por ejemplo, para el string, o para cuando haya que elegirlas en la pelea.
         }
     }
 

@@ -1,6 +1,5 @@
 package com.sorianotapia;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sorianotapia.events.Event;
 import com.sorianotapia.events.EventMessage;
 import com.sorianotapia.events.EventFactory;
@@ -22,10 +21,14 @@ public class Controller {
     private Scanner scanner;
     private static Player player;
     private ScreenFactory screenFactory;
-    private GameDate date;
+    public static GameDate date;
     private GameInfo gameInfo;
     private static EventQueue eventMessageQueue;
     private static Object[] displayInformationBuffer;
+
+    public static void setGameDate(GameDate gameDate){
+        date = gameDate;
+    }
 
     public static void main(String[] args) throws IOException {
         TextContainer.setFile("texts.json");
