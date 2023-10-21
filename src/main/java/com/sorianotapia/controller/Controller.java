@@ -72,7 +72,7 @@ public class Controller {
             boolean first = true;
             while (!inputString.matches(validInput)) {
                 if (first) first = false;
-                else System.out.printf(screen.getBadInputPrompt(), inputString);
+                else System.out.println(String.format(screen.getBadInputPrompt(), inputString));
 
                 inputString = scanner.nextLine();
             }
@@ -95,7 +95,6 @@ public class Controller {
             }
 
             while (!eventMessageQueue.isEmpty()) {
-                System.out.println(eventMessageQueue.toString());
 
                 Event event = eventMessageQueue.poll();
                 event.run(this);
@@ -106,7 +105,6 @@ public class Controller {
             }
         }
     }
-
 
     private void render() {
         if (screen.getHeading()) {
