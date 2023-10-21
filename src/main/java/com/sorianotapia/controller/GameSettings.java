@@ -23,4 +23,11 @@ public class GameSettings {
     public static final int MIN_PAYMENT_PERIOD = 3;
     public static final int INTEREST_RATE = 10;
     public static final int ROBBER_VENGEANCE_HARM = 5;
+
+    // Robbery settings
+    public static final int MAX_CASH_ROBBERY_PERCENT = 80;
+    public static final int MIN_CASH_ROBBERY_PERCENT = 20;
+
+    public static final int MAX_STUFF_ROBBERY_PERCENT = 80;
+    public static final int MIN_STUFF_ROBBERY_PERCENT = 20;
 }

@@ -63,6 +63,10 @@ public class GameInfo {
         holster = player.getHolster();
     }
 
+    public String printHeading(){
+        return "\n"+printUserStats()+"\n"+printUserHolster()+"\n"+printStuff();
+    }
+
     public String printStuff(){
         StringBuilder stringBuilder = new StringBuilder();
 

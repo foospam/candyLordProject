@@ -1,5 +1,6 @@
 package com.sorianotapia.screens;
 
+import com.sorianotapia.controller.Controller;
 import com.sorianotapia.controller.GameSettings;
 import com.sorianotapia.player.Player;
 
@@ -11,7 +12,8 @@ public class RobStuffScreen extends AbstractScreen {
     @Override
     public void handleUserInput(Player player) {
         if (player.getCash() > 0) {
-            player.emptyHold();
+            int robbedStuffUnits = player.emptyHold();
+            Controller.setDisplayInformationBuffer(new Object[]{robbedStuffUnits});
             setNextScreen(ScreenFactory.ofName(ScreenName.ROB_ALL_STUFF));
         } else {
             int health = player.getHealth();

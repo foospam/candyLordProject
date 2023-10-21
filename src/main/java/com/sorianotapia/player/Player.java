@@ -190,15 +190,42 @@ public class Player implements Fighter {
         return location.getStuffName(index);
     }
 
-    public void emptyHold() {
+    /*
+    Other than in the original game, when you get robbed you don't lose all your
+    stuff but always retain some of it.
+    */
+
+    public int emptyHold() {
+
+        int robbedStuff = 0;
+
         for (String key : stuffOnHand.keySet()) {
-            stuffOnHand.put(key, 0);
+            int stuffQuantity = stuffOnHand.get(key);
+            if (stuffQuantity > 0){
+                int robberyPercent = ThreadLocalRandom.current()
+                        .nextInt(GameSettings.MIN_STUFF_ROBBERY_PERCENT, GameSettings.MAX_STUFF_ROBBERY_PERCENT);
+                int robbedQuantity = (stuffQuantity * robberyPercent) / 100;
+                // The thief always take something, even if the result of the operation is 0.
+                robbedQuantity = Math.max(1, robbedQuantity);
+                stuffOnHand.put(key, stuffQuantity - robbedQuantity);
+                hold += robbedQuantity;
+                robbedStuff += 0;
+            }
         }
-        hold = maxHold;
+
+        return robbedStuff;
     }
 
-    public void emptyPockets() {
-        this.cash = 0;
+    /*
+    Other than in the original game, when you get robbed you don't lose all your
+    money but always retain some of it.
+    */
+
+    public int emptyPockets() {
+        int robberyPercent = ThreadLocalRandom.current()
+                .nextInt(GameSettings.MIN_CASH_ROBBERY_PERCENT, GameSettings.MAX_CASH_ROBBERY_PERCENT);
+        this.cash -= (this.cash * robberyPercent) / 100;
+        return robberyPercent;
     }
 
     public void extendPaymentPeriod() {

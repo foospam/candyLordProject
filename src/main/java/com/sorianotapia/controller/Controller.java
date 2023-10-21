@@ -111,9 +111,7 @@ public class Controller {
     private void render() {
         if (screen.getHeading()) {
             gameInfo.updateGameInfo(player, date);
-            System.out.println(gameInfo.printUserStats());
-            System.out.println(gameInfo.printUserHolster());
-            System.out.println(gameInfo.printStuff());
+            System.out.println(gameInfo.printHeading());
         }
         String prompt = screen.render(player);
         if (prompt != null && prompt != "null") System.out.println(prompt);
