@@ -275,7 +275,7 @@
       "validInput": ""
     },
     "ROB_ALL_STUFF": {
-      "prompt": "A potential customer steps out of a dark alley and puts a gun to your temple.\n\"Give me all that sweet stuff of yours!\"\nYou trick him a little, but he takes %s units you were carrying.",
+      "prompt": "A potential customer steps out of a dark alley and puts a gun to your temple.\n\"Give me all that sweet stuff of yours!\"\nYou trick him a little, but he takes %s unit%s you were carrying.",
       "validInput": ""
     },
     "ROB_ALL_STUFF_NO_OK": {

@@ -209,7 +209,7 @@ public class Player implements Fighter {
                 robbedQuantity = Math.max(1, robbedQuantity);
                 stuffOnHand.put(key, stuffQuantity - robbedQuantity);
                 hold += robbedQuantity;
-                robbedStuff += 0;
+                robbedStuff += robbedQuantity;
             }
         }
 

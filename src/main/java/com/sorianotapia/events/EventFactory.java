@@ -51,8 +51,12 @@ public class EventFactory {
     public static void pushRandomUserEvents(Player player) {
 
         if (Math.random() < GameSettings.RANDOM_USER_EVENT_FREQ) {
+//            Controller.pushEventMessage(new EventMessage(
+//                    ofName(randomUserEvents.get(ThreadLocalRandom.current().nextInt(randomUserEvents.size())),
+//                            player),
+//                    player.getLocation()));
             Controller.pushEventMessage(new EventMessage(
-                    ofName(randomUserEvents.get(ThreadLocalRandom.current().nextInt(randomUserEvents.size())),
+                    ofName(randomUserEvents.get(3),
                             player),
                     player.getLocation()));
         }
