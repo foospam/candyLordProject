@@ -14,9 +14,9 @@ public class ScreenFactory {
             AbstractScreen screen = switch (name) {
                 case WELCOME_SCREEN, NEW_GAME -> new WelcomeScreen(ScreenName.WELCOME_SCREEN);
                 case MAIN_SELECTION -> new MainSelectionScreen(name);
-                case SELECT_DRUG_TO_BUY, SELECT_DRUG_TO_SELL -> new InputGrabberScreen(name);
-                case SELECT_QTY_TO_BUY -> new SelectDrugQtyToBuyScreen(name);
-                case SELECT_QTY_TO_SELL -> new SelectDrugQtyToSellScreen(name);
+                case SELECT_STUFF_TO_BUY, SELECT_STUFF_TO_SELL -> new InputGrabberScreen(name);
+                case SELECT_QTY_TO_BUY -> new SelectStuffQtyToBuyScreen(name);
+                case SELECT_QTY_TO_SELL -> new SelectStuffQtyToSellScreen(name);
                 case BANK_OPERATION_SELECTION -> new BankOperationSelectionScreen(name);
                 case DEPOSIT_MONEY -> new BankDepositScreen(name);
                 case WITHDRAW_MONEY -> new BankWithdrawScreen(name);

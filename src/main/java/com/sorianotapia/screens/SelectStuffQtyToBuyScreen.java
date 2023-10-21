@@ -3,8 +3,8 @@ package com.sorianotapia.screens;
 import com.sorianotapia.controller.Controller;
 import com.sorianotapia.player.Player;
 
-public class SelectDrugQtyToBuyScreen extends AbstractScreen {
-    public SelectDrugQtyToBuyScreen(ScreenName name) {
+public class SelectStuffQtyToBuyScreen extends AbstractScreen {
+    public SelectStuffQtyToBuyScreen(ScreenName name) {
         super(name);
     }
 

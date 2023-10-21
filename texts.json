@@ -100,7 +100,7 @@
       "prompt": "Here are your possible plans:\n(B)uy stuff              (S)ell stuff             (J)et to another city\n(V)isit the bank         Go to the (H)ospital     See the (L)oan shark\n(R)elax and do nothing   (Q)uit like a coward\nWhat do you do?",
       "validInput" : "[BSJVHLRQ]"
     },
-    "SELECT_DRUG_TO_BUY": {
+    "SELECT_STUFF_TO_BUY": {
       "badInputPrompt": "Please enter a number from 1 to 8!",
       "prompt": "-What sweet stuff are you interested in?\n\n    1. %1$-20s 5. %5$-20s\n    2. %2$-20s 6. %6$-20s\n    3. %3$-20s 7. %7$-20s\n    4. %4$-20s 8. %8$-20s\n",
       "validInput": "[1-8]",
@@ -125,7 +125,7 @@
       "prompt": "You can't carry that much!",
       "validInput": ""
     },
-    "SELECT_DRUG_TO_SELL": {
+    "SELECT_STUFF_TO_SELL": {
       "badInputPrompt": "Please enter a number from 1 to 8!",
       "prompt": "What do you have for me?\n\n    1. %1$-20s 5. %5$-20s\n    2. %2$-20s 6. %6$-20s\n    3. %3$-20s 7. %7$-20s\n    4. %4$-20s 8. %8$-20s\n",
       "validInput": "[1-8]",

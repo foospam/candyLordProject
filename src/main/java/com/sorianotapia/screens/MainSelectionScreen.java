@@ -26,7 +26,7 @@ public class MainSelectionScreen extends AbstractScreen {
                                 GameInfo.gameInfo.getStuffNames().get(6),
                                 GameInfo.gameInfo.getStuffNames().get(7),
                         });
-                yield ScreenFactory.ofName(ScreenName.SELECT_DRUG_TO_BUY);}
+                yield ScreenFactory.ofName(ScreenName.SELECT_STUFF_TO_BUY);}
             case "S" -> {
                 Controller.setDisplayInformationBuffer(
                         new Object[]{
@@ -39,7 +39,7 @@ public class MainSelectionScreen extends AbstractScreen {
                                 GameInfo.gameInfo.getStuffNames().get(6),
                                 GameInfo.gameInfo.getStuffNames().get(7),
                         });
-                yield ScreenFactory.ofName(ScreenName.SELECT_DRUG_TO_SELL);}
+                yield ScreenFactory.ofName(ScreenName.SELECT_STUFF_TO_SELL);}
             case "J" -> ScreenFactory.ofName(ScreenName.TRAVEL);
             case "V" -> ScreenFactory.ofName(ScreenName.BANK_OPERATION_SELECTION);
             case "H" -> ScreenFactory.ofName(ScreenName.GO_TO_HOSPITAL);
