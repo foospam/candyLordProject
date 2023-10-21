@@ -73,11 +73,37 @@ public class LoanSharkDebt implements TimeListener {
         value = (int) (value * (1 + GameSettings.INTEREST_RATE / 100.));
     }
 
+    /*
+    The player's maximum credit is reputation * BASIC_LOAN - 1.
+    If the player's reputation is 0 or lower, they get the lower of
+    MIN_LOAN * 2 or BASIC_LOAN /2, just to keep the game rolling.
+     */
+
     private int getMaxCredit(Player player) {
+        int reputation = player.getReputation();
+        if (reputation <= 0){
+            return Math.min(GameSettings.MIN_LOAN * 2, GameSettings.BASIC_LOAN/2);
+        }
+        else {
         return player.getReputation() * GameSettings.BASIC_LOAN - 1;
+        }
     }
 
+    /*
+
+    The initial payment period depends (non-linearly) on the actual credit / maximum possible credit.
+    It decreases more quickly as the ratio gets high.
+    For the special case of a player with reputation 0 or lower, it gets a grace payment period
+    of half of the maximum payment period to help them when in need.
+
+     */
+
     private int getInitialPaymentPeriod(Player player, int quantity) {
+
+        if (player.getReputation() <= 0) {
+            return (GameSettings.MAX_PAYMENT_PERIOD / 2);
+        }
+
         int maxCredit = getMaxCredit(player);
         int variablePaymentPeriod = GameSettings.MAX_PAYMENT_PERIOD - GameSettings.MIN_PAYMENT_PERIOD;
         double normalizedQuantity = (maxCredit - quantity) / (double) maxCredit;
