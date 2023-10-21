@@ -31,24 +31,6 @@ public class Controller {
         date = gameDate;
     }
 
-    public static void main(String[] args) throws IOException {
-        TextContainer.setFile("texts.json");
-        GameDate gameDate = new GameDate();
-        Player newPlayer = new Player();
-        LoanSharkDebt debt = new LoanSharkDebt();
-        newPlayer.setDebt(debt);
-        gameDate.subscribe(debt);
-        player = newPlayer;
-
-        EventFactory.initializeEvents(player);
-
-
-        Controller controller = new Controller(player, gameDate);
-        //controller.player.setHealth(50);
-
-        controller.run();
-    }
-
     public Controller(Player newPlayer, GameDate gameDate) {
         inputBuffer = new ArrayList<>();
         scanner = new Scanner(System.in);

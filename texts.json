@@ -102,19 +102,23 @@
     },
     "SELECT_DRUG_TO_BUY": {
       "badInputPrompt": "Please enter a number from 1 to 8!",
-      "prompt": "What stuff are you interested in?\n\n    1. %1$-20s 5. %5$-20s\n    2. %2$-20s 6. %6$-20s\n    3. %3$-20s 7. %7$-20s\n    4. %4$-20s 8. %8$-20s\n",
+      "prompt": "-What sweet stuff are you interested in?\n\n    1. %1$-20s 5. %5$-20s\n    2. %2$-20s 6. %6$-20s\n    3. %3$-20s 7. %7$-20s\n    4. %4$-20s 8. %8$-20s\n",
       "validInput": "[1-8]",
       "passInput": true,
       "defaultNextScreen": "SELECT_QTY_TO_BUY"
     },
     "SELECT_QTY_TO_BUY": {
       "badInputPrompt": "Please enter a valid number!",
-      "prompt": "How much do you want to buy?",
+      "prompt": "-How much do you want to buy?",
       "validInput": "[0-9]+",
       "advanceDay": 1
     },
+    "ZERO_STUFF_TO_BUY": {
+      "prompt": "-You come to me to buy nothing? Come back when you want to make serious business!",
+      "validInput": ""
+    },
     "CASH_EXCEEDED": {
-      "prompt": "You don't have that much money!",
+      "prompt": "-Come back when you got the money, you broke bastard!",
       "validInput": ""
     },
     "HOLD_EXCEEDED": {
@@ -123,16 +127,20 @@
     },
     "SELECT_DRUG_TO_SELL": {
       "badInputPrompt": "Please enter a number from 1 to 8!",
-      "prompt": "What stuff do you want to unload?\n\n    1. %1$-20s 5. %5$-20s\n    2. %2$-20s 6. %6$-20s\n    3. %3$-20s 7. %7$-20s\n    4. %4$-20s 8. %8$-20s\n",
+      "prompt": "What do you have for me?\n\n    1. %1$-20s 5. %5$-20s\n    2. %2$-20s 6. %6$-20s\n    3. %3$-20s 7. %7$-20s\n    4. %4$-20s 8. %8$-20s\n",
       "validInput": "[1-8]",
       "passInput": true,
       "defaultNextScreen": "SELECT_QTY_TO_SELL"
     },
     "SELECT_QTY_TO_SELL": {
       "badInputPrompt": "Please enter a valid number!",
-      "prompt": "How much do you want to unload?",
+      "prompt": "-How much do you want to unload?",
       "validInput": "[0-9]+",
       "advanceDay": 1
+    },
+    "ZERO_STUFF_TO_SELL": {
+      "prompt": "-Come on, guy! Don't you dare pull that one on me ever again! My children are hungry!",
+      "validInput": ""
     },
     "STASH_EXCEEDED": {
       "prompt": "You don't have that much on you!",

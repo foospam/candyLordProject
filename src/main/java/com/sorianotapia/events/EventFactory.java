@@ -38,7 +38,7 @@ public class EventFactory {
     }
 
 
-    public static void pushRandomPlaceEvent(Place place, Player player) {
+    private static void pushRandomPlaceEvent(Place place, Player player) {
 
         if (Math.random() < GameSettings.RANDOM_PLACE_EVENT_FREQ) {
             Controller.pushEventMessage(new EventMessage(

@@ -15,18 +15,18 @@ public class SelectDrugQtyToBuyScreen extends AbstractScreen {
         int stuffQty = Integer.parseInt(Controller.inputBuffer.get(1));
 
         switch (player.buyStuff(stuff, stuffQty)) {
-            case SUCCESS:
-                setNextScreen(ScreenFactory.ofName(ScreenName.EVENT_LOOP));
-                break;
-            case INSUFFICIENT_MONEY: {
+            case SUCCESS -> setNextScreen(ScreenFactory.ofName(ScreenName.EVENT_LOOP));
+            case INSUFFICIENT_MONEY -> {
                 setAdvanceDay(0);
                 setNextScreen(ScreenFactory.ofName(ScreenName.CASH_EXCEEDED));
-                break;
             }
-            case INSUFFICIENT_HOLD: {
+            case INSUFFICIENT_HOLD -> {
                 setAdvanceDay(0);
                 setNextScreen(ScreenFactory.ofName(ScreenName.HOLD_EXCEEDED));
-                break;
+            }
+            case QUANTITY_ZERO -> {
+                setAdvanceDay(0);
+                setNextScreen(ScreenFactory.ofName(ScreenName.ZERO_STUFF_TO_BUY));
             }
         }
     }

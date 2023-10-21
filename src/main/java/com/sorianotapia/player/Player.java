@@ -48,6 +48,9 @@ public class Player implements Fighter {
     }
 
     public MethodAnswers buyStuff(String stuff, int quantity) {
+        if (quantity == 0){
+            return MethodAnswers.QUANTITY_ZERO;
+        }
         int totalCost = location.getStuffPrice(stuff) * quantity;
 
         if (totalCost > cash) {

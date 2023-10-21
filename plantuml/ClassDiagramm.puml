@@ -1,0 +1,154 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+interface Event {
++ abstract void run(Controller)
++ boolean isLocalEvent()
++ void setPlace(Place)
++ void setPlayer(Player)
+}
+
+class UserEvent implements Event
+class PlaceEvent implements Event
+class GameOverEvent implements Event
+class ReclaimDebtEvent implements Event
+class PoliceCombatEvent extends UserEvent
+class StuffRobberyEvent extends UserEvent
+class MoneyRobberyEvent extends UserEvent
+class BuyArmEvent extends UserEvent
+
+class EventFactory {
++ pushRandomPlaceEvents(Player)
++ pushRandomUserEvents(Player)
++ pushGameOverEvent(Player)
++ pushDailyPriceUpdateEvent(Player)
++ pushDebtEvent(Player)
+}
+
+EventFactory -[dashed]-> Event
+
+class EventMessage
+class EventName
+class EventQueue {
+- LinkedList<PlaceEvent> nonLocalPlaceEvents;
+- LinkedList<UserEvent> randomUserEvents;
+- LinkedList<PlaceEvent> localPlaceEvents;
+- LinkedList<UserEvent> triggeredUserEvents;
++ poll()
++ add()
++ isEmpty()
+}
+EventQueue o-- Event
+Controller *-- EventQueue
+
+interface Fighter{
++ Object[] shootRandomEnemy(ArrayList<Fighter>)
++ Object[] escapeEnemies(ArrayList<Fighter>)
++ void setHarm(int)
++ int gunRoll()
++ int harmRoll()
++ setArmInHand(Arm)
++ String getName()
++ boolean isDead()
++ boolean isInBattle()
++ Arm giveArmInHand();
++ String combatInfoString();
+}
+
+class NPC implements Fighter {
++ abstract act(ArrayList<Fighter>)
+}
+class Accomplice extends NPC
+class Policeman extends NPC
+
+interface TimeFeed
+interface TimeListener
+class GameDate implements TimeFeed
+class GameInfo
+
+Controller *-- GameInfo
+Controller *-- GameDate
+Controller *-- Player
+
+class Player implements Fighter
+class BankAccount
+class LoanSharkDebt implements TimeListener
+class Hospital
+
+Player *-- BankAccount
+Player *-- LoanSharkDebt
+Player *-- Hospital
+
+class StdSerializer
+class StdDeserializer
+
+class GamePersistor {
++ saveGame(Controller, Player)
++ loadGame()
+}
+
+class ArmContainer
+class Arm
+ArmContainer "provides" -[dashed]-> Arm
+class StuffCarrierContainer
+class StuffCarrier
+StuffCarrierContainer "provides" -[dashed]-> StuffCarrier
+Player --> StuffCarrier
+class Holster
+Holster "contains" *-- Arm
+Player *-- Holster
+class StuffContainer
+class Stuff
+StuffContainer "provides" -[dashed]-> Stuff
+class PlaceContainer
+class Place
+PlaceContainer "provides" -[dashed]-> Place
+Player o-- Place
+
+class AbstractScreen
+class ConcreteScreen extends AbstractScreen
+enum ScreenName{
+}
+
+class ScreenFactory {
+- EnumMap<ScreenName, AbstractScreen> container
++ <? extends AbstractScreen> ofName(ScreenName)
+}
+ScreenFactory -[dashed]-> ConcreteScreen
+ScreenFactory --> ScreenName
+ConcreteScreen *-- ScreenName
+
+
+
+
+
+class CustomGameDateSerializer implements StdSerializer
+class CustomGameDateDeserializer implements StdDeserializer
+class CustomPlaceSerializer implements StdSerializer
+class CustomPlaceDeserializer implements StdDeserializer
+class CustomPlayerSerializer implements StdSerializer
+class CustomPlayerDeserializer implements StdDeserializer
+
+GamePersistor -> StdSerializer
+GamePersistor -> StdDeserializer
+GamePersistor ---> Player
+GamePersistor <---> Controller
+
+enum MethodAnswers {
+INSUFFICIENT_MONEY
+INSUFFICIENT_STASH
+SUCCESS
+INSUFFICIENT_HOLD
+QUANTITY_ZERO
+SAME_ORIGIN_AND_DESTINATION
+QUANTITY_NOT_WORTH_THE_FUSS
+DEBT_CANCELLED
+PARTIAL_PAYBACK_OK
+MINIMUM_LOAN_NOT_REACHED
+MAXIMUM_CREDIT_EXCEEDED
+CURRENT_CREDIT_EXCEEDED
+}
+
+
+@enduml

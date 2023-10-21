@@ -3,11 +3,11 @@ package com.sorianotapia.events;
 import java.util.LinkedList;
 
 public class EventQueue {
-    LinkedList<PlaceEvent> nonLocalPlaceEvents;
-    LinkedList<UserEvent> randomUserEvents;
-    LinkedList<PlaceEvent> localPlaceEvents;
-    LinkedList<UserEvent> triggeredUserEvents;
-    GameOverEvent gameOverEvent;
+    private LinkedList<PlaceEvent> nonLocalPlaceEvents;
+    private LinkedList<UserEvent> randomUserEvents;
+    private LinkedList<PlaceEvent> localPlaceEvents;
+    private LinkedList<UserEvent> triggeredUserEvents;
+    private GameOverEvent gameOverEvent;
 
     public EventQueue() {
         nonLocalPlaceEvents = new LinkedList<>();
