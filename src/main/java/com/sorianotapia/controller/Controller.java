@@ -7,9 +7,7 @@ import com.sorianotapia.events.EventFactory;
 import com.sorianotapia.events.EventQueue;
 import com.sorianotapia.player.LoanSharkDebt;
 import com.sorianotapia.player.Player;
-import com.sorianotapia.screens.AbstractScreen;
-import com.sorianotapia.screens.ScreenFactory;
-import com.sorianotapia.screens.ScreenName;
+import com.sorianotapia.screens.*;
 
 import java.io.IOException;
 import java.util.*;
@@ -66,9 +64,14 @@ public class Controller {
 
 
     private void getUserInput() {
+//        if (screen.getClass() != OneLinerScreen.class &&
+//        screen.getClass() != EventLoopOneLinerScreen.class) {
+//            System.out.print("> ");
+//        }
+
         String validInput = screen.getValidInput();
         if (null != validInput) {
-            String inputString = "FALSE_INPUT";
+            String inputString = GameSettings.FALSE_INPUT_TOKEN;
             boolean first = true;
             while (!inputString.matches(validInput)) {
                 if (first) first = false;

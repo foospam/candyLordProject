@@ -30,4 +30,5 @@ public class GameSettings {
 
     public static final int MAX_STUFF_ROBBERY_PERCENT = 80;
     public static final int MIN_STUFF_ROBBERY_PERCENT = 20;
+    public static final String FALSE_INPUT_TOKEN = "FALSE_INPUT";
 }

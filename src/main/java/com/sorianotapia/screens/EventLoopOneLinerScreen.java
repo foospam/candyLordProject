@@ -2,12 +2,15 @@ package com.sorianotapia.screens;
 
 import com.sorianotapia.controller.Controller;
 import com.sorianotapia.auxiliaries.TextContainer;
+import com.sorianotapia.controller.GameSettings;
 import com.sorianotapia.player.Player;
 
 public class EventLoopOneLinerScreen extends AbstractScreen {
 
     public EventLoopOneLinerScreen(ScreenName name){
+
         super(name);
+        validInput = "^((?!"+ GameSettings.FALSE_INPUT_TOKEN+")(.|))*$";;
     }
 
     @Override

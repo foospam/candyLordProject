@@ -114,16 +114,13 @@
       "advanceDay": 1
     },
     "ZERO_STUFF_TO_BUY": {
-      "prompt": "-You come to me to buy nothing? Come back when you want to make serious business!",
-      "validInput": ""
+      "prompt": "-You come to me to buy nothing? Come back when you want to make serious business!"
     },
     "CASH_EXCEEDED": {
-      "prompt": "-Come back when you got the money, you broke bastard!",
-      "validInput": ""
+      "prompt": "-Come back when you got the money, you broke bastard!"
     },
     "HOLD_EXCEEDED": {
-      "prompt": "You can't carry that much!",
-      "validInput": ""
+      "prompt": "You can't carry that much!"
     },
     "SELECT_STUFF_TO_SELL": {
       "badInputPrompt": "Please enter a number from 1 to 8!",
@@ -139,12 +136,10 @@
       "advanceDay": 1
     },
     "ZERO_STUFF_TO_SELL": {
-      "prompt": "-Come on, guy! Don't you dare pull that one on me ever again! My children are hungry!",
-      "validInput": ""
+      "prompt": "-Come on, guy! Don't you dare pull that one on me ever again! My children are hungry!"
     },
     "STASH_EXCEEDED": {
-      "prompt": "You don't have that much on you!",
-      "validInput": ""
+      "prompt": "You don't have that much on you!"
     },
     "BANK_OPERATION_SELECTION": {
       "badInputPrompt": "Please answer just 'D' or 'W'!",
@@ -157,8 +152,7 @@
       "validInput": "\\d+"
     },
     "DEPOSIT_EXCEEDED": {
-      "prompt": "You don't have that much cash!",
-      "validInput": ""
+      "prompt": "You don't have that much cash!"
     },
     "WITHDRAW_MONEY": {
       "badInputPrompt": "Please enter a valid number!",
@@ -166,8 +160,7 @@
       "validInput": "\\d+"
     },
     "WITHDRAW_LIMIT_EXCEEDED": {
-      "prompt": "You don't have that much cash!",
-      "validInput": ""
+      "prompt": "You don't have that much cash!"
     },
     "GO_TO_HOSPITAL": {
       "badInputPrompt": "Just say Y or N, man!",
@@ -176,16 +169,13 @@
       "passInput": true
     },
     "HEALED": {
-      "prompt": "You are good to go. Just lay in bed for %s days.",
-      "validInput": ""
+      "prompt": "You are good to go. Just lay in bed for %s days."
     },
     "NOT_HEALED": {
-      "prompt": "God help you man!",
-      "validInput": ""
+      "prompt": "God help you man!"
     },
     "NO_CASH_FOR_HEALING": {
-      "prompt": "You don't have enough money! The docs also want to eat!",
-      "validInput": ""
+      "prompt": "You don't have enough money! The docs also want to eat!"
     },
     "LOAN_SHARK": {
       "badInputPrompt": "I don't speak your language! Just say B or P, man",
@@ -199,21 +189,17 @@
       "passInput": true
     },
     "BORROW_MONEY_TOO_MUCH": {
-      "prompt": "No, man, that's too risky.",
-      "validInput": ""
+      "prompt": "No, man, that's too risky."
     },
     "BORROW_MONEY_TOO_LITTLE": {
-      "prompt": "That's too little. You won't get my lazy ass off the sofa for less than 1000 $.",
-      "validInput": ""
+      "prompt": "That's too little. You won't get my lazy ass off the sofa for less than 1000 $."
     },
     "BORROW_MONEY_OK": {
       "prompt": "Here you are, sir. Now, you know the drill: you have %s days to pay me back, or you'll get a visit from my boys.",
-      "validInput": "",
       "advanceDay": 1
     },
     "BORROW_MONEY_NOT_OK": {
-      "prompt": "No way, man! You still owe me %s $. You better pay me back soon, the clock is ticking...",
-      "validInput": ""
+      "prompt": "No way, man! You still owe me %s $. You better pay me back soon, the clock is ticking..."
     },
     "PAY_BACK_MONEY": {
       "badInputPrompt": "Come on, say a figure!",
@@ -221,20 +207,16 @@
       "validInput": "\\d+"
     },
     "PAY_BACK_IN_FULL": {
-      "prompt": "You pay in full? It's a pleasure to make business with you, sir.",
-      "validInput": ""
+      "prompt": "You pay in full? It's a pleasure to make business with you, sir."
     },
     "PAY_BACK_PARTIALLY": {
-      "prompt": "Each note is beautiful, but you still owe me %s.",
-      "validInput": ""
+      "prompt": "Each note is beautiful, but you still owe me %s."
     },
     "PAY_BACK_ZERO": {
-      "prompt": "Do you think that's funny? I won't take that little. Get the hell out of my office and make me some money.",
-      "validInput": ""
+      "prompt": "Do you think that's funny? I won't take that little. Get the hell out of my office and make me some money."
     },
     "PAY_BACK_TOO_MUCH": {
-      "prompt": "Where are those moneys? You don't have that much on you!",
-      "validInput": ""
+      "prompt": "Where are those moneys? You don't have that much on you!"
     },
     "TRAVEL": {
       "badInputPrompt": "Just type the number of your destination",
@@ -243,44 +225,35 @@
     },
     "TRAVEL_OK": {
       "prompt": "All right! Hop in! We're headed to %s!",
-      "validInput": "",
       "advanceDay": 1
     },
     "TRAVEL_NOT_OK": {
       "prompt": "Man, you are already in %s! So here you remain."
     },
     "TRAVEL_TOO_EXPENSIVE": {
-      "prompt": "You don't have enough money to get to %s! Come back when you got the money!",
-      "validInput": ""
+      "prompt": "You don't have enough money to get to %s! Come back when you got the money!"
     },
     "RELAX": {
       "prompt": "Yeah, just relax and wait to see what the future has in store for you.",
-      "validInput": "",
       "advanceDay": 1
     },
     "EVENT_PRICE_INCREASE": {
-      "prompt": "The cops have seized an important cargo of %s. Its prices are exploding!",
-      "validInput": ""
+      "prompt": "The cops have seized an important cargo of %s. Its prices are exploding!"
     },
     "EVENT_PRICE_DECREASE": {
-      "prompt": "Some cops have started traficking themselves. The market is flooded with %s!",
-      "validInput": ""
+      "prompt": "Some cops have started traficking themselves. The market is flooded with %s!"
     },
     "ROB_ALL_MONEY": {
-      "prompt": "A gangster steps out of a dark alley and puts a gun to your temple.\n\"Empty your pockets, man!\"\nYou manage to save some of your cash, but he takes %s percent of it.",
-      "validInput": ""
+      "prompt": "A gangster steps out of a dark alley and puts a gun to your temple.\n\"Empty your pockets, man!\"\nYou manage to save some of your cash, but he takes %s percent of it."
     },
     "ROB_ALL_MONEY_NO_OK": {
-      "prompt": "A gangster steps out of a dark alley and puts a gun to your temple.\n\"Empty your pockets, man!\"\nUnfortunately, you don't have enough. He hits you with the back of his gun.\n\"You broke bastard!\"\nYou get away injured.",
-      "validInput": ""
+      "prompt": "A gangster steps out of a dark alley and puts a gun to your temple.\n\"Empty your pockets, man!\"\nUnfortunately, you don't have enough. He hits you with the back of his gun.\n\"You broke bastard!\"\nYou get away injured."
     },
     "ROB_ALL_STUFF": {
-      "prompt": "A potential customer steps out of a dark alley and puts a gun to your temple.\n\"Give me all that sweet stuff of yours!\"\nYou trick him a little, but he takes %s unit%s you were carrying.",
-      "validInput": ""
+      "prompt": "A potential customer steps out of a dark alley and puts a gun to your temple.\n\"Give me all that sweet stuff of yours!\"\nYou trick him a little, but he takes %s unit%s you were carrying."
     },
     "ROB_ALL_STUFF_NO_OK": {
-      "prompt": "A gangster steps out of a dark alley and puts a gun to your temple.\n\"Give me all that sweet stuff of yours!\"\nUnfortunately, you don't carry anything. He hits you with the back of his gun.\n\"Now I'll have to go cold turkey!\"\nYou get away injured.",
-      "validInput": ""
+      "prompt": "A gangster steps out of a dark alley and puts a gun to your temple.\n\"Give me all that sweet stuff of yours!\"\nUnfortunately, you don't carry anything. He hits you with the back of his gun.\n\"Now I'll have to go cold turkey!\"\nYou get away injured."
     },
     "BUY_STUFF_CARRIER": {
       "badInputPrompt": "Just say yes or no, man. I don't have all day.",
@@ -288,12 +261,10 @@
       "validInput": "[YN]"
     },
     "BUY_STUFF_CARRIER_OK": {
-      "prompt": "Here you are! It's a pleasure to make business with you!",
-      "validInput": ""
+      "prompt": "Here you are! It's a pleasure to make business with you!"
     },
     "BUY_STUFF_CARRIER_NO": {
-      "prompt": "Your miss. That was some sweet merch!",
-      "validInput": ""
+      "prompt": "Your miss. That was some sweet merch!"
     },
     "BUY_ARM": {
       "badInputPrompt": "Just say yes or no, man. I don't have all day.",
@@ -301,16 +272,13 @@
       "validInput": "[YN]"
     },
     "BUY_ARM_OK": {
-      "prompt": "Here you are! It's a pleasure to make business with you, sir!",
-      "validInput": ""
+      "prompt": "Here you are! It's a pleasure to make business with you, sir!"
     },
     "BUY_ARM_NO_OK": {
-      "prompt": "I'm sorry. This could really have protected you.",
-      "validInput": ""
+      "prompt": "I'm sorry. This could really have protected you."
     },
     "NO_MONEY": {
-      "prompt": "Come back when you got the money!",
-      "validInput": ""
+      "prompt": "Come back when you got the money!"
     },
     "RECLAIM_DEBT": {
       "prompt": "A group of sketchy guys round you up in dark alley. You don't have time to react. One of them has a baseball bat.",
@@ -322,8 +290,7 @@
       "passInput": true
     },
     "WARN_DEBITOR": {
-      "prompt": "The loan shark needs his money, comprende? You got 10 more days. Next time you won't come off so lightly!",
-      "validInput": ""
+      "prompt": "The loan shark needs his money, comprende? You got 10 more days. Next time you won't come off so lightly!"
     },
     "GAME_OVER": {
       "badInputPrompt": "Just type Y or N!",
