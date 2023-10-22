@@ -23,20 +23,25 @@ public class EventFactory {
     ;
 
     public static void initializeEvents(Player player) {
-        randomPlaceEvents.add(EventName.PRICE_INCREASE_EVENT);
-        randomPlaceEvents.add(EventName.PRICE_DECREASE_EVENT);
+        addEventWithFrequency(randomPlaceEvents, EventName.PRICE_DECREASE_EVENT);
+        addEventWithFrequency(randomPlaceEvents, EventName.PRICE_INCREASE_EVENT);
 
-        randomUserEvents.add(EventName.BUY_STUFF_CARRIER_EVENT); // TO DO, quitar del constructor el place, se puede manejar con setter ssolo
-        randomUserEvents.add(EventName.BUY_ARM_EVENT);
-        randomUserEvents.add(EventName.MONEY_ROBBERY_EVENT);
-        randomUserEvents.add(EventName.STUFF_ROBBERY_EVENT);
-        randomUserEvents.add(EventName.POLICE_COMBAT_EVENT);
+        addEventWithFrequency(randomUserEvents, EventName.BUY_STUFF_CARRIER_EVENT);
+        addEventWithFrequency(randomUserEvents, EventName.BUY_ARM_EVENT);
+        addEventWithFrequency(randomUserEvents, EventName.MONEY_ROBBERY_EVENT);
+        addEventWithFrequency(randomUserEvents, EventName.STUFF_ROBBERY_EVENT);
+        addEventWithFrequency(randomUserEvents, EventName.POLICE_COMBAT_EVENT);
 
         reclaimDebtEvent = new ReclaimDebtEvent(player);
 
         gameOverEvent = new GameOverEvent(player);
     }
 
+    private static void addEventWithFrequency(ArrayList<EventName> eventList, EventName eventName){
+        for (int i = 0; i < GameSettings.EVENT_FREQUENCY.get(eventName); i++) {
+            eventList.add(eventName);
+        }
+    }
 
     private static void pushRandomPlaceEvent(Place place, Player player) {
 

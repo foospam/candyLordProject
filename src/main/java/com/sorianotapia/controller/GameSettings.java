@@ -1,5 +1,9 @@
 package com.sorianotapia.controller;
 
+import com.sorianotapia.events.EventName;
+
+import java.util.HashMap;
+
 public class GameSettings {
     public static final int DEBITOR_HARM = 25;
     public static final int RAMDOM_PRICE_VARIATION_PERCENTAGE = 3;
@@ -30,5 +34,23 @@ public class GameSettings {
 
     public static final int MAX_STUFF_ROBBERY_PERCENT = 80;
     public static final int MIN_STUFF_ROBBERY_PERCENT = 20;
+
+    // Event frequency settings
+
+    public static final int LOW_FREQ = 1;
+    public static final int NORMAL_FREQ = 2;
+    public static final int HIGH_FREQ = 3;
+    public static final HashMap<EventName, Integer> EVENT_FREQUENCY = new HashMap<>();
+    static {
+        EVENT_FREQUENCY.put(EventName.PRICE_INCREASE_EVENT, NORMAL_FREQ);
+        EVENT_FREQUENCY.put(EventName.PRICE_DECREASE_EVENT, NORMAL_FREQ);
+
+        EVENT_FREQUENCY.put(EventName.BUY_ARM_EVENT, LOW_FREQ);
+        EVENT_FREQUENCY.put(EventName.BUY_STUFF_CARRIER_EVENT, NORMAL_FREQ);
+        EVENT_FREQUENCY.put(EventName.MONEY_ROBBERY_EVENT, LOW_FREQ);
+        EVENT_FREQUENCY.put(EventName.STUFF_ROBBERY_EVENT, HIGH_FREQ);
+        EVENT_FREQUENCY.put(EventName.POLICE_COMBAT_EVENT, NORMAL_FREQ);
+    }
+
     public static final String FALSE_INPUT_TOKEN = "FALSE_INPUT";
 }
