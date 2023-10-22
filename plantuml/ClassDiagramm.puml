@@ -2,6 +2,23 @@
 'https://plantuml.com/class-diagram
 
 
+class Controller {
++ static ArrayList<> InputBuffer;
+- Scanner scanner;
+- static Player player;
+- AbstractScreen screen;
+- static GameDate date;
+- GameInfo gameInfo;
+- static EventQueue eventMessageQueue;
+- static Object[] displayInformationBuffer;
+
++ void run()
+- void render()
+- void getUserInput()
+- void handleUserInput()
+- void update()
+}
+
 interface Event {
 + abstract void run(Controller)
 + boolean isLocalEvent()

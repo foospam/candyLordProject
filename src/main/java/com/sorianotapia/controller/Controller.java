@@ -19,7 +19,6 @@ public class Controller {
     public static ArrayList<String> inputBuffer;
     private Scanner scanner;
     private static Player player;
-    private ScreenFactory screenFactory;
     public static GameDate date;
     private GameInfo gameInfo;
     private static EventQueue eventMessageQueue;
@@ -33,9 +32,7 @@ public class Controller {
         inputBuffer = new ArrayList<>();
         scanner = new Scanner(System.in);
         player = newPlayer;
-        //player = new Player();
-        screenFactory = new ScreenFactory();
-        screen = screenFactory.ofName(ScreenName.WELCOME_SCREEN);
+        screen = ScreenFactory.ofName(ScreenName.WELCOME_SCREEN);
         date = gameDate;
         gameInfo = new GameInfo(player, gameDate);
         eventMessageQueue = new EventQueue();
@@ -64,10 +61,6 @@ public class Controller {
 
 
     private void getUserInput() {
-//        if (screen.getClass() != OneLinerScreen.class &&
-//        screen.getClass() != EventLoopOneLinerScreen.class) {
-//            System.out.print("> ");
-//        }
 
         String validInput = screen.getValidInput();
         if (null != validInput) {
